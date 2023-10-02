@@ -1,0 +1,54 @@
+1.상품은 단품상품
+2.DB구축은 erd클라우드에서 좀 배끼기
+3.스토리보드는 카카오 oven으로
+---------------이번주 토욜, 일욜까지-------------------
+ JSON.stringfy()
+ 전달인자로 받은 자바스크립트 객체를 문자열(JSON)로 변환하여 반환한다. (직렬화)
+ JSON.parse()
+ 전달인자로 받은 문자열을 자바스크립트 객체로 변환하여 반환한다. (역직렬화)
+
+이클립스의 mvc_ajax기반으로 쇼핑몰 만들것임.
+WebController인터페이스를 많이 구현할것임.
+
+쿠키나 세션접근 필요하면 HttpController구현해서만들기
+
+뭔가 하나의 요청페이지를 만드려면 세부컨트롤러 -> jsp페이지 -> config에 경로+클래스풀네임 적기 순으로 만듦.
+
+아이디중복검사
+put한 member객체의 리스트인 members를 루프돌며 현재 input에 들어온 값과 비교,
+비교후 같은값이 존재하면, 누군가 사용중 입니다.
+같지 않으면, 사용 가능한 아이디 입니다.
+
+<구현을 위해 필요한 작업>
+우리 구현해야할 클래스()
+
+Step1
+이걸 하기 위해선 우선 페이지에서 구현해야할 행동을 정해야함. 
+Ex)멤버라는 클래스를 이용해 사이트에서 어떤기능들을 구현했는지
+create()메소드는 왠만하면 다 있어야 하니 이거부터 해도 될듯.
+
+1.Java Resources에 해당하는 객체의 패키지를 만듦
+  패키지명은 두가지로 나뉨 web과 domain으로
+  domain은 서비스객체, 객체, 해당객체를사용한DB작업객체 3개가 해당되고
+  web은 세부컨트롤러객체가 생성되는 패키지임.
+  
+  domain패키지명 => ezen.shoppingmall.domain.(해당하는기능명).(dao, dto, service 3개중 하나)
+  3개의 패키지를 모두 만들어둠.
+
+2.먼저dto패키지엔 그 폴더를 대표하는 DB에 작성된 테이블을 자바클래스화 시킴 Member.java
+
+3.그다음 dao패키지에는 findAll()이나 registMember()같은 Member클래스를 이용한 DB작업 메소드의 명세클래스를 만든뒤(MemberDao.java)
+   그것을 구현한 구현체인 jdbcMemberDao.java를 생성해 실제 메소드 내부를 구현하여 기능을 만듦
+
+4.그다음 service패키지에는 jdbcMemberDao.java에서 만든 기능클래스를 실제로 사용할 MemberService.java라는 명세를 또 만든 뒤
+  MemberServiceImpl.java라는 해당 명세의 구현체에서 jdbcMemberDao를 생성해 속성은 dataSource, memberDao를 받고
+   두개의 속성을 가지고 생성하는 생성자를 하나 만든 뒤 common폴더에있는 ServiceFactory.java에 MemberService명세를 리턴하는 메소드를 만들고 내용은 구현체인  
+  MemberServiceImpl에게 dataSource와 daoFactory.getMemberDao()로 dao객체를 넘겨주며 생성시키고 리턴해줌.
+
+5.그 뒤 가입, 회원목록 보여주기메소드를 실행하는 메소드를 만들 때 오토커밋을 꺼주고 메소드 실행이
+   원활히 진행되면 커밋을 해주고 파이널리에 커넥션이 널이 아닐시 커넥션을 close해줌.
+   메인에서 실행시 원활히 기능이 잘 돌아갈시 기능적인 자바코드는 모두 끝난것 다음 step으로
+
+Step2
+
+하나의 요청페이지를 만드는 순서

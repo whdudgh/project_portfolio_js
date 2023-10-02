@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/4ec79785b5.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+      /* 🚩 */
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Pretendard-Regular";
+      }
+      header {
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 1050px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+      .logo img {
+        width: 150px;
+      }
+      .search {
+        padding-left: 5px;
+        width: 400px;
+        height: 45px;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+      .search i {
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .search input {
+        border: 0;
+        outline: none;
+        font-size: 16px;
+        padding: 0;
+        height: 44px;
+        width: 340px;
+        margin-right: 20px;
+      }
+      .user i {
+        text-decoration: none;
+        color: black;
+        font-size: 25px;
+        padding: 10px;
+      }
+      .user i:hover {
+        color: rgb(113, 113, 113);
+      }
+      /* 🚩 */
+      nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        min-width: 1050px;
+        height: 50px;
+        margin: 0 auto;
+        line-height: 50px;
+        background-color: rgb(255, 255, 255);
+        z-index: 10;  /*무조건 맨 위로 오도록*/
+        box-shadow: 0 4px 4px -3px rgb(210, 210, 210);  /*그림자 아래에만 적용*/
+      }
+      .navbar {
+        width: 1200px;
+        font-size: 18px;
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 0 auto;
+
+      }
+      .navbar a{
+        text-decoration: none;
+        color: black;
+      }
+      .navbar li:hover{
+        color: rgb(98, 98, 98);
+      }
+      /* 🚩 */
+
+      /* 고객센터 시작 */
+      .service{ /* 전체부분 */
+        width: 1000px;
+        height: 1200px;
+        margin: 0 auto;
+        margin-top: 50px;
+        padding: 20px 10px;
+        display: flex;
+      }
+      .service_menu{ /* 왼쪽 리스트 고객센터,자주묻는질문 등 */
+        width: 200px;
+        margin: 10px 20px 0px -10px;
+      }
+      .menu_title{  /*  제목 "고객센터" 영역 */
+        height: 70px;
+        border-bottom: 1px solid black;
+        font-size: 32px;
+        position: relative;
+      }
+      .menu_title p{ 
+        position: absolute;
+        top: 13px;
+        left: 20px;
+      }
+      .menu_text{ /* 공지사항, 자주묻는질문, 1:1문의 영역 */
+        height: 210px;
+      }
+      .menu_text ul{
+        list-style: none;
+      }
+      .menu_text ul li{ /* 공지사항, 자주묻는질문, 1:1문의 */
+        height: 70px;
+        border-bottom: 1px solid black;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+      .menu_text ul li:hover{ /* 공지사항, 자주하는 질문, 1:1문의에 백그라운드 색 변경*/
+        background-color: rgba(211, 211, 211, 0.5);
+      }
+      .menu_text ul li span{ /* text */
+        margin-left: 20px;
+      }
+      .menu_text ul li img{ /* > 이미지 */
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+      }
+      .menu_btn{ /* 도움이 필요하신가요? 버튼 영역*/
+        height: 70px;
+        background-color:rgba(211, 211, 211, 0.5);
+        border-radius: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .menu_btn p{ /* 버튼 텍스트 */
+        margin-left: 20px;
+      }
+      .menu_btn img{ /*버튼 이미지*/
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+      }
+      .service_main{ /* 오른쪽 공지사항, 자주묻는질문, 1:1문의 영역 */
+        width: 800px;
+      }
+      .main_qna, .main_inq, .main_inq2{ /*자주묻는질문, 1:1문의내역 문의하기 영역 none*/
+        display: none;
+      }
+      .main_title{ /* 제목 부분 */
+        height: 80px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid black;
+      }
+      .main_title p{ /* 제목 text */
+        font-size: 32px;
+        margin-right: 5px;
+      }
+      .main_title span{ /*제목 옆 서브제목 text*/
+        color: gray;
+      }
+      .main_subtitle{ /* 번호 제목 작성일 등등 있는 영역 */
+        height: 40px;
+        display: flex;
+        text-align: center;
+        line-height: 40px;
+        border-bottom: 1px solid black;
+      }
+
+      /* 공지사항 영역 너비 조정 */
+      .main_notice .main_subtitle p:nth-child(1){
+        width: 10%;
+      }
+      .main_notice .main_subtitle p:nth-child(2){
+        width: 65%;
+      }
+      .main_notice .main_subtitle p:nth-child(3){
+        width: 10%;
+      }
+      .main_notice .main_subtitle p:nth-child(4){
+        width: 15%;
+      }
+      .main_notice .main_text ul li p:nth-child(1){
+        width: 10%;
+      }
+      .main_notice .main_text ul li p:nth-child(2){
+        width: 65%;
+        text-align: start;
+      }
+      .main_notice .main_text ul li p:nth-child(3){
+        width: 10%;
+      }
+      .main_notice .main_text ul li p:nth-child(4){
+        width: 15%;
+      }
+
+      /* 자주묻는 질문 영역 너비 조정 */
+      .main_qna .main_subtitle p:nth-child(1){
+        width: 10%;
+      }
+      .main_qna .main_subtitle p:nth-child(2){
+        width: 20%;
+      }
+      .main_qna .main_subtitle p:nth-child(3){
+        width: 70%;
+      }
+      .main_qna .main_text ul li p:nth-child(1){
+        width: 10%;
+      }
+      .main_qna .main_text ul li p:nth-child(2){
+        width: 20%;
+      }
+      .main_qna .main_text ul li p:nth-child(3){
+        width: 70%;
+        text-align: start;
+      }
+
+      /* 1:1문의 내역 너비 조정 */
+      .main_inq .main_subtitle p:nth-child(1){
+        width: 70%;
+      }
+      .main_inq .main_subtitle p:nth-child(2){
+        width: 15%;
+      }
+      .main_inq .main_subtitle p:nth-child(3){
+        width: 15%;
+      }
+      .main_inq .main_text p:nth-child(1){
+        width: 70%;
+      }
+      .main_inq .main_text p:nth-child(2){
+        width: 15%;
+      }
+      .main_inq .main_text p:nth-child(3){
+        width: 15%;
+        color: forestgreen;
+      }
+
+      .main_inq .main_text{ /* 1:1문의 내가 문의한 내역 영역 */
+        display: flex;
+        text-align: center;
+        position: relative;
+        height: 57px;
+        border-bottom: 1px solid lightgray;
+        line-height: 57px;
+      }
+
+      .main_inq .main_text button{ /* 1:1 문의에 있는 문의하기 버튼*/
+        position: absolute;
+        top: 100px;
+        right: 5px;
+        width: 100px;
+        height: 40px;
+        background-color:rgba(211, 211, 211, 0.5);
+        border: 0px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .main_text{ /* 공지사항, 자주묻는질문, 1:1문의 전체 영역*/
+        height: 1075px;
+      }
+      .main_text ul{ /* 공지사항, 자주묻는질문, 1:1문의 ul 영역 */
+        height: 1075px;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+      }
+      .main_text ul li{ /* 공지사항, 자주묻는질문, 1:1문의 li 영역 */
+        height: 57px;
+        border-bottom: 1px solid lightgray;
+        display: flex;
+        text-align: center;
+        align-items: center; /* 글씨 가운데 정렬 */
+        cursor: pointer;
+      }
+      .txt{ /* 리스트 누르면 나오는 내용, 숨겨놓기*/
+        display: none;
+        margin: 30px 0px 20px 80px;
+        font-weight: 600;
+      }
+      .main_inq2 .main_text{ /* 1:1 문의하기 영역 제목,내용 */
+        display: flex;
+        flex-direction: column;
+        margin-top: -7px;
+      }
+
+      .text_title{  /* 1:1 문의하기 제목 영역 */
+        height: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .text_title p, .text_txt p{ /* 제목, 내용 텍스트 */
+        font-size: 18px;
+        width: 16%;
+        margin-left: 20px;
+      }
+      .text_title span, .text_txt span{ /* 제목, 내용 옆에있는 * */
+        color: red;
+      }
+      .text_title input{ /* 제목 input 박스 */
+        width: 84%;
+        height: 50%;
+        margin-right: 20px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+      }
+      .text_txt{  /* 1:1문의하기 내용 영역*/
+        height: 80%;
+        display: flex;
+        margin-top: 16px;
+        justify-content: space-around;
+      }
+      .text_txt textarea{ /* 내용 박스 */
+        width: 84%;
+        height: 94%;
+        margin-right: 20px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+      }
+      .text_title input:focus, .text_txt textarea:focus{ /* 제목,내용 박스들 포커스 될 때 */
+        outline: 1px solid black;
+        text-align: left;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .text_btn{  /* 버튼 영역*/
+        height: 10%;
+        position: relative;
+      }
+
+      .text_btn button{ /* 버튼 */
+        position: absolute;
+        left: 370px;
+        width: 150px;
+        height: 50px;
+        font-size: 18px;
+        border: 0px;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color:rgba(211, 211, 211, 0.5);
+      }
+
+      /* 고객센터 끝 */
+
+      /* 🚩 */
+      footer{
+        width: 100%;
+      }
+      #info{
+        width: 1200px;
+        padding-top: 30px;
+        margin: 30px auto;
+        margin-top: -50px;
+      }
+      .qbox{
+        display: flex;
+      }
+      #call{
+        margin-bottom: 30px;
+      }
+      #callnumber{
+        font-size: 28px;
+      }
+      #call span{
+        margin-right: 10px;
+      }
+      .qbox{
+        padding: 5px 0px;
+      }
+      .qbox div{
+        color: gray;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .qbox button{
+        width: 180px;
+        height: 40px;
+        margin-right: 20px;
+        border:1px solid rgb(206, 206, 206);
+        padding: 8px 40px;
+        background-color: white;
+        cursor: pointer;
+      }
+      footer h2{
+        padding: 20px 0;
+      }
+      #info{
+        display: flex;
+        justify-content: space-between;
+
+      }
+      #info2 ul{
+        padding: 20px 0 20px 0;
+        list-style: none;
+        display: flex;
+        margin-bottom: 50px;
+        
+      }
+      #info2 ul li{
+        margin-right: 15px;
+      }
+      #info2 p{
+        font-size: 13px;
+        color: gray;
+        padding: 4px;
+      }
+
+      #icons{
+        font-size: 30px;
+        color: gray;
+        margin-top: 20px;
+      }
+      #copyright{
+        height: 100px;
+        line-height: 100px;
+        background-color: rgb(238, 238, 238);
+        text-align: center;
+        padding: 0 30px 0 30px;
+        font-size: 12px;
+        color: rgb(122, 122, 122);
+        margin-top: 30px;
+      }
+    </style>
+    <script>
+
+      // 메뉴 클릭하면 메뉴에 맞게 보이게 해주는 함수
+      function list(obj){
+        let notice = obj.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild;
+        let qna = notice.nextElementSibling;
+        let inq = qna.nextElementSibling;
+        let inq2 = document.querySelector(".main_inq2")
+        let noticeClick = obj.parentElement.firstElementChild;
+        let qnaClick = noticeClick.nextElementSibling;
+        let inqClick = qnaClick.nextElementSibling;
+
+        switch(obj){
+          case noticeClick:
+          //디스플레이 설정
+          notice.style.display="block";
+          qna.style.display="none";
+          inq.style.display="none";
+          inq2.style.display="none";
+          //백그라운드 설정
+          noticeClick.style.background = "rgba(211, 211, 211, 0.5)";
+          qnaClick.style.background = "";
+          inqClick.style.background = "";
+          break;
+
+          case qnaClick:
+          notice.style.display="none";
+          qna.style.display="block";
+          inq.style.display="none";
+          inq2.style.display="none";
+
+          noticeClick.style.background = "";
+          qnaClick.style.background = "rgba(211, 211, 211, 0.5)";
+          inqClick.style.background = "";
+          break;
+
+          case inqClick:
+          notice.style.display="none";
+          qna.style.display="none";
+          inq.style.display="block";
+          inq2.style.display="none";
+
+          noticeClick.style.background = "";
+          qnaClick.style.background = "";
+          inqClick.style.background = "rgba(211, 211, 211, 0.5)";
+          break;
+        }
+      }
+
+      // 1:1 문의하기 보이게 하는 함수
+      function inq(){
+        let inq2 = document.querySelector(".main_inq2");
+        let inq = document.querySelector(".main_inq");
+        let qna = document.querySelector(".main_qna");
+        let notice = document.querySelector(".main_notice");
+
+        //디스플레이 설정
+        notice.style.display="none";
+        qna.style.display="none";
+        inq.style.display="none";
+        inq2.style.display="block";
+
+      }
+
+      // 공지사항, 자주묻는질문 리스트 클릭시 내용 출력해주는 함수
+      function text(obj){
+        let text = obj.nextElementSibling;
+        let txt = document.querySelectorAll('.txt');
+
+        if(text.style.display == "block"){
+          text.style.display="none";
+        }
+        else{
+          for(let i=0; i<txt.length; i++){
+            document.querySelectorAll('.txt')[i].style.display ="none"; // .txt 클래스를 모두 display:none 설정
+          }
+          text.style.display="block";
+        }
+      }
+
+      //검색 시작
+      function search(obj){
+      let search = obj.previousElementSibling.value;
+      console.log(search);
+
+      switch(search){
+        case '신상품':
+        location.href = 'newList.html';
+        break;
+        case '베스트':
+        location.href = 'bestList.html';
+        break;
+        case '여성시계':
+        location.href = 'womensList.html';
+        break;
+        case '남성시계':
+        location.href = 'mensList.html';
+        break;
+        case '아동시계':
+        location.href = 'childList.html';
+        break;
+        default:
+        alert('상품이 존재하지 않습니다');
+        break;
+        }
+      }
+      //검색 끝
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="home.html"> <img src="image/logo.png" alt="" /> </a>
+        <span>Acorn watch </span>
+      </div>
+      <div class="search">
+        <input type="text"/>
+        <i onclick="search(this)" class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="user">
+        <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+    </header>
+    <nav>
+      <ul class="navbar">
+        <a href="newList.html"><li>신상품</li></a>
+        <a href="bestList.html"><li>베스트</li></a>
+        <a href="womensList.html"><li>여성시계</li></a>
+        <a href="mensList.html"><li>남성시계</li></a>
+        <a href="childList.html"><li>아동시계</li></a>
+      </ul>
+    </nav>
+
+
+    <main>  
+        <div class="service">
+            <div class="service_menu">
+                <div class="menu_title">
+                    <p>고객센터</p>
+                </div>
+                <div class="menu_text">
+                    <ul>
+                        <li onclick="list(this)"><span>공지사항</span><img src="image/rightbtn.png"></li>
+                        <li onclick="list(this)"><span>자주하는 질문</span><img src="image/rightbtn.png"></li>
+                        <li onclick="list(this)"><span>1:1 문의</span><img src="image/rightbtn.png"></li>
+                    </ul>
+                </div>
+                <div onclick="inq()" class="menu_btn">
+                    <p><span>도움이 필요하신가요?</span><br>1:1문의하기</p><img src="image/rightbtn.png">
+                </div>
+            </div>
+            <div class="service_main">
+              <div class="main_notice">
+                <div class="main_title">
+                  <p>공지사항</p>
+                  <span>새로운 소식들과 유용한 정보들을 한곳에서 확인하세요</span>
+                </div>
+                <div class="main_subtitle">
+                  <p>번호</p>
+                  <p>제목</p>
+                  <p>작성자</p>
+                  <p>작성일</p>
+                </div>
+                <div class="main_text">
+                  <ul>
+                    <li onclick="text(this)">
+                      <p>공지</p>
+                      <p>[안내] 소비자 분쟁해결 기준 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.02.01</p>
+                    </li>
+                    <p class="txt">
+                        본 소비자분쟁해결기준(이하 "분쟁해결기준")은 전자상거래 등에서의 소비자보호에<br><br>
+                        관한 법률(이하 "전자상거래법") 제 20조 제3항에 따라 (주)에이콘(이하 "에이콘")의<br><br>
+                        통신판매중개 또는 이를 통해 체결된 통신판매로 인해 발생한 소비자 분쟁의 원할한 해결을<br><br>
+                        위한 기준을 정함을 목적으로 합니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>14</p>
+                      <p>[이벤트] 라이브방송 경품 당첨자 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.27</p>
+                    </li>
+                    <p class="txt">
+                      안녕하세요 고객님,지난 1월 18일에 진행하였던 라이브방송 경품 당첨자 공지드립니다.<br><br>
+                      당첨물품은 2월 1일 이후 부터 고객센터를 통해 순차적으로 연락드릴 예정입니다.<br><br>
+                      안내드린 기한 내 미회신 시 당첨은 취소됩니다. 주문 취소 시에는 이벤트 당첨 취소가 되는 점 참고 부탁드립니다.<br><br>
+                      감사합니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>13</p>
+                      <p>[이벤트] 설날 추첨 특별 적립금 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.25</p>
+                    </li>
+                    <p class="txt">
+                      안녕하세요 고객님, 지난 1월 18일 진행된 라이브방송 특별 적립금 지급 관련하여 안내드립니다.<br><br>
+                      지급 대상: 라이브 방송동안 상품을 구매하신 고객 대상<br><br>
+                      적립금 지급 예정액: 구매금액 기준 5%<br><br>
+                      지급 일정: 행사 종료일부터 30일 후인 2월 17일 일괄 지급 예정입니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>12</p>
+                      <p>[안내] 카드결제 서비스(롯데카드) 시스템 작업 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.23</p>
+                    </li>
+                    <p class="txt">
+                      ■ 일시 : 2023년 01월 23일 (월) 오전 01:30 ~ 05:30<br><br>
+                      ■ 영향 : 작업 시간 내 서비스 일부 이용 제한<br><br>
+                      - 1차: 오전 01:30 ~ 02:30 (작업시간 내 5분 단절)<br><br>
+                      - 2차: 오전 04:30 ~ 05:30 (작업시간 내 순간 단절)
+                    </p>
+                    <li onclick="text(this)">
+                      <p>11</p>
+                      <p>[안내] 현대카드 시스템 정기점검 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.21</p>
+                    </li>
+                    <p class="txt">
+                      ■ 일시 : 2023년 01월 21일 (토) 오전 01:30 ~ 05:30<br><br>
+                      ■ 영향 : 작업 시간 내 서비스 일부 이용 제한<br><br>
+                      - 1차: 오전 01:30 ~ 02:30 (작업시간 내 5분 단절)<br><br>
+                      - 2차: 오전 04:30 ~ 05:30 (작업시간 내 순간 단절)
+                    </p>
+                    <li onclick="text(this)">
+                      <p>10</p>
+                      <p>[안내] 문자 메세지 안내 시스템 점검</p>
+                      <p>에이콘</p>
+                      <p>2023.01.19</p>
+                    </li>
+                    <p class="txt">
+                      ■ 일시 : 2023년 01월 19일 (목) 오전 08:30 ~ 11:30<br><br>
+                      ■ 영향 : 작업 시간 내 서비스 일부 이용 제한<br><br>
+                      - 1차: 오전 08:30 ~ 09:30 (작업시간 내 5분 단절)<br><br>
+                      - 2차: 오전 10:30 ~ 11:30 (작업시간 내 순간 단절)
+                    </p>
+                    <li onclick="text(this)">
+                      <p>9</p>
+                      <p>[안내] 이메일 서버 점검으로 인한 이메일 전송 지연 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.17</p>
+                    </li>
+                    <p class="txt">
+                      ■ 작업 : 이메일 발송 시스템 업그레이드 및 서버 점검<br><br>
+                      ■ 일시 : 2023. 01. 25 (수) 11:00 ~ 11:30 , 18:00 ~ 18:30<br><br>
+                      ■ 영향 : 작업 시간 동안 이메일 발송이 지연 될 수 있음 (주문안내, 본인인증, 정보변경결과 등)<br><br>
+                      서비스 이용에 불편을 드려 죄송합니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>8</p>
+                      <p>[이벤트] 1월 15일 구매인증, 구매왕 이벤트 당첨자 안내의 건</p>
+                      <p>에이콘</p>
+                      <p>2023.01.15</p>
+                    </li>
+                    <p class="txt">
+                      안녕하세요 고객님,지난 1월 3일에 진행하였던 구매인증, 구매왕 당첨자 공지드립니다.<br><br>
+                      당첨물품은 1월 15일 이후 부터 고객센터를 통해 순차적으로 연락드릴 예정입니다.<br><br>
+                      안내드린 기한 내 미회신 시 당첨은 취소됩니다. 주문 취소 시에는 이벤트 당첨 취소가 되는 점 참고 부탁드립니다.<br><br>
+                      감사합니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>7</p>
+                      <p>[안내] 개인정보처리방침 개정 내용 사전안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.13</p>
+                    </li>
+                    <p class="txt">
+                      안녕하세요 고객님, 에이콘 서비스를 이용해주셔서 감사드립니다.<br><br>
+                      에이콘 개인정보처리방침의 내용이 다음과 같이 변경 예정임을 안내드립니다.<br><br>
+                      개인정보리방침 개정 내용: 회원탈퇴 시 부정이용 방지를 위한 개인정보의 보유기간 변경<br><br>
+                      개정된 개인정보처리방침은 2023년 01월 25일에 시행됩니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>6</p>
+                      <p>[안내] 설 연휴 배송 일정 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.11</p>
+                    </li>
+                    <p class="txt">
+                      에이콘을 이용해 주시는 고객님께 감사 드립니다.<br><br>
+                      당월 설 연휴 배송 일정에 따라 지역별 주문/배송일에 변동이 있습니다.<br><br>
+                      ■ 택배배송<br><br>
+                      일반 택배로 배송 되는 지역은 1/18(수) 까지 주문 가능하며, 이후 1/24(화) 주문이 재개 됩니다. 
+                    </p>
+                    <li onclick="text(this)">
+                      <p>5</p>
+                      <p>[안내] 차이페이 결제 서비스 종료 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.09</p>
+                    </li>
+                    <p class="txt">
+                      차이페이의 결제서비스가 아래와 같이 종료 될 예정이므로 안내 드립니다.<br><br>
+                      ■ 내용 : 결제 서비스 종료<br><br>
+                      ■ 대상 : 차이페이<br><br>
+                      ■ 서비스 종료일 : 01월 23일(월) 이후 지원 종료
+                    </p>
+                    <li onclick="text(this)">
+                      <p>4</p>
+                      <p>[안내] 스마일페이 시스템 점검 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.07</p>
+                    </li>
+                    <p class="txt">
+                      스마일페이 시스템 점검 작업으로 인해 서비스 일시 중단 예정으로 안내 드립니다.<br><br>
+                      ■ 작업 내용 : 스마일페이 시스템 점검<br><br>
+                      ■ 일시 : 2023. 01. 09(월) AM 01:30 ~ AM 04:00 (2시간 30분)<br><br>
+                      ■ 영향 : 작업시간 동안 스마일페이 서비스 중단
+                    </p>
+                    <li onclick="text(this)">
+                      <p>3</p>
+                      <p>[안내] 에이콘 이용 약관 개정 사전 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.05</p>
+                    </li>
+                    <p class="txt">
+                      안녕하세요 고객님, 에이콘의 서비스를 이용해주셔서 감사드립니다<br><br>
+                      에이콘 이용약관이 다음과 같이 개정되어 2023년 1월 8일(일)부터 시행될 예정임을 안내드립니다.<br><br>
+                      ■ 주요개정내용 : 약관 개정 절차 정비, 재가입 제한 기간 수정, 회원탈퇴 및 자격 상실 제한 사유 추가<br><br>
+                      대금 지급 방법 정비, 할인쿠폰 및 게시물 정책 관련 내용추가 청약철회 등으로 인한 환불 관련 내용 수정
+                    </p>
+                    <li onclick="text(this)">
+                      <p>2</p>
+                      <p>[안내] 개인정보처리방침 개정 내용 사전 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.03</p>
+                    </li>
+                    <p class="txt">
+                      안녕하세요 고객님, 에이콘의 서비스를 이용해주셔서 감사드립니다<br><br>
+                      에이콘의 개인정보처리방침의 내용이 다음과 같이 변경 예정임을 안내드립니다.<br><br>
+                      ■ 개인정보 처리 방침 개정 내용 : 개인정보처리 위탁업체 현황 변경<br><br>
+                      분쟁 조정, 고객문의 대응 및 법령 준수 이력 증빙을 위한 개인정보의 보유 및 이용기간 변경
+                    </p>
+                    <li onclick="text(this)">
+                      <p>1</p>
+                      <p>서비스명 변경 안내</p>
+                      <p>에이콘</p>
+                      <p>2023.01.01</p>
+                    </li>
+                    <p class="txt">
+                      안녕하세요 고객님, '에이콘시계'에서 '에이콘'으로 서비스명이 변경되어 안내드립니다.<br><br>
+                      ■ 변경 전: 에이콘시계<br><br>
+                      ■ 변경 후: 에이콘<br><br>
+                      ■ 변경 적용일: 2023년 01월 01일
+                    </p>
+                  </ul>
+                </div>
+              </div>
+              <div class="main_qna">
+                <div class="main_title">
+                  <p>자주하는 질문</p>
+                  <span>고객님들께서 가장 자주하시는 질문을 모두 모았습니다.</span>
+                </div>
+                <div class="main_subtitle">
+                  <p>번호</p>
+                  <p>카테고리</p>
+                  <p>질문</p>
+                </div>
+                <div class="main_text">
+                  <ul>  
+                    <li onclick="text(this)">
+                      <p>15</p>
+                      <p>취소/교환/환불</p>
+                      <p>교환(반품)이 불가한 경우도 있나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 교환·반품이 불가한 경우<br><br>
+                      - 고객님의 책임 있는 사유로 상품이 멸실되거나 훼손된 경우<br><br>
+                      - 고객님의 사용 또는 일부 소비로 상품의 가치가 감소한 경우<br><br>
+                      - 고객님의 주문에 따라 개별적으로 생산되는 상품의 제작이 이미 진행된 경우
+                    </p>
+                    <li onclick="text(this)">
+                      <p>14</p>
+                      <p>서비스 이용</p>
+                      <p>상품 후기는 어떻게 작성하나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 상품 후기 작성 방법<br><br>
+                      배송완료일로부터 30일 동안 상품 후기를 작성하실 수 있습니다.<br><br>
+                      (PC) 나의 주문내역 > 해당 주문 건 > 후기작성 혹은 주문하신 상품상세 > 상품후기 > 상품후기 작성<br><br>
+                      (모바일) 마이페이지 > 상품 후기 혹은 주문하신 상품상세 > 상품후기 > 상품후기 작성
+                    </p>
+                    <li onclick="text(this)">
+                      <p>13</p>
+                      <p>이벤트/쿠폰/적립금</p>
+                      <p>적립금은 어떻게 누적하나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 적립금 누적 방법 안내<br><br>
+                      - 적립금은 에이콘 회원 대상으로 주어지는 혜택입니다.<br><br>
+                      - 주문 결제 / 후기 작성 / 이벤트 참여 등으로 누적 할 수 있습니다.<br><br>
+                      - 1원 단위 부터 주문서에서 사용 가능합니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>12</p>
+                      <p>취소/교환/환불</p>
+                      <p>교환(반품) 어떻게 진행되나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 교환(반품) 진행 방법<br><br>
+                      - 받으신 상품을 교환(반품) 하실 경우, 확인할 수 있는 사진과 함께 고객센터로 문의 바랍니다.<br><br>
+                      (PC) 홈페이지 상단 고객센터 > 1:1 문의 또는 홈페이지 하단 1:1문의<br><br>
+                      (모바일) 마이페이지 > 1:1 문의 또는 마이페이지 > 고객센터 > 1:1 문의 또는 카카오톡 문의
+                    </p>
+                    <li onclick="text(this)">
+                      <p>11</p>
+                      <p>주문/결제/대량주문</p>
+                      <p>주문 시 배송비가 부과되나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 주문 배송비 안내<br><br>
+                      - 실 결제금액 기준으로 10만원 미만 구매 시, 배송비 3천원이 추가로 부과됩니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>10</p>
+                      <p>포장</p>
+                      <p>상품은 어떻게 포장되나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 포장법 안내<br><br>
+                      - 깨지기 쉬운 제품인 경우 종이 또는 비닐 완충제를 사용합니다.<br><br>
+                      - 박스에 들어가지 않는 상품은 별도 외포장하여 송장 부착 후 배송 됩니다.<br><br>
+                      - 일부 상품의 경우, 많은 포장재 사용을 자제하고자 합포를 진행하고 있습니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>9</p>
+                      <p>이벤트/쿠폰/적립금</p>
+                      <p>제세공과금이 무엇인가요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 제세공과금<br><br>
+                      - 이벤트 참여 후 경품 등에 당첨되신 경우, 소득이 발생 된 것으로 간주하여 국가에서 세금을 부과하고 있습니다.<br><br>
+                      - 5만원 초과 경품의 한하여 경품가 22% 대하여 신고 및 납부가 필요합니다.<br><br>
+                      - 이벤트 별로 제세공과금을 당사에서 부담하기도 하며, 경품 지급 전으로 별도 개인정보를 수집합니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>8</p>
+                      <p>회원</p>
+                      <p>개명을 하여 회원정보의 이름을 바꾸고 싶습니다.</p>
+                    </li>
+                    <p class="txt">
+                      ■ 개명으로 인한 회원정보 수정 방법<br><br>
+                      - 개명하신 경우, 에이콘홈 로그인 후 [마이페이지]에서 수정하실 수 있습니다.<br><br>
+                      - [마이페이지 > 개인정보 수정 > 재로그인 > 이름 변경]<br><br>
+                      - 아이디는 변경이 불가합니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>7</p>
+                      <p>주문/결제/대량주문</p>
+                      <p>구매 영수증은 어떻게 발급 받나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 구매 영수증 출력<br><br>
+                      - 구매하신 주무건의 영수증 출력과 관련하여 직접 조회가 어려우십니다.<br><br>
+                      - 해당 내용은 에이콘 카카오톡 고객센터로 문의 부탁드립니다.<br><br>
+                      - 간편결제 서비스를 이용하여 구매하실 경우에는 해당 결제사를 통해서 영수증 발급이 가능합니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>6</p>
+                      <p>취소/교환/환불</p>
+                      <p>교환(반품) 진행 시, 배송비가 부과되나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 교환(반품) 진행 시, 배송비 안내<br><br>
+                      - 단순변심에 의한 교환/반품 시 배송비 6,000원 (주문건 배송비를 낸 경우 3,000원)을 부담하셔야합니다.<br><br>
+                      - 파트너사 판매상품의 경우, 상품의 상세페이지 내 안내 정책을 참고 부탁드립니다.
+                    </p>
+                    <li onclick="text(this)">
+                      <p>5</p>
+                      <p>회원</p>
+                      <p>아이디, 비밀번호를 잊어버렸습니다.</p>
+                    </li>
+                    <p class="txt">
+                      ■ 아이디, 비밀번호 찾기 안내<br><br>
+                      - 임시 비밀번호의 경우 회원가입 시 등록한 이메일 주소로 발송 됩니다.<br><br>
+                      (PC) 에이콘홈 상단 [로그인] > 화면 아래 [아이디 찾기] [비밀번호 찾기]<br><br>
+                      (모바일) 아래 탭에서 [마이페이지] > 로그인 화면 아래 [아이디 찾기] [비밀번호 찾기]
+                    </p>
+                    <li onclick="text(this)">
+                      <p>4</p>
+                      <p>이벤트/쿠폰/적립금</p>
+                      <p>적립금은 언제 지급 되나요?</p>
+                    </li>
+                    <p class="txt">
+                      ■ 적립금 지급 시점<br><br>
+                      - 주문 결제 : 배송완료 이 후, 일괄 적립금이 지급 됩니다.<br><br>
+                      - 후기 작성 : 후기 작성 이 후, 영업일 2~3일 내에 지급 됩니다.<br><br>
+                      - 이벤트 참여 : 이벤트 참여 후, 별도 고지 된 일정에 지급 됩니다
+                    </p>
+                    <li onclick="text(this)">
+                      <p>3</p>
+                      <p>서비스 이용</p>
+                      <p>이벤트 문자는 오는데, 배송완료문자만 오지 않습니다</p>
+                    </li>
+                    <p class="txt">
+                      ■ 배송완료 문자 미수신 사유<br><br>
+                      ① 보유 휴대폰 기기의 용량 초과 ( 이벤트 문자와 다르게 배송완료 문자는 사진이 포함 됨 )<br><br>
+                      ② 통신사 자체 스팸처리
+                      
+                    </p>
+                    <li onclick="text(this)">
+                      <p>2</p>
+                      <p>취소/교환/환불</p>
+                      <p>상품불량인 경우, 교환(반품) 기준이 궁금합니다.</p>
+                    </li>
+                    <p class="txt">
+                      ■ 상품에 문제가 있는 경우<br><br>
+                      - 받으신 상품이 표시·광고 내용 또는 계약 내용과 다른 경우에는 상품을 받은 날부터 3개월 이내<br><br>
+                      - 그 사실을 알게 된 날부터 30일 이내에 교환 및 환불을 요청하실 수 있습니다.<br><br>
+                      ※ 상품에 문제가 있는 것으로 확인되면 배송비는 에이콘이 부담합니다.
+                    
+                    </p>
+                    <li onclick="text(this)">
+                      <p>1</p>
+                      <p>시스템오류</p>
+                      <p>최종 결제처리 후, [결제완료] 창으로 넘어가지 않습니다.</p>
+                    </li>
+                    <p class="txt">
+                      ■ 에이콘 결제단계에서 오류 발생 시<br><br>
+                      아래 [점검 사항]을 따라 자체 점검하여도 오류 반복 확인 시 에이콘 카카오톡 행복센터로 문의 부탁드립니다.<br><br>
+                      (PC) 모든 인터넷창을 종료 > 에이콘 홈페이지 재접속 > 재로그인 진행<br><br>
+                      (모바일) 앱 - 앱 종료 > 재 로그인 진행
+                    </p>
+                  </ul>
+                </div>
+              </div>
+              <div class="main_inq">
+                <div class="main_title">
+                  <p>1:1 문의</p>
+                  <span>고객님의 1:1 문의 내역입니다.</span>
+                </div>
+                <div class="main_subtitle">
+                  <p>제목</p>
+                  <p>작성일</p>
+                  <p>답변상태</p>
+                </div>
+                <div class="main_text">
+                  <p>이거 정품 맞나요?????</p>
+                  <p>2023.02.01</p>
+                  <p>답변완료</p>
+                  <button onclick="inq()">문의하기</button>
+                </div>
+              </div>
+              <div class="main_inq2">
+                <div class="main_title">
+                  <p>1:1 문의</p>
+                </div>
+                <div class="main_text">
+                  <div class="text_title">
+                    <p>제목<span>*</span></p><input type="text" placeholder="　　제목을 입력해주세요">
+                  </div>
+                  <div class="text_txt">
+                    <p>내용<span>*</span></p>
+                    <textarea style="resize: none;" placeholder="
+      1:1 문의 작성 전 확인해주세요
+
+      반품 / 환불
+      ·제품 하자 혹은 이상으로 반품(환불)이 필요한 경우 사진과 함께 구체적인 내용을 남겨주세요.
+                    
+      주문취소
+      ·주문취소는 배송 단계별로 방법이 상이합니다.
+      · [주문완료] 상태일 경우에만 주문 취소 가능합니다.
+      · [마이페이지 > 주문내역 상세페이지]에서 직접 취소하실 수 있습니다.
+      · 생산이 시작된 [상품준비중] 이후에는 취소가 제한되는 점 고객님의 양해 부탁드립니다.
+      · [배송준비중] 이후에는 취소가 불가하니, 반품으로 진행해주세요. (상품에 따라 반품이 불가할 수 있습니다.)
+      · 주문마감 시간에 임박할수록 취소 가능 시간이 짧아질 수 있습니다.
+      · 비회원은 APP 또는 모바일 웹사이트에서 [마이페이지 > 비회원 주문조회 페이지] 에서 취소가 가능합니다.
+      · 일부 예약상품은 배송 3~4일 전에만 취소 가능합니다.
+      ※ 주문상품의 부분취소는 불가능합니다. 전체 주문 취소 후 다시 구매 해주세요.
+                    
+      배송
+      · 주문 완료 후 배송 방법(샛별/택배)은 변경이 불가능합니다.
+      · 배송일 배송시간 지정은 불가능합니다. (예약배송 포함)
+      ※ 전화번호, 이메일, 주소, 계좌번호 등의 상세 개인정보가 문의 내용에 저장되지 않도록 주의해 주시기 바랍니다."></textarea>
+                  </div>
+                  <div class="text_btn">
+                  <button>등록</button>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+      <div id="info">   
+        <div id="info1">
+          <h2>고객행복센터</h2>
+            <div id="call"><span id="callnumber"><strong>1644-1107</strong></span><span>월~토요일 오전7시 - 오후 6시</span></div>
+            <div class="qbox">
+            <button>카카오톡 문의</button>
+            <div>
+              월~토요일| 오전7시 - 오후 6시<br>
+              일~공휴일| 오전7시 - 오후 1시
+            </div>
+          </div>
+          <div class="qbox">
+            <a href="service.html"><button>1:1  문의</button></a>
+            <div>
+              365일<br>
+              고객센터 운영시간에 순차적으로 답변드리겠습니다.
+            </div>
+          </div>
+          <div class="qbox">
+            <a href="service.html"><button>대량주문 문의</button></a>
+            <div>
+              월~금요일| 오전9시 - 오후 6시<br>
+              점심시간| 오후1시 - 오후 2시
+            </div>
+          </div>
+        </div>
+        <div id="info2">
+          <ul>
+            <li>에이콘소개</li>
+            <li>에이콘소개영상</li>
+            <li>인재채용</li>
+            <li>이용약관</li>
+            <li>개인정보처리방침</li>
+            <li>이용안내</li>
+          </ul>
+          <p>법인명(상호):주식회사 에이콘 | 사업자 등록번호:61-254-25225 사업자 정보확인</p>
+          <P>통신판매업:제2018-서울강남-55566호 | 개인정보보호책임자:이원준</P>
+          <P>주소:서울특별시 강남구 테헤란로 133,18층(역삼동) | 대표이사:양양양</P>
+          <P>입점문의:입점문의하기| 제휴문의:ksjfdlssfljk@dlkjdl.com</P>
+          <p>채용문의:sksdkf@kdfjsld.com</p>
+          <p>팩스: 070-555-5545</p>
+          <div id="icons">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-youtube"></i>
+
+          </div>
+        </div>
+      </div>
+      <div id="copyright">
+        에이콘에서 판매되는 상품중에는 에이콘에 입접한 개별 판매자가 판매하는 오픈 마켓 상품이 포함되어 있습니다.
+        ACORN CORP.ALL RIGHT RESERVED
+      </div>
+    </footer>
+  </body>
+</html>

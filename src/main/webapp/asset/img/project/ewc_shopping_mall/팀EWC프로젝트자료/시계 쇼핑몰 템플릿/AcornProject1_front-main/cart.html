@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="asset/css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <!--공용 헤더 푸터 css추가-->
+    <link rel="stylesheet" href="asset/css/common.css">
+    <!--버거버튼 동작 자바스크립트 추가-->
+    <script defer src="asset/js/burgerBT.js"></script>
+    <script
+      src="https://kit.fontawesome.com/4ec79785b5.js"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script>
+      //🔴천단이 콤마 붙은 숫자 정수로 변경하는 함수
+      function stringNumberToInt(stringNumber){
+        return parseInt(stringNumber.replace(/,/g , ''));
+      }
+      //🔴페이지 로드되면 자동으로 결제 예정금액 계산
+      function cal(){
+        let calpriceTag = document.querySelector("#cal_price ");
+        let priceAllTag = document.querySelectorAll(".amt");
+        let ship_fee = stringNumberToInt(document.querySelector("#ship_fee").innerHTML);
+        let cal_total = document.querySelector("#cal_total_inner");
+        let amt = 0;
+        for(i=0;i<priceAllTag.length;i++){
+          amt = amt+ stringNumberToInt(priceAllTag[i].innerHTML);
+        }
+        calpriceTag.innerHTML = amt.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        cal_totalAll = amt+ship_fee;
+        cal_total.innerHTML = cal_totalAll.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+      }
+      //🔴페이지 로드되면 상품이 하나라도 있는지 확인
+      function goods_check(){
+        let list=document.querySelectorAll("#list li")
+        let listbox= document.querySelector("#list");
+        let ship_fee = document.querySelector("#ship_fee");
+        if(list.length==0){
+          listbox.innerHTML="장바구니에 상품이 없습니다."
+          listbox.classList.add("list_null");
+          ship_fee.innerHTML = 0;
+          cal();
+        }
+      }
+
+      //🔴버튼으로 수량 조절 기능
+      function plusbutton(obj){
+        let qty = obj.previousElementSibling;
+        let price = obj.parentElement.previousElementSibling;
+        let totalPrice = obj.parentElement.nextElementSibling;
+        qtyInner = qty.innerHTML
+        qtyInner=parseInt(qtyInner);
+        qtyInner++;
+        qty.innerHTML = qtyInner;
+        priceInner = parseInt(price.innerHTML);
+        totalPrice1 = priceInner*qtyInner;
+        //천단위 콤마 붙이기
+        totalPrice.innerHTML = totalPrice1.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+        cal();
+      }
+      function minusbutton(obj){
+        let qty = obj.nextElementSibling;
+        let price = obj.parentElement.previousElementSibling;
+        let totalPrice = obj.parentElement.nextElementSibling;
+        qtyInner = qty.innerHTML
+        qtyInner=parseInt(qtyInner);
+        if(qtyInner>1){
+        qtyInner--;
+        qty.innerHTML = qtyInner;
+        priceInner = parseInt(price.innerHTML);
+        totalPrice1 = priceInner*qtyInner;
+        //천단위 콤마 붙이기
+        totalPrice.innerHTML = totalPrice1.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        }else{
+          alert("한 개 이상 선택해주세요")
+        }
+        cal();
+      }
+      
+      //🔴리스트 삭제 기능
+      function remove(){
+        let checkbox = document.querySelectorAll(".check");
+        for(let i=0; i<checkbox.length;i++){
+          if(checkbox[i].checked == true){
+            checkbox[i].parentElement.remove();
+          }
+        }
+        cal();
+        goods_check();
+      }
+      //🔴전체선택 기능
+      function checkAll(){
+        let checkbox = document.querySelectorAll(".check");
+        let checkAll = document.querySelector("#checkAll")
+        if(checkAll.checked==true){
+          for(let i=0;i<checkbox.length;i++){
+            checkbox[i].checked=true;
+          }
+        }else{
+          for(let i=0;i<checkbox.length;i++){
+            checkbox[i].checked=false;
+          }
+        }
+      }
+
+      //검색 시작
+      function search(obj){
+      let search = obj.previousElementSibling.value;
+      console.log(search);
+
+      switch(search){
+        case '신상품':
+        location.href = 'newList.html';
+        break;
+        case '베스트':
+        location.href = 'bestList.html';
+        break;
+        case '여성시계':
+        location.href = 'womensList.html';
+        break;
+        case '남성시계':
+        location.href = 'mensList.html';
+        break;
+        case '아동시계':
+        location.href = 'childList.html';
+        break;
+        default:
+        alert('상품이 존재하지 않습니다');
+        break;
+        }
+      }
+      //검색 끝
+
+    </script>
+  </head>
+  <body>
+      <!-- =========================헤더 부분 시작===================== -->
+      <header>
+        <div>
+          <div class="hamburger-btn active">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+          </div>
+        </div>
+        <div class="title">
+          <a href="index.html" class="title-link" style="text-decoration: none; color: black;">
+            <h1>EWC</h1>
+            <h4>SCHAFFHAUSEN</h4>
+          </a>
+        </div>
+        <div class="user">
+          <a href="login.html"><i class="fa-solid fa-user"></i></a>
+          <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+      </header>
+      <!-- 버거버튼 포함된 헤더 끝 상단 head태그에 burgerBT.js추가하여 동작 가능해짐.-->
+    
+      <!-- 평소엔 숨겨져있다가 버거버튼을 누르면 나오는 사이드바 메뉴 임시 -->
+      <div class="sidebar">
+        <div class="sidebar-header" style="line-height: normal;">
+          <span class="close-btn">&times;</span>
+        </div>
+        <div class="sidebar-content">
+          <div class="categories" style="flex: 2;">
+            <h2>카테고리</h2>
+            <ul>
+              <li class="category" data-category="1">아쿠아타이머</li>
+              <li class="category" data-category="2">다빈치</li>
+              <li class="category" data-category="3">인제니어</li>
+              <li class="category" data-category="4">포르토피노</li>
+              <li class="category" data-category="5">포르투기저</li>
+            </ul>
+          </div>
+          <div class="divider-vertical"></div>
+    
+          <div class="product-container" style="flex: 8;">
+            <div class="products">
+              <img src="/asset/image/product6.jpg">
+              <img src="/asset/image/main-3.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- =========================헤더 부분 끝===================== -->
+
+    <!-- =========================장바구니 부분 시작===================== -->
+    <main>
+      <div  id="cart_title"><span>장바구니</span></div>
+      <div id="listbox_wrap">
+        <div id="listbox">
+          <div id="check-remove">
+            <input class="check" id="checkAll" type="checkbox" onclick="checkAll()" ><label for="checkAll"><i class="fa-solid fa-check"></i></label>
+            <label for="checkAll"><span> 전체선택</span></label>
+            <button id="remove" onclick="remove()">선택삭제</button>
+          </div >
+          <ul id="list">
+            <li>
+              <input class="check" type="checkbox" id="check1"><label for="check1"><i class="fa-solid fa-check"></i></label>
+              <img src="https://static.swatch.com/images/product/SUOK147-026/sa200/SUOK147-026_sa200_er005.png" alt="">
+              <p>SXY - VALENTINES 2023 I</p>
+              <div class="price">89000</div>
+              <div class="qty">
+                <button onclick="minusbutton(this)">-</button>
+                <div>1</div>
+                <button onclick="plusbutton(this)">+</button>
+              </div>
+              <div class="amt">
+                89,000
+              </div>
+            </li>
+            <li>
+              <input class="check" type="checkbox"  id="check2"><label for="check2"><i class="fa-solid fa-check"></i></label>
+              <img src="https://static.swatch.com/images/product/SO29N705/sa200/SO29N705_sa200_er005.png" alt="">
+              <p>COBALT DISCO</p>
+              <div class="price">200000</div>
+              <div class="qty">
+                <button onclick="minusbutton(this)">-</button>
+                <div>1</div>
+                <button onclick="plusbutton(this)">+</button>
+              </div>
+              <div class="amt">
+                200,000
+              </div>
+            </li>
+            <li>
+              <input class="check" type="checkbox"  id="check3"><label for="check3"><i class="fa-solid fa-check"></i></label>
+              <img src="https://static.swatch.com/images/product/SUOK144-047/sa200/SUOK144-047_sa200_er005.png" alt="">
+              <p>SXY - KRILLIN</p>
+              <div class="price">132000</div>
+              <div class="qty">
+                <button onclick="minusbutton(this)">-</button>
+                <div>1</div>
+                <button onclick="plusbutton(this)">+</button>
+              </div>
+              <div class="amt">
+                132,000
+              </div>
+            </li>
+          </ul>
+          <div id="check-remove">
+            <span>EWC에서 주문하신 모든 제품은 EWC 시그니처 패키징 방법으로 포장되어 배송됩니다</span>
+            <button id="gift" ><i class="fas fa-gift"></i> 기프트 메시지 추가</button>
+          </div >
+        </div>
+        <div class="order">
+          <div id="calbox">
+            <div id="calbox_inner">
+              <div><span>상품금액</span><p><span  id="cal_price">29100</span><span> 원</span></p></div>
+              <div id="cal_total"><span>결제예정금액</span><p><span id="cal_total_inner">30000</span><span>원</span></p></div>
+            </div>
+
+          </div>
+          <div>
+            <button id="order_btn">주문하기</button>
+          </div>
+
+          <!-- <div id="item_base">
+            <div>
+          <span id="item_base_a">주문하신 모든 제품은 무료로 배송됩니다</span>
+          <button id="item_base_b">자세히 보기</button>
+        </div>
+        <div>
+          <span id="item_base_a">반품 및 교환</span>
+          <button id="item_base_b">자세히 보기</button>
+        </div>
+        </div> -->
+
+        </div>
+      </div >
+
+    </main>
+    <!-- =========================장바구니 부분 끝===================== -->
+
+    <!-- =========================하단 부분 시작===================== -->
+    <footer>
+      <div id="info">
+        <div id="info1">
+          <h2>고객행복센터</h2>
+          <div id="call"><span id="callnumber"><strong>1644-1107</strong></span><span>월~토요일 오전7시 - 오후 6시</span></div>
+        </div>
+        <div id="info2">
+          <p>법인명(상호):주식회사 이젠 | 사업자 등록번호:61-254-25225 사업자 정보확인</p>
+          <P>시계쇼핑몰:제2018-서울강남-55566호 | 개인정보보호책임자:이원준</P>
+          <P>주소:서울특별시 강남구 테헤란로 133,18층(역삼동) | 대표이사:양양양</P>
+          <p>채용문의:bangry@ezen.com</p>
+          <p>팩스: 070-555-5545</p>
+          <!-- <div id="icons">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-youtube"></i>
+          </div> -->
+        </div>
+      </div>
+    </footer>
+    <!-- =========================하단 부분 끝===================== -->
+
+  </body>
+</html>

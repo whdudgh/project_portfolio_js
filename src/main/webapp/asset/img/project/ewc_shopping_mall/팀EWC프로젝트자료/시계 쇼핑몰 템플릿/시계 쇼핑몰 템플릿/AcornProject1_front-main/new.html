@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+  
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+    }
+  
+    .hamburger-btn {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+  
+    .bar {
+      width: 30px;
+      height: 4px;
+      background-color: #fff;
+      margin: 4px 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+  
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+      z-index: 999;
+    }
+  
+    .sidebar.active {
+      transform: translateX(0);
+    }
+  
+    .sidebar-content {
+      display: flex;
+      flex-direction: row; /* 수정: 가로로 정렬 */
+      border-right: 1px solid #000;
+      height: 100vh; /* 수정: 뷰포트 높이에 맞게 설정 */
+    }
+  
+    .categories {
+      flex: 2; /* 수정: 카테고리 영역이 가변적으로 너비를 가지도록 설정 */
+      padding: 10px;
+      color: #000;
+    }
+  
+    .categories h3 {
+      margin-bottom: 10px;
+    }
+  
+    .categories ul {
+      list-style: none;
+      padding: 0;
+    }
+  
+    .categories li {
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+  
+    .product-container {
+      flex: 8; /* 수정: 상품 목록 영역이 가변적으로 너비를 가지도록 설정 */
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .divider-vertical {
+      width: 1px;
+      background-color: #000;
+      height: 100%;
+    }
+  
+    .product-list {
+      list-style: none;
+      padding: 0;
+    }
+  
+    .product-list li {
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+  
+    /* 추가: sidebar-content를 flex로 변경하여 카테고리와 상품 목록이 나란히 표시되도록 */
+    .sidebar-content {
+      display: flex;
+      flex-direction: row;
+    }
+  
+    /* 추가: product-container에 flex-grow 속성을 주어 가로로 남은 공간을 모두 차지하도록 설정 */
+    .product-container {
+      flex-grow: 1;
+    }
+  
+    /* 추가: 사이드바 내부의 X 버튼을 화면 우상단에 배치 */
+    .sidebar-header {
+      padding: 10px;
+      display: flex;
+      justify-content: flex-end; /* 수정: 오른쪽 정렬 */
+    }
+  
+    .close-btn {
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .products {
+      color: #000;
+    }
+  
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hamburger-btn">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </header>
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <span class="close-btn">&times;</span>
+    </div>
+    <div class="sidebar-content">
+      <div class="categories" style="flex: 2;">
+        <h3>카테고리</h3>
+        <ul>
+          <li class="category" data-category="1">카테고리1</li>
+          <li class="category" data-category="2">카테고리2</li>
+          <li class="category" data-category="3">카테고리3</li>
+        </ul>
+      </div>
+      <div class="divider-vertical"></div>
+
+      <div class="product-container" style="flex: 8;">
+        <div class="products">
+          <h3>상품 목록</h3>
+          <ul class="product-list">
+            <!-- 상품들은 JavaScript로 동적으로 추가됩니다. -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script defer>
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const closeBtn = document.querySelector('.close-btn');
+    const category1 = document.querySelector('.category[data-category="1"]');
+    const category2 = document.querySelector('.category[data-category="2"]');
+    const category3 = document.querySelector('.category[data-category="3"]');
+
+    hamburgerBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+    });
+
+    category1.addEventListener('click', () => {
+      showProductsForCategory(1);
+    });
+
+    category2.addEventListener('click', () => {
+      showProductsForCategory(2);
+    });
+
+    category3.addEventListener('click', () => {
+      showProductsForCategory(3);
+    });
+
+    const productList = document.querySelector('.product-list');
+
+    function showProductsForCategory(categoryNumber) {
+      productList.innerHTML = '';
+
+      for (let i = 1; i <= 4; i++) {
+        const productItem = document.createElement('li');
+        productItem.textContent = `카테고리${categoryNumber} 상품 ${i}`;
+        productList.appendChild(productItem);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/4ec79785b5.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+      /* 🚩 */
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Pretendard-Regular";
+      }
+      
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+      .logo img {
+        width: 150px;
+      }
+      .search {
+        padding-left: 5px;
+        width: 400px;
+        height: 45px;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+      .search i {
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .search input {
+        border: 0;
+        outline: none;
+        font-size: 16px;
+        padding: 0;
+        height: 44px;
+        width: 340px;
+        margin-right: 20px;
+      }
+      .user i {
+        text-decoration: none;
+        color: black;
+        font-size: 25px;
+        padding: 10px;
+      }
+      .user i:hover {
+        color: rgb(113, 113, 113);
+      }
+      /* 🚩 */
+      nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        min-width: 1050px;
+        height: 50px;
+        margin: 0 auto;
+        line-height: 50px;
+        background-color: rgb(255, 255, 255);
+        z-index: 10;  /*무조건 맨 위로 오도록*/
+        box-shadow: 0 4px 4px -3px rgb(210, 210, 210);  /*그림자 아래에만 적용*/
+      }
+      .navbar {
+        width: 1200px;
+        font-size: 18px;
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 0 auto;
+
+      }
+      .navbar a{
+        text-decoration: none;
+        color: black;
+      }
+      .navbar li:hover{
+        color: rgb(98, 98, 98);
+      }
+      /*맨 위로 버튼*/
+      aside{
+        float: right;
+        position:sticky;
+        bottom: 50px;
+        right: 50px;
+      }
+      aside div{
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        font-size: 40px;
+        line-height: 50px;        
+        cursor: pointer;
+        border: 1px solid lightgray;
+        border-radius: 50%;
+      }
+      #upbtn img{
+        width: 25px;
+        height: 25px;
+        transform: rotateZ(90deg);
+      }
+      /*맨 위로 버튼 끝*/
+      
+      /* 🚩 */
+      footer{
+        width: 100%;
+      }
+      #info{
+        width: 1200px;
+        padding-top: 30px;
+        margin: 30px auto;
+      }
+
+      .qbox{
+        display: flex;
+      }
+      #call{
+        margin-bottom: 30px;
+      }
+      #callnumber{
+        font-size: 28px;
+      }
+      #call span{
+        margin-right: 10px;
+      }
+      .qbox{
+        padding: 5px 0px;
+      }
+      .qbox div{
+        color: gray;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .qbox button{
+        width: 180px;
+        height: 40px;
+        margin-right: 20px;
+        border:1px solid rgb(206, 206, 206);
+        padding: 8px 40px;
+        background-color: white;
+        cursor: pointer;
+      }
+      footer h2{
+        padding: 20px 0;
+      }
+      #info{
+        display: flex;
+        justify-content: space-between;
+
+      }
+      #info2 ul{
+        padding: 20px 0 20px 0;
+        list-style: none;
+        display: flex;
+        margin-bottom: 50px;
+        
+      }
+      #info2 ul li{
+        margin-right: 15px;
+      }
+      #info2 p{
+        font-size: 13px;
+        color: gray;
+        padding: 4px;
+      }
+
+      #icons{
+        font-size: 30px;
+        color: gray;
+        margin-top: 20px;
+      }
+      #copyright{
+        height: 100px;
+        line-height: 100px;
+        background-color: rgb(238, 238, 238);
+        text-align: center;
+        padding: 0 30px 0 30px;
+        font-size: 12px;
+        color: rgb(122, 122, 122);
+        margin-top: 30px;
+      }
+      .categories {
+      flex: 1;
+      padding-right: 20px;
+    }
+    
+    /* 추가: 카테고리 리스트 스타일 */
+    .categories ul {
+      list-style: none;
+    }
+    
+    .categories li {
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    
+    /* 추가: 상품 목록 영역 스타일 */
+    .products {
+      flex: 3;
+    }
+    
+    .product-list {
+      list-style: none;
+    }
+    
+    .product-list li {
+      margin-bottom: 5px;
+    }
+    </style>
+    <script>
+      //맨위로
+      function upbtn(){
+        window.scrollTo({top:0, behavior:"smooth"});
+      }
+      //맨위로 끝
+    </script>
+    <style>
+      header {
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 중앙 정렬 추가 */
+}
+
+    .logo {
+      display: flex; /* 추가: 로고를 flex 컨테이너로 설정 */
+      align-items: center; /* 추가: 로고를 수직 가운데로 정렬 */
+    }
+
+    .logo img {
+      height: 30px; /* 로고 이미지의 높이 조절 */
+      margin-right: 5px; /* 추가: 로고와 텍스트 사이 간격 */
+    }
+
+    .user {
+      display: flex; /* 추가: 유저 아이콘들을 flex 컨테이너로 설정 */
+      align-items: center; /* 추가: 유저 아이콘들을 수직 가운데로 정렬 */
+    }
+
+    /* 햄버거 버튼 아이콘 스타일 */
+    .hamburger-btn {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      margin-right: 10px; /* 추가: 햄버거 버튼과 로고 사이 간격 */
+    }
+
+    .bar {
+      width: 30px;
+      height: 4px;
+      background-color: #000;
+      margin: 4px 0;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* 추가: 마우스를 올렸을 때 햄버거 버튼 애니메이션 */
+    .hamburger-btn:hover .bar {
+      background-color: #ccc;
+    }
+    @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+    @import url('https://kit-free.fontawesome.com/releases/latest/css/free.min.css');
+    </style>
+  </head>
+  <body onload="init()">
+    <header>
+      <div class="logo">
+        <div class="hamburger-btn">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+        <a href="home.html"> <img src="image/logo.png" alt="" /> </a>
+        <span>Acorn watch</span>
+      </div>
+      <div>
+        <h1>EWC</h1>
+        <p>Ezen Watch Cool</p>
+      </div>
+      <div class="user">
+        <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+    </header>
+
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <span class="close-btn">&times;</span>
+      </div>
+      <div class="sidebar-content">
+        <div class="categories">
+          <h3>카테고리</h3>
+          <ul>
+            <li class="category" data-category="1">카테고리1</li>
+            <li class="category" data-category="2">카테고리2</li>
+            <li class="category" data-category="3">카테고리3</li>
+          </ul>
+        </div>
+        <div class="products">
+          <h3>상품 목록</h3>
+          <ul class="product-list">
+            <!-- 상품들은 JavaScript로 동적으로 추가됩니다. -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <script defer>
+      const hamburgerBtn = document.querySelector('.hamburger-btn');
+      const sidebar = document.querySelector('.sidebar');
+      const closeBtn = document.querySelector('.close-btn');
+      const category1 = document.querySelector('.category[data-category="1"]');
+      const category2 = document.querySelector('.category[data-category="2"]');
+      const category3 = document.querySelector('.category[data-category="3"]');
+      const productList = document.querySelector('.product-list');
+  
+      hamburgerBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+      });
+  
+      closeBtn.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+      });
+  
+      category1.addEventListener('click', () => {
+        showProductsForCategory(1);
+      });
+  
+      category2.addEventListener('click', () => {
+        showProductsForCategory(2);
+      });
+  
+      category3.addEventListener('click', () => {
+        showProductsForCategory(3);
+      });
+  
+      function showProductsForCategory(categoryNumber) {
+        productList.innerHTML = '';
+  
+        for (let i = 1; i <= 4; i++) {
+          const productItem = document.createElement('li');
+          productItem.textContent = `카테고리${categoryNumber} 상품 ${i}`;
+          productList.appendChild(productItem);
+        }
+      }
+    </script>
+
+  </body>
+</html>

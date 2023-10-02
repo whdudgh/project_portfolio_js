@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>로그인</title>
+  <script src="https://kit.fontawesome.com/4ec79785b5.js" crossorigin="anonymous"></script>
+  
+  <!--공용 헤더 푸터 css추가-->
+  <link rel="stylesheet" href="asset/css/common.css">
+  
+  <!--login css추가-->
+  <link rel="stylesheet" href="asset/css/login.css">
+  
+  <!--버거버튼 동작 자바스크립트 추가-->
+  <script defer src="asset/js/burgerBT.js"></script>
+
+  <script>
+
+    //로그인버튼 제약 함수
+
+    function login_check() {
+      let userId = document.querySelector("#userId");
+      let userPw = document.querySelector("#userPw");
+
+      if (userId.value == "") {
+        alert("이메일을 입력해주세요");
+        userId.focus();
+      } else if (userPw.value == "") {
+        alert("비밀번호를 입력해주세요");
+        userPw.focus();
+      } else {
+        alert("로그인 되었습니다.");
+        location.href = "mypage.html"
+      }
+    }
+
+    //가입버튼 함수
+
+    function signup() {
+      location.href = "signup.html"
+    }
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <!----------------------------------------헤더-------------------------------------------------->
+
+  <header>
+    <div>
+      <div class="hamburger-btn active">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+    <div class="title">
+      <a href="index.html" class="title-link" style="text-decoration: none; color: black;">
+        <h1>EWC</h1>
+        <h4>SCHAFFHAUSEN</h4>
+      </a>
+    </div>
+    <div class="user">
+      <a href="login.html"><i class="fa-solid fa-user"></i></a>
+      <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </header>
+  <!-- 버거버튼 포함된 헤더 끝 상단 head태그에 burgerBT.js추가하여 동작 가능해짐.-->
+
+  <!-- 평소엔 숨겨져있다가 버거버튼을 누르면 나오는 사이드바 메뉴 임시 -->
+  <div class="sidebar">
+    <div class="sidebar-header" style="line-height: normal;">
+      <span class="close-btn">&times;</span>
+    </div>
+    <div class="sidebar-content">
+      <div class="categories" style="flex: 2;">
+        <h2>카테고리</h2>
+        <ul>
+          <li class="category" data-category="1">아쿠아타이머</li>
+          <li class="category" data-category="2">다빈치</li>
+          <li class="category" data-category="3">인제니어</li>
+          <li class="category" data-category="4">포르토피노</li>
+          <li class="category" data-category="5">포르투기저</li>
+        </ul>
+      </div>
+      <div class="divider-vertical"></div>
+
+      <div class="product-container" style="flex: 8;">
+        <div class="products">
+          <img src="/asset/image/product6.jpg">
+          <img src="/asset/image/main-3.png">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!----------------------------------------메인-------------------------------------------------->
+
+  <main>
+    <div id="loginbox" style="margin-top: 4em;">
+
+      <!--------------------------------------정보입력-------------------------------------------------->
+
+      <form>
+        <div>
+          <div class="email">
+            <i class="fas fa-envelope"></i>
+            <input id="userPw" type="password" placeholder="이메일을 입력해주세요">
+          </div>
+          <div class="pwWord">
+            <i class="fas fa-lock" style="font-size: 2em; padding: 14px;"></i>
+            <input id="userPw" type="password" placeholder="비밀번호를 입력해주세요">
+          </div>
+        </div>
+
+        <span id="findIwPw">
+          <a id="findId" href="">아이디 찾기</a>
+          <a id="findPw" href="">비밀번호 찾기</a>
+        </span>
+
+        <button type="button" onclick="login_check()" id="loginbtn">로그인</button>
+        <div id="hr-line"></div>
+        <button type="button" id="signupbtn" onclick="signup()">회원가입</button>
+      </form>
+    </div>
+  </main>
+
+  <!----------------------------------------풋터-------------------------------------------------->
+
+  <footer>
+    <div id="info">
+      <div id="info1">
+        <h2>고객행복센터</h2>
+        <div id="call"><span id="callnumber"><strong>1644-1107</strong></span><span>월~토요일 오전7시 - 오후 6시</span></div>
+      </div>
+      <div id="info2">
+        <p>법인명(상호):주식회사 이젠 | 사업자 등록번호:61-254-25225 사업자 정보확인</p>
+        <P>시계쇼핑몰:제2018-서울강남-55566호 | 개인정보보호책임자:이원준</P>
+        <P>주소:서울특별시 강남구 테헤란로 133,18층(역삼동) | 대표이사:양양양</P>
+        <p>채용문의:bangry@ezen.com</p>
+        <p>팩스: 070-555-5545</p>
+        <!-- <div id="icons">
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-youtube"></i>
+        </div> -->
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

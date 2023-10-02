@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="hamburger-btn active">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+    <div class="title">
+      <h1><a href="home.html">EWC</a></h1>
+    </div>
+    <div class="user">
+      <a href="login.html"><i class="fa-solid fa-user"></i></a>
+      <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </header>
+  <!-- 버거버튼 포함된 헤더 끝 상단 head태그에 burgerBT.js추가하여 동작 가능해짐.-->
+
+  <!-- 평소엔 숨겨져있다가 버거버튼을 누르면 나오는 사이드바 메뉴 임시 -->
+  <div class="sidebar">
+    <div class="sidebar-header" style="line-height: normal;">
+      <span class="close-btn">&times;</span>
+    </div>
+    <div class="sidebar-content">
+      <div class="categories" style="flex: 2;">
+        <h3>카테고리</h3>
+        <ul>
+          <li class="category" data-category="1">카테고리1</li>
+          <li class="category" data-category="2">카테고리2</li>
+          <li class="category" data-category="3">카테고리3</li>
+        </ul>
+      </div>
+      <div class="divider-vertical"></div>
+
+      <div class="product-container" style="flex: 8;">
+        <div class="products">
+          <h3>상품 목록</h3>
+          <ul class="product-list">
+            <!-- 상품들은 JavaScript로 동적 추가 showproduct함수에 가보면 형식이 있음. 거기서 내용이 추가되는것-->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--숨겨진 사이드바 끝-->
+
+  <!--================================햄버거 header 완전 끝 밑에부턴 각자페이지===========================================-->
+</body>
+</html>

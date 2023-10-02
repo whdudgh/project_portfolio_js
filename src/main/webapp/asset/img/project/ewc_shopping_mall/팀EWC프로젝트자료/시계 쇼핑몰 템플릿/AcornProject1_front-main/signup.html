@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원가입</title>
+  <script src="https://kit.fontawesome.com/4ec79785b5.js" crossorigin="anonymous"></script>
+
+  <!--공용 헤더 푸터 css추가-->
+  <link rel="stylesheet" href="asset/css/common.css">
+
+  <!-- signup css추가-->
+  <link rel="stylesheet" href="asset/css/signup.css">
+
+  <!--버거버튼 동작 자바스크립트 추가-->
+  <script defer src="asset/js/burgerBT.js"></script>
+
+  <script defer src="asset/js/signup.js"></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <!----------------------------------------헤더-------------------------------------------------->
+
+  <header>
+    <div>
+      <div class="hamburger-btn active">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+    <div class="title">
+      <a href="index.html" class="title-link" style="text-decoration: none; color: black;">
+        <h1>EWC</h1>
+        <h4>SCHAFFHAUSEN</h4>
+      </a>
+    </div>
+    <div class="user">
+      <a href="login.html"><i class="fa-solid fa-user"></i></a>
+      <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </header>
+  <!-- 버거버튼 포함된 헤더 끝 상단 head태그에 burgerBT.js추가하여 동작 가능해짐.-->
+
+  <!-- 평소엔 숨겨져있다가 버거버튼을 누르면 나오는 사이드바 메뉴 임시 -->
+  <div class="sidebar">
+    <div class="sidebar-header" style="line-height: normal;">
+      <span class="close-btn">&times;</span>
+    </div>
+    <div class="sidebar-content">
+      <div class="categories" style="flex: 2;">
+        <h2>카테고리</h2>
+        <ul>
+          <li class="category" data-category="1">아쿠아타이머</li>
+          <li class="category" data-category="2">다빈치</li>
+          <li class="category" data-category="3">인제니어</li>
+          <li class="category" data-category="4">포르토피노</li>
+          <li class="category" data-category="5">포르투기저</li>
+        </ul>
+      </div>
+      <div class="divider-vertical"></div>
+
+      <div class="product-container" style="flex: 8;">
+        <div class="products">
+          <img src="/asset/image/product6.jpg">
+          <img src="/asset/image/main-3.png">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!----------------------------------------메인-------------------------------------------------->
+
+  <main>
+
+    <!----------------------------------------정보 입력란-------------------------------------------------->
+
+    <p id="main" style="text-align: center; font-size: xx-large; font-weight: bold; margin-top: 2em;">회 원 가 입</p>
+    <table>
+      <tr>
+        <th><i class="fas fa-user"></i></th>
+        <td><input type="text" id="name" placeholder="이름"></td>
+      </tr>
+      <tr>
+        <th><i class="fas fa-envelope"></i></th>
+        <td>
+          <input type="email" id="email">
+          @
+          <input type="email" id="emaill">
+          <select name="" id="eee" onchange="em(this)">
+            <option value="">직접입력</option>
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="hanmail.net">hanmail.net</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th><i class="fas fa-lock"></i></th>
+        <td class="pwch1"><input type="password" id="pw" onblur="pwch1(pw)" placeholder="비밀번호(예.영문, 숫자 혼합하여 6~20자리 이내)" placeholder="비밀번호를 입력해주세요"><span
+          id="pwcheck1">양식에 맞게 입력해주세요.</span></td>
+      </tr>
+      <tr>
+        <th><i class="fas fa-lock-open"></th>
+        <td class="pwch2"><input type="password" id="checkpw" onblur="pwch2(checkpw)" placeholder="한번 더 입력해주세요"><span
+            id="pwcheck2">비밀번호가 다릅니다.</span></td>
+      </tr>
+      <tr>
+        <th><i class="fas fa-cake-candles"></i></th>
+        <td class="birthch"><input type="text" id="birth" onblur="birthch(birth)"
+            placeholder="생년월일(예.20020115)"><span id="birthcheck">양식에 맞게 입력해주세요</span></td>
+      </tr>
+      <tr>
+        <th><i class="fas fa-phone"></i></th>
+        <td class="phonech"><input type="text" id="phone" onblur="phonech(phone)"
+            placeholder="핸드폰번호(예.01012341234)"><span id="phonecheck">양식에 맞게 입력해주세요</span>
+        </td>
+      </tr>
+    </table>
+
+    <!----------------------------------------개인정보-------------------------------------------------->
+
+    <div style="text-align: center;">
+      <input id="checkBox" type="checkbox"
+        style="height: 11px; vertical-align: middle; text-align: center; margin-right: 5px;" checked><label>개인정보 수집 및
+        이용 동의</label>
+    </div>
+    <table class="privacytable">
+      <tr style="border: 1px solid black; background-color: #f2f2f2; padding: 1px; text-align: center;">
+        <th>구분</th>
+        <th>이용목적</th>
+        <th>수집항목</th>
+        <th>보유기간</th>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black; padding: 2px; text-align: center;">가입</td>
+        <td style="border: 1px solid black; padding: 2px; text-align: center;">서비스 이용 및 상담</td>
+        <td style="border: 1px solid black; padding: 2px; text-align: center;">이메일, 성명, ID, 비밀번호, 생년월일, 휴대폰번호</td>
+        <td rowspan="3" style="border: 1px solid black; padding: 1px; text-align: center;"> 회원탈퇴시 또는 법정보유기간</td>
+      </tr>
+      <tr>
+        <td rowspan="2" style="border: 1px solid black; padding: 2px; text-align: center;">구매 및 배송</td>
+        <td style="border: 1px solid black; padding: 2px; text-align: center;">구매결제</td>
+        <td style="border: 1px solid black; padding: 1px; text-align: center;">결제정보(카드번호, 계좌번호, 휴대폰번호 등)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black; padding: 2px; text-align: center;">물품배송</td>
+        <td style="border: 1px solid black; padding: 2px; text-align: center;">배송정보(주문자/수취인 성명, 연락처, 배송지주소)</td>
+      </tr>
+    </table>
+
+    <!----------------------------------------가입,돌아가기 버튼-------------------------------------------------->
+
+    <div style="text-align: center;">
+      <button type="button" onclick="submit()" id="signbtn">가입하기</button>
+      <button type="button" onclick="back()" id="backbtn">돌아가기</button>
+    </div>
+  </main>
+
+  <!----------------------------------------풋터-------------------------------------------------->
+
+  <footer>
+    <div id="info">
+      <div id="info1">
+        <h2>고객행복센터</h2>
+        <div id="call"><span id="callnumber"><strong>1644-1107</strong></span><span>월~토요일 오전7시 - 오후 6시</span></div>
+      </div>
+      <div id="info2">
+        <p>법인명(상호):주식회사 이젠 | 사업자 등록번호:61-254-25225 사업자 정보확인</p>
+        <P>시계쇼핑몰:제2018-서울강남-55566호 | 개인정보보호책임자:이원준</P>
+        <P>주소:서울특별시 강남구 테헤란로 133,18층(역삼동) | 대표이사:양양양</P>
+        <p>채용문의:bangry@ezen.com</p>
+        <p>팩스: 070-555-5545</p>
+        <!-- <div id="icons">
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-youtube"></i>
+        </div> -->
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

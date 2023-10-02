@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>시계쇼핑몰</title>
+  <script src="https://kit.fontawesome.com/4ec79785b5.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <link rel="stylesheet" href="asset/css/main.css">
+  <link rel="stylesheet" href="asset/css/common.css">
+  <script defer src="asset/js/burgerBT.js"></script>
+
+
+</head>
+
+<body>
+
+
+  <!-------------------------- header 시작---------------------------->
+  <!-- 원래 있던 기본 헤더에 햄버거 버튼 추가한 헤더 시작 -->
+  <header>
+    <div>
+      <div class="hamburger-btn active">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+    <div class="title">
+      <a href="index.html" class="title-link" style="text-decoration: none; color: black;">
+        <h1>EWC</h1>
+        <h4>SCHAFFHAUSEN</h4>
+      </a>
+    </div>
+    <div class="user">
+      <a href="login.html"><i class="fa-solid fa-user"></i></a>
+      <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+    </div>
+  </header>
+  <!-- 버거버튼 포함된 헤더 끝 상단 head태그에 burgerBT.js추가하여 동작 가능해짐.-->
+
+  <!-- 평소엔 숨겨져있다가 버거버튼을 누르면 나오는 사이드바 메뉴 임시 -->
+  <div class="sidebar">
+    <div class="sidebar-header" style="line-height: normal;">
+      <span class="close-btn">&times;</span>
+    </div>
+    <div class="sidebar-content">
+      <div class="categories" style="flex: 2;">
+        <h2>카테고리</h2>
+        <ul>
+          <li class="category" data-category="1">아쿠아타이머</li>
+          <li class="category" data-category="2">다빈치</li>
+          <li class="category" data-category="3">인제니어</li>
+          <li class="category" data-category="4">포르토피노</li>
+          <li class="category" data-category="5">포르투기저</li>
+        </ul>
+      </div>
+      <div class="divider-vertical"></div>
+
+      <div class="product-container" style="flex: 8;">
+        <div class="products">
+          <img src="/asset/image/product6.jpg">
+          <img src="/asset/image/main-3.png">
+        </div>
+      </div>
+    </div>
+  </div>
+  <!----------------------------- header 끝------------------------------>
+
+  <!------------------------------ main 시작------------------------------>
+  <main>
+    <section>
+      <div class="mainPage">
+        <div class="main_img">
+          <img src="/asset/image/main.png" id="main_img">
+          <div class="text-inside-image">
+            <p>ICONIC<br>IWC<br>CHRONOGRAPHS</p>
+          </div>
+        </div>
+    </section>
+    <section>
+      <div class="mainPP">
+        <div class="mainContent">
+          <h2>OUR<br>LATEST</h2><br>
+          <div class="mainText">
+            <pre>A Grande Sonnerie Supersonnerie, Minute Repeater,
+            Perpetual Calendar, Split-Seconds Flyback </pre>
+            <br>
+            <pre>Chronograph and Flying Tourbillon come together i
+            n this ultra-complicated wristwatch. </pre>
+          </div>
+        </div>
+        <div class="slider">
+          <input type="radio" name="slide" id="slide1" checked>
+          <input type="radio" name="slide" id="slide2">
+          <input type="radio" name="slide" id="slide3">
+          <input type="radio" name="slide" id="slide4">
+          <ul id="imgholder" class="imgs">
+            <li><img src="/asset/image/slide/slide2.png" style="width:700px;" height="550px;">
+              <p>크로노그래프</p>
+
+            </li>
+            <li><img src="/asset/image/slide/slide3.png" style="width:700px;" height="550px;">
+              <p>크로노그래프-갈라파고스 아일랜드</p>
+            </li>
+            <li><img src="/asset/image/slide/slide5.png" style="width:700px;" height="550px;">
+              <p>포르토피노-퍼페추얼</p>
+            </li>
+            <li><img src="/asset/image/slide/slide6.png" style="width:700px;" height="550px;">
+              <p>오토메틱-데이앤나이트34</p>
+            </li>
+          </ul>
+          <div class="bullets">
+            <label for="slide1">&nbsp;</label>
+            <label for="slide2">&nbsp;</label>
+            <label for="slide3">&nbsp;</label>
+            <label for="slide4">&nbsp;</label>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="mainPPP">
+        <div class="main_img2">
+          <img src="/asset/image/main-2.png" style="width:700px;" height="550px;">
+        </div>
+        <div class="mainContent2">
+          <h2>AP COVERAGE<br>SERVICE</h2><br>
+          <div class="mainText2">
+            <pre>A Grande Sonnerie Supersonnerie, Minute Repeater,
+      Perpetual Calendar, Split-Seconds Flyback </pre>
+            <br>
+            <pre>Chronograph and Flying Tourbillon come together i
+      n this ultra-complicated wristwatch. </pre>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="mainPPPP">
+        <div class="mainContent3">
+          <h2>NEW<br>ROYAL<br>OFFSHORE</h2><br>
+          <div class="mainText3">
+            <pre>A Grande Sonnerie Supersonnerie, Minute Repeater,
+            Perpetual Calendar, Split-Seconds Flyback </pre>
+            <br>
+            <pre>Chronograph and Flying Tourbillon come together i
+            n this ultra-complicated wristwatch. </pre>
+          </div>
+        </div>
+        <div class="main_img3">
+          <img src="/asset/image/main-3.png" style="width: 500px;" height="300px">
+          <div class="main_img4">
+            <img src="/asset/image/main3-2.png" style="width: 500px;" height="300px">
+          </div>
+        </div>
+      </div>
+    </section>
+    </div>
+  </main>
+  <div class="mainPPPPP">
+    <div class="mainContent4">
+      <h2> FIND A<br>BOUTIQUE</h2>
+    </div>
+    <div class="img-5">
+      <img src="/asset/image/main5.jpeg">
+    </div>
+  </div>
+  <!------------------------------- main 끝------------------------------>
+
+  <!---------------------------- footer시작 --------------------------->
+  <footer>
+    <div id="info">
+      <div id="info1">
+        <h2>고객행복센터</h2>
+        <div id="call"><span id="callnumber"><strong>1644-1107</strong></span><span>월~토요일 오전7시 - 오후 6시</span></div>
+      </div>
+      <div id="info2">
+        <p>법인명(상호):주식회사 이젠 | 사업자 등록번호:61-254-25225 사업자 정보확인</p>
+        <P>시계쇼핑몰:제2018-서울강남-55566호 | 개인정보보호책임자:이원준</P>
+        <P>주소:서울특별시 강남구 테헤란로 133,18층(역삼동) | 대표이사:양양양</P>
+        <p>채용문의:bangry@ezen.com</p>
+        <p>팩스: 070-555-5545</p>
+        <!-- <div id="icons">
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-youtube"></i>
+        </div> -->
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

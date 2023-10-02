@@ -1,0 +1,503 @@
+--------------------------------------------------------
+--  파일이 생성됨 - 금요일-7월-28-2023   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Sequence BOARD_KEY_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "BOARD_KEY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 50 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence CART_ITEM_KEY_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "CART_ITEM_KEY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence CART_KEY_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "CART_KEY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 520 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence CUST_KEY_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "CUST_KEY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 41 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence ITEM_KEY_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "ITEM_KEY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1120 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence ORDER_DET_KEY_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "ORDER_DET_KEY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 11151 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence ORDER_KEY_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "ORDER_KEY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 100021 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Table BOARD
+--------------------------------------------------------
+
+  CREATE TABLE "BOARD" 
+   (	"BOARD_KEY" NUMBER(2,0), 
+	"CUST_KEY" NUMBER(4,0), 
+	"P_KEY" VARCHAR2(20 BYTE), 
+	"TITLE" VARCHAR2(100 BYTE), 
+	"B_RDATE" DATE DEFAULT SYSDATE, 
+	"CONTENT" VARCHAR2(2000 BYTE), 
+	"RATE" NUMBER(2,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table CART
+--------------------------------------------------------
+
+  CREATE TABLE "CART" 
+   (	"CART_KEY" NUMBER(4,0), 
+	"CUST_KEY" NUMBER(4,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table CART_ITEM
+--------------------------------------------------------
+
+  CREATE TABLE "CART_ITEM" 
+   (	"CART_ITEM_KEY" NUMBER(4,0), 
+	"CART_KEY" NUMBER(4,0), 
+	"P_KEY" VARCHAR2(20 BYTE), 
+	"P_CNT" NUMBER(4,0) DEFAULT 1, 
+	"CONTAIN_DATE" DATE DEFAULT SYSDATE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table CATEGORY
+--------------------------------------------------------
+
+  CREATE TABLE "CATEGORY" 
+   (	"CATEGORY_KEY" VARCHAR2(5 BYTE), 
+	"C_NAME" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table CUSTOMER
+--------------------------------------------------------
+
+  CREATE TABLE "CUSTOMER" 
+   (	"CUST_KEY" NUMBER(4,0), 
+	"EMAIL" VARCHAR2(50 BYTE), 
+	"U_NAME" VARCHAR2(15 BYTE), 
+	"U_PWD" VARCHAR2(150 BYTE), 
+	"U_BIRTH" DATE, 
+	"PHONE_NUM" VARCHAR2(15 BYTE), 
+	"SIGNOUT" VARCHAR2(1 BYTE) DEFAULT 'N'
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MEMO
+--------------------------------------------------------
+
+  CREATE TABLE "MEMO" 
+   (	"BOARD_KEY" NUMBER(2,0), 
+	"CONTENT" VARCHAR2(2000 BYTE), 
+	"C_RDATE" DATE DEFAULT SYSDATE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table ORDER_DETAIL
+--------------------------------------------------------
+
+  CREATE TABLE "ORDER_DETAIL" 
+   (	"P_KEY" VARCHAR2(20 BYTE), 
+	"ORDER_KEY" NUMBER(7,0), 
+	"ORDER_DET_KEY" NUMBER(7,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table PRODUCT
+--------------------------------------------------------
+
+  CREATE TABLE "PRODUCT" 
+   (	"P_KEY" VARCHAR2(20 BYTE), 
+	"CATEGORY_KEY" VARCHAR2(5 BYTE), 
+	"P_NAME" VARCHAR2(150 BYTE), 
+	"MAIN_IMG" VARCHAR2(600 BYTE), 
+	"SUB_IMG1" VARCHAR2(600 BYTE), 
+	"SUB_IMG2" VARCHAR2(600 BYTE), 
+	"SUB_IMG3" VARCHAR2(600 BYTE), 
+	"SUB_IMG4" VARCHAR2(600 BYTE), 
+	"PRICE" NUMBER(12,0) DEFAULT 0, 
+	"P_RDATE" DATE DEFAULT SYSDATE, 
+	"P_CNT" NUMBER(4,0) DEFAULT 0, 
+	"DETAIL_COMMENT" VARCHAR2(4000 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table TOTAL_ORDER
+--------------------------------------------------------
+
+  CREATE TABLE "TOTAL_ORDER" 
+   (	"CUST_KEY" NUMBER(4,0), 
+	"O_RDATE" DATE DEFAULT SYSDATE, 
+	"PAY_METHOD" VARCHAR2(20 BYTE), 
+	"PRICE" NUMBER(12,0) DEFAULT 0, 
+	"ORDER_KEY" NUMBER(7,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into BOARD
+SET DEFINE OFF;
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (10,1,'IW344602','명품시계',to_date('23/07/24','RR/MM/DD'),'아다다다다다다다다다다다다다다다다다다다',5);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (11,2,'IW458611','세계의명작',to_date('23/07/24','RR/MM/DD'),'네맞습니다맞습니다맞습니다',4);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (12,3,'IW390701','생각보다 별로입니다',to_date('23/07/24','RR/MM/DD'),'롤렉스가 더 나을 것 같습니다',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (13,4,'IW458611','명품 EWC',to_date('23/07/24','RR/MM/DD'),'EWC의 명성에 걸맞은 상품입니다',5);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (14,5,'IW390701','항상 최고',to_date('23/07/24','RR/MM/DD'),'EWC에 더이상 무슨 말이 필요한가요?',5);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (15,1,'IW458307','너무 만족',to_date('23/07/24','RR/MM/DD'),'별점 6점이 없어서 전 5점을 넘어선 1점을 드립니다',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (16,6,'IW379502','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (17,7,'IW390703','지인 추천',to_date('23/07/24','RR/MM/DD'),'제가 명품이 되는 것 같습니다',5);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (18,1,'IW376806','BTS가 차는 시계?',to_date('23/07/24','RR/MM/DD'),'이 시계가 RM이 즐겨 찾는 시계 맞죠?',4);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (19,2,'IW459306','Best of Best',to_date('23/07/24','RR/MM/DD'),'Korea number 1 watch EWC',5);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (20,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (21,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (22,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (23,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (24,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (25,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (26,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (27,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (28,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (29,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (30,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (31,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+Insert into BOARD (BOARD_KEY,CUST_KEY,P_KEY,TITLE,B_RDATE,CONTENT,RATE) values (32,8,'IW344602','후기들 사기?',to_date('23/07/24','RR/MM/DD'),'IWC도 아니고 EWC면 뭐죠?',1);
+REM INSERTING into CART
+SET DEFINE OFF;
+Insert into CART (CART_KEY,CUST_KEY) values (500,1);
+Insert into CART (CART_KEY,CUST_KEY) values (501,2);
+Insert into CART (CART_KEY,CUST_KEY) values (502,3);
+Insert into CART (CART_KEY,CUST_KEY) values (503,4);
+Insert into CART (CART_KEY,CUST_KEY) values (504,5);
+REM INSERTING into CART_ITEM
+SET DEFINE OFF;
+Insert into CART_ITEM (CART_ITEM_KEY,CART_KEY,P_KEY,P_CNT,CONTAIN_DATE) values (1,500,'IW376804',1,to_date('23/07/26','RR/MM/DD'));
+Insert into CART_ITEM (CART_ITEM_KEY,CART_KEY,P_KEY,P_CNT,CONTAIN_DATE) values (2,500,'IW392103',2,to_date('23/07/26','RR/MM/DD'));
+Insert into CART_ITEM (CART_ITEM_KEY,CART_KEY,P_KEY,P_CNT,CONTAIN_DATE) values (3,500,'IW328904',1,to_date('23/07/26','RR/MM/DD'));
+Insert into CART_ITEM (CART_ITEM_KEY,CART_KEY,P_KEY,P_CNT,CONTAIN_DATE) values (4,500,'IW657601',1,to_date('23/07/26','RR/MM/DD'));
+Insert into CART_ITEM (CART_ITEM_KEY,CART_KEY,P_KEY,P_CNT,CONTAIN_DATE) values (5,501,'IW657601',3,to_date('23/07/26','RR/MM/DD'));
+Insert into CART_ITEM (CART_ITEM_KEY,CART_KEY,P_KEY,P_CNT,CONTAIN_DATE) values (7,501,'IW390701',2,to_date('23/07/26','RR/MM/DD'));
+REM INSERTING into CATEGORY
+SET DEFINE OFF;
+Insert into CATEGORY (CATEGORY_KEY,C_NAME) values ('DA','다빈치');
+Insert into CATEGORY (CATEGORY_KEY,C_NAME) values ('AQ','아쿠아타이머');
+Insert into CATEGORY (CATEGORY_KEY,C_NAME) values ('IN','인제니어');
+Insert into CATEGORY (CATEGORY_KEY,C_NAME) values ('TO','포르토피노');
+Insert into CATEGORY (CATEGORY_KEY,C_NAME) values ('TU','포루투기처');
+REM INSERTING into CUSTOMER
+SET DEFINE OFF;
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (21,'aaa@naa.com','구구구','1234',to_date('03/09/09','RR/MM/DD'),'01022223333','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (1,'dong1@gmail.com','홍길동','1111',to_date('23/07/21','RR/MM/DD'),'010-1234-5678','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (2,'minjun@gmail.com','김민준','1111',to_date('23/07/21','RR/MM/DD'),'010-1111-2222','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (3,'seoyoon@gmail.com','이서윤','1111',to_date('23/07/21','RR/MM/DD'),'010-3333-4444','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (4,'haha@gmail.com','임하윤','1111',to_date('23/07/21','RR/MM/DD'),'010-5555-6666','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (5,'jun1@gmail.com','박나라','1111',to_date('23/07/21','RR/MM/DD'),'010-7447-8888','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (6,'jun2@gmail.com','박준우','1111',to_date('23/07/21','RR/MM/DD'),'010-7337-8838','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (7,'jun3@gmail.com','김아장','1111',to_date('23/07/21','RR/MM/DD'),'010-7223-8448','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (8,'jun4@gmail.com','오준우','1111',to_date('23/07/21','RR/MM/DD'),'010-7777-8888','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (22,'aaa@naa.com','구구구','1234',to_date('03/09/09','RR/MM/DD'),'01022223333','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (23,'a111a@naa.com','구aa구구','1234',to_date('03/09/09','RR/MM/DD'),'01022223333','N');
+Insert into CUSTOMER (CUST_KEY,EMAIL,U_NAME,U_PWD,U_BIRTH,PHONE_NUM,SIGNOUT) values (24,'a111a@naa.com','구aa구구','1234',to_date('03/09/09','RR/MM/DD'),'01022223333','N');
+REM INSERTING into MEMO
+SET DEFINE OFF;
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (10,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (10,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (12,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (13,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (14,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (15,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (16,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (17,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (18,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (19,'고맙습니다 고객님',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (20,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (21,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (22,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (23,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (24,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (25,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (26,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (27,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (28,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (29,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (30,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (31,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+Insert into MEMO (BOARD_KEY,CONTENT,C_RDATE) values (32,'악플은 삭제합니다',to_date('23/07/24','RR/MM/DD'));
+REM INSERTING into ORDER_DETAIL
+SET DEFINE OFF;
+Insert into ORDER_DETAIL (P_KEY,ORDER_KEY,ORDER_DET_KEY) values ('IW371617',100013,11127);
+Insert into ORDER_DETAIL (P_KEY,ORDER_KEY,ORDER_DET_KEY) values ('IW458611',100014,11128);
+Insert into ORDER_DETAIL (P_KEY,ORDER_KEY,ORDER_DET_KEY) values ('IW657601',100015,11129);
+Insert into ORDER_DETAIL (P_KEY,ORDER_KEY,ORDER_DET_KEY) values ('IW458307',100016,11130);
+Insert into ORDER_DETAIL (P_KEY,ORDER_KEY,ORDER_DET_KEY) values ('IW371610',100017,11131);
+REM INSERTING into PRODUCT
+SET DEFINE OFF;
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW458307','DA','다 빈치 오토매틱','IW458307-1.png','IW458307-2.png','IW458307-3.png','IW458307-4.png','IW458307-5.png',8100000,to_date('23/07/24','RR/MM/DD'),30,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW459306','DA','다 빈치 오토매틱 문 페이즈','IW459306-1.png','IW459306-2.png','IW459306-3.png','IW459306-4.png','IW459306-5.png',10800000,to_date('23/07/24','RR/MM/DD'),20,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW393101','DA','다 빈치 투르비옹 레트로그레이드 크로노 그래프','IW393101-1.png','IW393101-2.png','IW393101-3.png','IW393101-4.png','IW393101-5.png',135600000,to_date('23/07/24','RR/MM/DD'),10,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW392103','DA','다 빈치 퍼페추얼 캘린더 크로노그래프','IW392103-1.png','IW392103-2.png','IW392103-3.png','IW392103-4.png','IW392103-5.png',39500000,to_date('23/07/24','RR/MM/DD'),15,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328802','AQ','아쿠아타이머 오토매틱','IW328802-1.png','IW328802-2.png','IW328802-3.png','IW328802-4.png','IW328802-5.png',8700000,to_date('23/07/24','RR/MM/DD'),40,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW376806','AQ','아쿠아타이머 크로노그래프','IW376806-1.png','IW376806-2.png','IW376806-3.png','IW376806-4.png','IW376806-5.png',10000000,to_date('23/07/24','RR/MM/DD'),30,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW379502','AQ','아쿠아타이머 크로노그래프 갈라파고스 아일랜드 에디션','IW379502-1.png','IW379502-2.png','IW379502-3.png','IW379502-4.png','IW379502-5.png',14600000,to_date('23/07/24','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW376804','AQ','아쿠아타이머 크로노그래프 화이트','IW376804-1.png','IW376804-2.png','IW376804-3.png','IW376804-4.png','IW376804-5.png',11100000,to_date('23/07/24','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328904','IN','인제니어 오토매틱 40 그레이','IW328904-1.png','IW328904-2.png','IW328904-3.png','IW328904-4.png','IW328904-5.png',18500000,to_date('23/07/24','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328903','IN','인제니어 오토매틱 40 그린','IW328903-1.png','IW328903-2.png','IW328903-3.png','IW328903-4.png','IW328903-5.png',14900000,to_date('23/07/24','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328901','IN','인제니어 오토매틱 40 블랙','IW328901-1.png','IW328901-2.png','IW328903-3.png','IW328901-4.png','IW328901-5.png',14900000,to_date('23/07/24','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328902','IN','인제니어 오토매틱 40 실버','IW328902-1.png','IW328902-2.png','IW328902-3.png','IW328902-4.png','IW328902-5.png',14900000,to_date('23/07/24','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW657601','TO','포르토피노 오토매틱 34','IW657601-1.png','IW657601-2.png','IW657601-3.png','IW657601-4.png','IW657601-5.png',13700000,to_date('23/07/24','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW458611','TO','포르토피노 오토매틱 37','IW458611-1.png','IW458611-2.png','IW458611-3.png','IW458611-4.png','IW458611-5.png',7800000,to_date('23/07/24','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW459801','TO','포르토피노 데이앤나이트','IW459801-1.png','IW459801-2.png','IW459801-3.png','IW459801-4.png','IW459801-5.png',8700000,to_date('23/07/24','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW344602','TO','포르토피노 퍼페추얼 캘린더','IW344602-1.png','IW344602-2.png','IW344602-3.png','IW344602-4.png','IW344602-5.png',43700000,to_date('23/07/24','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW390701','TU','포르투기저 요트 클럽 크로노그래프','IW390701-1.png','IW390701-2.png','IW390701-3.png','IW390701-4.png','IW390701-5.png',16900000,to_date('23/07/24','RR/MM/DD'),20,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW371610','TU','포르투기저 크로노그래프','IW371610-1.png','IW371610-2.png','IW371610-3.png','IW371610-4.png','IW371610-5.png',23000000,to_date('23/07/24','RR/MM/DD'),10,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW390703','TU','포르투기저 크로노그래프2','IW390703-1.png','IW390703-2.png','IW390703-3.png','IW390703-4.png','IW390703-5.png',25500000,to_date('23/07/24','RR/MM/DD'),10,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW371617','TU','포르투기저 페퍼추얼 캘린더42','IW371617-1.png','IW371617-2.png','IW371617-3.png','IW371617-4.png','IW371617-5.png',12600000,to_date('23/07/24','RR/MM/DD'),20,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW458301','DA','다 빈치 오토매틱2','IW458307-1.png','IW458307-2.png','IW458307-3.png','IW458307-4.png','IW458307-5.png',8100000,to_date('23/07/25','RR/MM/DD'),30,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW459302','DA','다 빈치 오토매틱 문 페이즈2','IW459306-1.png','IW459306-2.png','IW459306-3.png','IW459306-4.png','IW459306-5.png',10800000,to_date('23/07/25','RR/MM/DD'),20,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW393103','DA','다 빈치 투르비옹 레트로그레이드 크로노 그래프2','IW393101-1.png','IW393101-2.png','IW393101-3.png','IW393101-4.png','IW393101-5.png',135600000,to_date('23/07/25','RR/MM/DD'),10,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW392104','DA','다 빈치 퍼페추얼 캘린더 크로노그래프2','IW392103-1.png','IW392103-2.png','IW392103-3.png','IW392103-4.png','IW392103-5.png',39500000,to_date('23/07/25','RR/MM/DD'),15,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328801','AQ','아쿠아타이머 오토매틱2','IW328802-1.png','IW328802-2.png','IW328802-3.png','IW328802-4.png','IW328802-5.png',8700000,to_date('23/07/25','RR/MM/DD'),40,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW376801','AQ','아쿠아타이머 크로노그래프2','IW376806-1.png','IW376806-2.png','IW376806-3.png','IW376806-4.png','IW376806-5.png',10000000,to_date('23/07/25','RR/MM/DD'),30,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW379507','AQ','아쿠아타이머 크로노그래프 갈라파고스 아일랜드 에디션2','IW379502-1.png','IW379502-2.png','IW379502-3.png','IW379502-4.png','IW379502-5.png',14600000,to_date('23/07/25','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW376807','AQ','아쿠아타이머 크로노그래프 화이트2','IW376804-1.png','IW376804-2.png','IW376804-3.png','IW376804-4.png','IW376804-5.png',11100000,to_date('23/07/25','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328907','IN','인제니어 오토매틱 40 그레이2','IW328904-1.png','IW328904-2.png','IW328904-3.png','IW328904-4.png','IW328904-5.png',18500000,to_date('23/07/25','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW528903','IN','인제니어 오토매틱 40 그린2','IW328903-1.png','IW328903-2.png','IW328903-3.png','IW328903-4.png','IW328903-5.png',14900000,to_date('23/07/25','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328908','IN','인제니어 오토매틱 40 블랙2','IW328901-1.png','IW328901-2.png','IW328903-3.png','IW328901-4.png','IW328901-5.png',14900000,to_date('23/07/25','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW328905','IN','인제니어 오토매틱 40 실버2','IW328902-1.png','IW328902-2.png','IW328902-3.png','IW328902-4.png','IW328902-5.png',14900000,to_date('23/07/25','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW657604','TO','포르토피노 오토매틱 342','IW657601-1.png','IW657601-2.png','IW657601-3.png','IW657601-4.png','IW657601-5.png',13700000,to_date('23/07/25','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW458619','TO','포르토피노 오토매틱 372','IW458611-1.png','IW458611-2.png','IW458611-3.png','IW458611-4.png','IW458611-5.png',7800000,to_date('23/07/25','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW459809','TO','포르토피노 데이앤나이트2','IW459801-1.png','IW459801-2.png','IW459801-3.png','IW459801-4.png','IW459801-5.png',8700000,to_date('23/07/25','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW344609','TO','포르토피노 퍼페추얼 캘린더2','IW344602-1.png','IW344602-2.png','IW344602-3.png','IW344602-4.png','IW344602-5.png',43700000,to_date('23/07/25','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW390707','TU','포르투기저 요트 클럽 크로노그래프2','IW390701-1.png','IW390701-2.png','IW390701-3.png','IW390701-4.png','IW390701-5.png',16900000,to_date('23/07/25','RR/MM/DD'),20,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW371615','TU','포르투기저 크로노그래프2','IW371610-1.png','IW371610-2.png','IW371610-3.png','IW371610-4.png','IW371610-5.png',23000000,to_date('23/07/25','RR/MM/DD'),10,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW290707','TU','포르투기저 크로노그래프22','IW390703-1.png','IW390703-2.png','IW390703-3.png','IW390703-4.png','IW390703-5.png',25500000,to_date('23/07/25','RR/MM/DD'),10,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW371612','TU','포르투기저 페퍼추얼 캘린더422','IW371617-1.png','IW371617-2.png','IW371617-3.png','IW371617-4.png','IW371617-5.png',12600000,to_date('23/07/25','RR/MM/DD'),20,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121061','DA','다 빈치 오토매틱','IW458307-1.png','IW458307-2.png','IW458307-3.png','IW458307-4.png','IW458307-5.png',8100000,to_date('23/07/26','RR/MM/DD'),30,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121062','DA','다 빈치 오토매틱 문 페이즈','IW459306-1.png','IW459306-2.png','IW459306-3.png','IW459306-4.png','IW459306-5.png',10800000,to_date('23/07/26','RR/MM/DD'),20,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121063','DA','다 빈치 투르비옹 레트로그레이드 크로노 그래프','IW393101-1.png','IW393101-2.png','IW393101-3.png','IW393101-4.png','IW393101-5.png',135600000,to_date('23/07/26','RR/MM/DD'),10,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121064','DA','다 빈치 퍼페추얼 캘린더 크로노그래프','IW392103-1.png','IW392103-2.png','IW392103-3.png','IW392103-4.png','IW392103-5.png',39500000,to_date('23/07/26','RR/MM/DD'),15,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121065','AQ','아쿠아타이머 오토매틱','IW328802-1.png','IW328802-2.png','IW328802-3.png','IW328802-4.png','IW328802-5.png',8700000,to_date('23/07/26','RR/MM/DD'),40,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121066','AQ','아쿠아타이머 크로노그래프','IW376806-1.png','IW376806-2.png','IW376806-3.png','IW376806-4.png','IW376806-5.png',10000000,to_date('23/07/26','RR/MM/DD'),30,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121067','AQ','아쿠아타이머 크로노그래프 갈라파고스 아일랜드 에디션','IW379502-1.png','IW379502-2.png','IW379502-3.png','IW379502-4.png','IW379502-5.png',14600000,to_date('23/07/26','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121068','AQ','아쿠아타이머 크로노그래프 화이트','IW376804-1.png','IW376804-2.png','IW376804-3.png','IW376804-4.png','IW376804-5.png',11100000,to_date('23/07/26','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121069','IN','인제니어 오토매틱 40 그레이','IW328904-1.png','IW328904-2.png','IW328904-3.png','IW328904-4.png','IW328904-5.png',18500000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121070','IN','인제니어 오토매틱 40 그린','IW328903-1.png','IW328903-2.png','IW328903-3.png','IW328903-4.png','IW328903-5.png',14900000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121071','IN','인제니어 오토매틱 40 블랙','IW328901-1.png','IW328901-2.png','IW328903-3.png','IW328901-4.png','IW328901-5.png',14900000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121072','IN','인제니어 오토매틱 40 실버','IW328902-1.png','IW328902-2.png','IW328902-3.png','IW328902-4.png','IW328902-5.png',14900000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121073','TO','포르토피노 오토매틱 34','IW657601-1.png','IW657601-2.png','IW657601-3.png','IW657601-4.png','IW657601-5.png',13700000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121074','TO','포르토피노 오토매틱 37','IW458611-1.png','IW458611-2.png','IW458611-3.png','IW458611-4.png','IW458611-5.png',7800000,to_date('23/07/26','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121075','TO','포르토피노 데이앤나이트','IW459801-1.png','IW459801-2.png','IW459801-3.png','IW459801-4.png','IW459801-5.png',8700000,to_date('23/07/26','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121076','TO','포르토피노 퍼페추얼 캘린더','IW344602-1.png','IW344602-2.png','IW344602-3.png','IW344602-4.png','IW344602-5.png',43700000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121077','TU','포르투기저 요트 클럽 크로노그래프','IW390701-1.png','IW390701-2.png','IW390701-3.png','IW390701-4.png','IW390701-5.png',16900000,to_date('23/07/26','RR/MM/DD'),20,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121078','TU','포르투기저 크로노그래프','IW371610-1.png','IW371610-2.png','IW371610-3.png','IW371610-4.png','IW371610-5.png',23000000,to_date('23/07/26','RR/MM/DD'),10,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121079','TU','포르투기저 크로노그래프2','IW390703-1.png','IW390703-2.png','IW390703-3.png','IW390703-4.png','IW390703-5.png',25500000,to_date('23/07/26','RR/MM/DD'),10,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121080','TU','포르투기저 페퍼추얼 캘린더42','IW371617-1.png','IW371617-2.png','IW371617-3.png','IW371617-4.png','IW371617-5.png',12600000,to_date('23/07/26','RR/MM/DD'),20,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121081','DA','다 빈치 오토매틱2','IW458307-1.png','IW458307-2.png','IW458307-3.png','IW458307-4.png','IW458307-5.png',8100000,to_date('23/07/26','RR/MM/DD'),30,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121082','DA','다 빈치 오토매틱 문 페이즈2','IW459306-1.png','IW459306-2.png','IW459306-3.png','IW459306-4.png','IW459306-5.png',10800000,to_date('23/07/26','RR/MM/DD'),20,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121083','DA','다 빈치 투르비옹 레트로그레이드 크로노 그래프2','IW393101-1.png','IW393101-2.png','IW393101-3.png','IW393101-4.png','IW393101-5.png',135600000,to_date('23/07/26','RR/MM/DD'),10,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121084','DA','다 빈치 퍼페추얼 캘린더 크로노그래프2','IW392103-1.png','IW392103-2.png','IW392103-3.png','IW392103-4.png','IW392103-5.png',39500000,to_date('23/07/26','RR/MM/DD'),15,'18캐럿 레드 골드 케이스, 오토매틱, 셀프 와인딩, 직경 44.0 mm, 산토니 사의 다크 브라운 엘리게이터 레더 스트랩 , 스트랩 폭 22.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121085','AQ','아쿠아타이머 오토매틱2','IW328802-1.png','IW328802-2.png','IW328802-3.png','IW328802-4.png','IW328802-5.png',8700000,to_date('23/07/26','RR/MM/DD'),40,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121086','AQ','아쿠아타이머 크로노그래프2','IW376806-1.png','IW376806-2.png','IW376806-3.png','IW376806-4.png','IW376806-5.png',10000000,to_date('23/07/26','RR/MM/DD'),30,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121087','AQ','아쿠아타이머 크로노그래프 갈라파고스 아일랜드 에디션2','IW379502-1.png','IW379502-2.png','IW379502-3.png','IW379502-4.png','IW379502-5.png',14600000,to_date('23/07/26','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121088','AQ','아쿠아타이머 크로노그래프 화이트2','IW376804-1.png','IW376804-2.png','IW376804-3.png','IW376804-4.png','IW376804-5.png',11100000,to_date('23/07/26','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121089','IN','인제니어 오토매틱 40 그레이2','IW328904-1.png','IW328904-2.png','IW328904-3.png','IW328904-4.png','IW328904-5.png',18500000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121090','IN','인제니어 오토매틱 40 그린2','IW328903-1.png','IW328903-2.png','IW328903-3.png','IW328903-4.png','IW328903-5.png',14900000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121091','IN','인제니어 오토매틱 40 블랙2','IW328901-1.png','IW328901-2.png','IW328903-3.png','IW328901-4.png','IW328901-5.png',14900000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121092','IN','인제니어 오토매틱 40 실버2','IW328902-1.png','IW328902-2.png','IW328902-3.png','IW328902-4.png','IW328902-5.png',14900000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121093','TO','포르토피노 오토매틱 342','IW657601-1.png','IW657601-2.png','IW657601-3.png','IW657601-4.png','IW657601-5.png',13700000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121094','TO','포르토피노 오토매틱 372','IW458611-1.png','IW458611-2.png','IW458611-3.png','IW458611-4.png','IW458611-5.png',7800000,to_date('23/07/26','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121095','TO','포르토피노 데이앤나이트2','IW459801-1.png','IW459801-2.png','IW459801-3.png','IW459801-4.png','IW459801-5.png',8700000,to_date('23/07/26','RR/MM/DD'),20,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121096','TO','포르토피노 퍼페추얼 캘린더2','IW344602-1.png','IW344602-2.png','IW344602-3.png','IW344602-4.png','IW344602-5.png',43700000,to_date('23/07/26','RR/MM/DD'),10,'IWC 지속가능성 스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 산토니 사의 블루 엘리게이터 레더 스트랩, 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121097','TU','포르투기저 요트 클럽 크로노그래프2','IW390701-1.png','IW390701-2.png','IW390701-3.png','IW390701-4.png','IW390701-5.png',16900000,to_date('23/07/26','RR/MM/DD'),20,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121098','TU','포르투기저 크로노그래프2','IW371610-1.png','IW371610-2.png','IW371610-3.png','IW371610-4.png','IW371610-5.png',23000000,to_date('23/07/26','RR/MM/DD'),10,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121099','TU','포르투기저 크로노그래프22','IW390703-1.png','IW390703-2.png','IW390703-3.png','IW390703-4.png','IW390703-5.png',25500000,to_date('23/07/26','RR/MM/DD'),10,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+Insert into PRODUCT (P_KEY,CATEGORY_KEY,P_NAME,MAIN_IMG,SUB_IMG1,SUB_IMG2,SUB_IMG3,SUB_IMG4,PRICE,P_RDATE,P_CNT,DETAIL_COMMENT) values ('IW121100','TU','포르투기저 페퍼추얼 캘린더422','IW371617-1.png','IW371617-2.png','IW371617-3.png','IW371617-4.png','IW371617-5.png',12600000,to_date('23/07/26','RR/MM/DD'),20,'스테인리스 스틸 케이스, 오토매틱, 셀프 와인딩, 직경 36.0 mm, 스테인리스 스틸 브레이슬릿 , 스트랩 폭 18.0 mm. /Made in Switzerland');
+REM INSERTING into TOTAL_ORDER
+SET DEFINE OFF;
+Insert into TOTAL_ORDER (CUST_KEY,O_RDATE,PAY_METHOD,PRICE,ORDER_KEY) values (2,to_date('23/07/24','RR/MM/DD'),'신용카드',20000000,100014);
+Insert into TOTAL_ORDER (CUST_KEY,O_RDATE,PAY_METHOD,PRICE,ORDER_KEY) values (3,to_date('23/07/24','RR/MM/DD'),'무통장',10000000,100015);
+Insert into TOTAL_ORDER (CUST_KEY,O_RDATE,PAY_METHOD,PRICE,ORDER_KEY) values (5,to_date('23/07/24','RR/MM/DD'),'신용카드',13000000,100016);
+Insert into TOTAL_ORDER (CUST_KEY,O_RDATE,PAY_METHOD,PRICE,ORDER_KEY) values (8,to_date('23/07/24','RR/MM/DD'),'신용카드',17000000,100017);
+Insert into TOTAL_ORDER (CUST_KEY,O_RDATE,PAY_METHOD,PRICE,ORDER_KEY) values (1,to_date('23/07/24','RR/MM/DD'),'체크카드',30000000,100013);
+--------------------------------------------------------
+--  Constraints for Table BOARD
+--------------------------------------------------------
+
+  ALTER TABLE "BOARD" ADD CONSTRAINT "PK_BOARD" PRIMARY KEY ("BOARD_KEY")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "BOARD" MODIFY ("CONTENT" NOT NULL ENABLE);
+  ALTER TABLE "BOARD" MODIFY ("TITLE" NOT NULL ENABLE);
+  ALTER TABLE "BOARD" MODIFY ("P_KEY" NOT NULL ENABLE);
+  ALTER TABLE "BOARD" MODIFY ("CUST_KEY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CART
+--------------------------------------------------------
+
+  ALTER TABLE "CART" ADD CONSTRAINT "CART_KEY_PK" PRIMARY KEY ("CART_KEY")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "CART" MODIFY ("CUST_KEY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CART_ITEM
+--------------------------------------------------------
+
+  ALTER TABLE "CART_ITEM" ADD CONSTRAINT "CART_ITEM_KEY_PK" PRIMARY KEY ("CART_ITEM_KEY")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "CART_ITEM" MODIFY ("CONTAIN_DATE" NOT NULL ENABLE);
+  ALTER TABLE "CART_ITEM" MODIFY ("P_CNT" NOT NULL ENABLE);
+  ALTER TABLE "CART_ITEM" MODIFY ("P_KEY" NOT NULL ENABLE);
+  ALTER TABLE "CART_ITEM" MODIFY ("CART_KEY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CATEGORY
+--------------------------------------------------------
+
+  ALTER TABLE "CATEGORY" ADD CONSTRAINT "PK_CATEGORY" PRIMARY KEY ("CATEGORY_KEY")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "CATEGORY" MODIFY ("C_NAME" NOT NULL ENABLE);
+  ALTER TABLE "CATEGORY" MODIFY ("CATEGORY_KEY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table CUSTOMER
+--------------------------------------------------------
+
+  ALTER TABLE "CUSTOMER" ADD CONSTRAINT "PK_CUSTOMER" PRIMARY KEY ("CUST_KEY")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "CUSTOMER" MODIFY ("PHONE_NUM" NOT NULL ENABLE);
+  ALTER TABLE "CUSTOMER" MODIFY ("U_BIRTH" NOT NULL ENABLE);
+  ALTER TABLE "CUSTOMER" MODIFY ("U_PWD" NOT NULL ENABLE);
+  ALTER TABLE "CUSTOMER" MODIFY ("U_NAME" NOT NULL ENABLE);
+  ALTER TABLE "CUSTOMER" MODIFY ("EMAIL" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MEMO
+--------------------------------------------------------
+
+  ALTER TABLE "MEMO" MODIFY ("CONTENT" NOT NULL ENABLE);
+  ALTER TABLE "MEMO" MODIFY ("BOARD_KEY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table ORDER_DETAIL
+--------------------------------------------------------
+
+  ALTER TABLE "ORDER_DETAIL" MODIFY ("P_KEY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PRODUCT
+--------------------------------------------------------
+
+  ALTER TABLE "PRODUCT" ADD CONSTRAINT "PK_PRODUCT" PRIMARY KEY ("P_KEY")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "PRODUCT" MODIFY ("DETAIL_COMMENT" NOT NULL ENABLE);
+  ALTER TABLE "PRODUCT" MODIFY ("P_CNT" NOT NULL ENABLE);
+  ALTER TABLE "PRODUCT" MODIFY ("PRICE" NOT NULL ENABLE);
+  ALTER TABLE "PRODUCT" MODIFY ("MAIN_IMG" NOT NULL ENABLE);
+  ALTER TABLE "PRODUCT" MODIFY ("P_NAME" NOT NULL ENABLE);
+  ALTER TABLE "PRODUCT" MODIFY ("CATEGORY_KEY" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table TOTAL_ORDER
+--------------------------------------------------------
+
+  ALTER TABLE "TOTAL_ORDER" MODIFY ("PRICE" NOT NULL ENABLE);
+  ALTER TABLE "TOTAL_ORDER" MODIFY ("PAY_METHOD" NOT NULL ENABLE);
+  ALTER TABLE "TOTAL_ORDER" MODIFY ("CUST_KEY" NOT NULL ENABLE);
+  ALTER TABLE "TOTAL_ORDER" ADD CONSTRAINT "PK_TOTAL_ORDER" PRIMARY KEY ("ORDER_KEY")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table BOARD
+--------------------------------------------------------
+
+  ALTER TABLE "BOARD" ADD CONSTRAINT "FK_CUSTOMER_TO_BOARD" FOREIGN KEY ("CUST_KEY")
+	  REFERENCES "CUSTOMER" ("CUST_KEY") ENABLE;
+  ALTER TABLE "BOARD" ADD CONSTRAINT "FK_PRODUCT_TO_BOARD" FOREIGN KEY ("P_KEY")
+	  REFERENCES "PRODUCT" ("P_KEY") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table CART
+--------------------------------------------------------
+
+  ALTER TABLE "CART" ADD CONSTRAINT "CART_CUST_KEY_FK" FOREIGN KEY ("CUST_KEY")
+	  REFERENCES "CUSTOMER" ("CUST_KEY") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table CART_ITEM
+--------------------------------------------------------
+
+  ALTER TABLE "CART_ITEM" ADD CONSTRAINT "CART_ITEM_CART_KEY_ID_FK" FOREIGN KEY ("CART_KEY")
+	  REFERENCES "CART" ("CART_KEY") ENABLE;
+  ALTER TABLE "CART_ITEM" ADD CONSTRAINT "CART_ITEM_P_KEY_FK" FOREIGN KEY ("P_KEY")
+	  REFERENCES "PRODUCT" ("P_KEY") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table MEMO
+--------------------------------------------------------
+
+  ALTER TABLE "MEMO" ADD CONSTRAINT "FK_MEMO_TO_BOARD" FOREIGN KEY ("BOARD_KEY")
+	  REFERENCES "BOARD" ("BOARD_KEY") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ORDER_DETAIL
+--------------------------------------------------------
+
+  ALTER TABLE "ORDER_DETAIL" ADD CONSTRAINT "FK_PRODUCT_TO_ORDER_DETAIL" FOREIGN KEY ("P_KEY")
+	  REFERENCES "PRODUCT" ("P_KEY") ENABLE;
+  ALTER TABLE "ORDER_DETAIL" ADD CONSTRAINT "FK_TOTAL_ORDER_TO_ORDER_DETAIL" FOREIGN KEY ("ORDER_KEY")
+	  REFERENCES "TOTAL_ORDER" ("ORDER_KEY") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PRODUCT
+--------------------------------------------------------
+
+  ALTER TABLE "PRODUCT" ADD CONSTRAINT "FK_CATEGORY_TO_PRODUCT" FOREIGN KEY ("CATEGORY_KEY")
+	  REFERENCES "CATEGORY" ("CATEGORY_KEY") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table TOTAL_ORDER
+--------------------------------------------------------
+
+  ALTER TABLE "TOTAL_ORDER" ADD CONSTRAINT "FK_CUSTOMER_TO_TOTAL_ORDER" FOREIGN KEY ("CUST_KEY")
+	  REFERENCES "CUSTOMER" ("CUST_KEY") ENABLE;

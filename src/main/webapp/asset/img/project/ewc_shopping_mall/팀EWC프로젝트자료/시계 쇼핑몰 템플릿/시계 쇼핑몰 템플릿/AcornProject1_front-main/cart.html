@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/4ec79785b5.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+      /* 🚩 */
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Pretendard-Regular";
+      }
+      header {
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 1050px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+      .logo img {
+        width: 150px;
+      }
+      .search {
+        padding-left: 5px;
+        width: 400px;
+        height: 45px;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+      .search i {
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .search input {
+        border: 0;
+        outline: none;
+        font-size: 16px;
+        padding: 0;
+        height: 44px;
+        width: 340px;
+        margin-right: 20px;
+      }
+      .user i {
+        text-decoration: none;
+        color: black;
+        font-size: 25px;
+        padding: 10px;
+      }
+      .user i:hover {
+        color: rgb(113, 113, 113);
+      }
+      /* 🚩 */
+      nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        min-width: 1050px;
+        height: 50px;
+        margin: 0 auto;
+        line-height: 50px;
+        background-color: rgb(255, 255, 255);
+        z-index: 10;  /*무조건 맨 위로 오도록*/
+        box-shadow: 0 4px 4px -3px rgb(210, 210, 210);  /*그림자 아래에만 적용*/
+      }
+      .navbar {
+        width: 1200px;
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 0 auto;
+      }
+      .navbar a{
+        text-decoration: none;
+        color: black;
+      }
+      .navbar li:hover{
+        color: rgb(98, 98, 98);
+      }
+      /* 🚩 */
+      main{
+        margin-bottom: 100px;
+      }
+      #listbox_wrap{
+        width: 1050px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+      }
+      #list li{
+        display: flex;
+        align-items: center;
+        border-bottom: 0.5px solid rgb(236, 236, 236);
+        height: 100px;
+        box-sizing: border-box;
+        padding: 20px;
+      }
+      #list li input{
+        margin-right: 30px;
+
+      }
+      #list li img{
+        width: 60px;
+        margin-right: 40px;
+        margin-left: 20px;
+      }
+      #list li p{
+        width: 320px;
+      }
+      .qty{
+        display: flex;
+        width: 70px;
+        justify-content: space-between;
+        margin-right: 80px;
+      }
+      .qty button{
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 0;
+        font-size: 15px;
+        line-height: 15px;
+        background-color: black;
+        color:aliceblue;
+        cursor: pointer;
+      }
+      #calbox{
+        margin-top: 50px;
+        width: 300px;
+        height: 200px;
+        background-color: rgb(244, 244, 244);
+        border-radius: 10px;
+      }
+      #calbox_inner{
+        padding: 20px;
+      }
+      #calbox_inner div{
+        padding-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+      }
+      #cal_total{
+        padding-top: 20px;
+        border-top: 0.5px solid rgb(210, 210, 210);
+      }
+      #cal_total p{
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .price{
+        /* 🟡상품 기존 가격은 보이지 않게 숨김 */
+        display: none;
+      }
+      #cart_title{
+        text-align: center;
+        font-size: 30px;
+        line-height: 150px;
+      }
+      /* 🔴check버튼 관련 */
+      input[class="check"]+label{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 0.5px solid rgb(203, 203, 203);
+        border-radius: 50%;
+        cursor: pointer;
+        color: rgb(198, 198, 198);
+        text-align: center;
+        font-size: 15px;
+        line-height: 20px;
+      }
+      input[class="check"]:checked+label{
+        background-color: black;
+        color: aliceblue;
+      }
+      input[class="check"]{
+        display:none;
+      }
+      #remove{
+        border: 0;
+        background-color: white;
+        font-size: 16px;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      #check-remove{
+        margin-top: 20px;
+        margin-left: 20px;
+      }
+      #check-remove label:nth-of-type(2){
+        /* <span>전체선택</span>을 감싸고 있는 2번째 라벨 */
+        cursor: pointer;
+      }
+      #order_btn{
+        margin-top: 20px;
+        width: 300px;
+        height: 50px;
+        background-color: black;
+        color: aliceblue;
+        font-size: 20px;
+        border-radius: 5px;
+        border: 0;
+        cursor: pointer;
+      }
+      /* 장바구니 없을 때에 나올 값 style */
+      .list_null{ 
+        width: 600px;
+        height: 300px;
+        text-align: center;
+        font-size: 20px;
+        line-height: 300px;
+      }
+      
+
+      /* 🚩 */
+      footer{
+        width: 100%;
+      }
+      #info{
+        width: 1200px;
+        padding-top: 30px;
+        margin: 30px auto;
+      }
+
+      .qbox{
+        display: flex;
+      }
+      #call{
+        margin-bottom: 30px;
+      }
+      #callnumber{
+        font-size: 28px;
+      }
+      #call span{
+        margin-right: 10px;
+      }
+      .qbox{
+        padding: 5px 0px;
+      }
+      .qbox div{
+        color: gray;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .qbox button{
+        width: 180px;
+        height: 40px;
+        margin-right: 20px;
+        border:1px solid rgb(206, 206, 206);
+        padding: 8px 40px;
+        background-color: white;
+        cursor: pointer;
+      }
+      footer h2{
+        padding: 20px 0;
+      }
+      #info{
+        display: flex;
+        justify-content: space-between;
+
+      }
+      #info2 ul{
+        padding: 20px 0 20px 0;
+        list-style: none;
+        display: flex;
+        margin-bottom: 50px;
+        
+      }
+      #info2 ul li{
+        margin-right: 15px;
+      }
+      #info2 p{
+        font-size: 13px;
+        color: gray;
+        padding: 4px;
+      }
+
+      #icons{
+        font-size: 30px;
+        color: gray;
+        margin-top: 20px;
+      }
+      #copyright{
+        height: 100px;
+        line-height: 100px;
+        background-color: rgb(238, 238, 238);
+        text-align: center;
+        padding: 0 30px 0 30px;
+        font-size: 12px;
+        color: rgb(122, 122, 122);
+        margin-top: 30px;
+      }
+    </style>
+    <script>
+      //🔴천단이 콤마 붙은 숫자 정수로 변경하는 함수
+      function stringNumberToInt(stringNumber){
+        return parseInt(stringNumber.replace(/,/g , ''));
+      }
+      //🔴페이지 로드되면 자동으로 결제 예정금액 계산
+      function cal(){
+        let calpriceTag = document.querySelector("#cal_price ");
+        let priceAllTag = document.querySelectorAll(".amt");
+        let ship_fee = stringNumberToInt(document.querySelector("#ship_fee").innerHTML);
+        let cal_total = document.querySelector("#cal_total_inner");
+        let amt = 0;
+        for(i=0;i<priceAllTag.length;i++){
+          amt = amt+ stringNumberToInt(priceAllTag[i].innerHTML);
+        }
+        calpriceTag.innerHTML = amt.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        cal_totalAll = amt+ship_fee;
+        cal_total.innerHTML = cal_totalAll.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+      }
+      //🔴페이지 로드되면 상품이 하나라도 있는지 확인
+      function goods_check(){
+        let list=document.querySelectorAll("#list li")
+        let listbox= document.querySelector("#list");
+        let ship_fee = document.querySelector("#ship_fee");
+        if(list.length==0){
+          listbox.innerHTML="장바구니에 상품이 없습니다."
+          listbox.classList.add("list_null");
+          ship_fee.innerHTML = 0;
+          cal();
+        }
+      }
+
+      //🔴버튼으로 수량 조절 기능
+      function plusbutton(obj){
+        let qty = obj.previousElementSibling;
+        let price = obj.parentElement.previousElementSibling;
+        let totalPrice = obj.parentElement.nextElementSibling;
+        qtyInner = qty.innerHTML
+        qtyInner=parseInt(qtyInner);
+        qtyInner++;
+        qty.innerHTML = qtyInner;
+        priceInner = parseInt(price.innerHTML);
+        totalPrice1 = priceInner*qtyInner;
+        //천단위 콤마 붙이기
+        totalPrice.innerHTML = totalPrice1.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+
+        cal();
+      }
+      function minusbutton(obj){
+        let qty = obj.nextElementSibling;
+        let price = obj.parentElement.previousElementSibling;
+        let totalPrice = obj.parentElement.nextElementSibling;
+        qtyInner = qty.innerHTML
+        qtyInner=parseInt(qtyInner);
+        if(qtyInner>1){
+        qtyInner--;
+        qty.innerHTML = qtyInner;
+        priceInner = parseInt(price.innerHTML);
+        totalPrice1 = priceInner*qtyInner;
+        //천단위 콤마 붙이기
+        totalPrice.innerHTML = totalPrice1.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        }else{
+          alert("한 개 이상 선택해주세요")
+        }
+        cal();
+      }
+      
+      //🔴리스트 삭제 기능
+      function remove(){
+        let checkbox = document.querySelectorAll(".check");
+        for(let i=0; i<checkbox.length;i++){
+          if(checkbox[i].checked == true){
+            checkbox[i].parentElement.remove();
+          }
+        }
+        cal();
+        goods_check();
+      }
+      //🔴전체선택 기능
+      function checkAll(){
+        let checkbox = document.querySelectorAll(".check");
+        let checkAll = document.querySelector("#checkAll")
+        if(checkAll.checked==true){
+          for(let i=0;i<checkbox.length;i++){
+            checkbox[i].checked=true;
+          }
+        }else{
+          for(let i=0;i<checkbox.length;i++){
+            checkbox[i].checked=false;
+          }
+        }
+      }
+
+      //검색 시작
+      function search(obj){
+      let search = obj.previousElementSibling.value;
+      console.log(search);
+
+      switch(search){
+        case '신상품':
+        location.href = 'newList.html';
+        break;
+        case '베스트':
+        location.href = 'bestList.html';
+        break;
+        case '여성시계':
+        location.href = 'womensList.html';
+        break;
+        case '남성시계':
+        location.href = 'mensList.html';
+        break;
+        case '아동시계':
+        location.href = 'childList.html';
+        break;
+        default:
+        alert('상품이 존재하지 않습니다');
+        break;
+        }
+      }
+      //검색 끝
+
+    </script>
+  </head>
+  <body onload="cal(), goods_check()">
+    <header>
+      <div class="logo">
+        <a href="home.html"> <img src="image/logo.png" alt="" /> </a>
+        <span>Acorn watch </span>
+      </div>
+      <div class="search">
+        <input type="text"/>
+        <i onclick="search(this)" class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="user">
+        <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+    </header>
+    <nav>
+      <ul class="navbar">
+        <a href="newList.html"><li>신상품</li></a>
+        <a href="bestList.html"><li>베스트</li></a>
+        <a href="womensList.html"><li>여성시계</li></a>
+        <a href="mensList.html"><li>남성시계</li></a>
+        <a href="childList.html"><li>아동시계</li></a>
+      </ul>
+    </nav>
+
+
+    <main>
+      <div  id="cart_title"><span>장바구니</span></div>
+      <div id="listbox_wrap">
+        <div id="listbox">
+          <ul id="list">
+            <li>
+              <input class="check" type="checkbox" id="check1"><label for="check1"><i class="fa-solid fa-check"></i></label>
+              <img src="https://static.swatch.com/images/product/SUOK147-026/sa200/SUOK147-026_sa200_er005.png" alt="">
+              <p>SXY - VALENTINES 2023 I</p>
+              <div class="price">89000</div>
+              <div class="qty">
+                <button onclick="minusbutton(this)">-</button>
+                <div>1</div>
+                <button onclick="plusbutton(this)">+</button>
+              </div>
+              <div class="amt">
+                89,000
+              </div>
+              <span> 원</span>
+            </li>
+            <li>
+              <input class="check" type="checkbox"  id="check2"><label for="check2"><i class="fa-solid fa-check"></i></label>
+              <img src="https://static.swatch.com/images/product/SO29N705/sa200/SO29N705_sa200_er005.png" alt="">
+              <p>COBALT DISCO</p>
+              <div class="price">200000</div>
+              <div class="qty">
+                <button onclick="minusbutton(this)">-</button>
+                <div>1</div>
+                <button onclick="plusbutton(this)">+</button>
+              </div>
+              <div class="amt">
+                200,000
+              </div>
+              <span> 원</span>
+            </li>
+            <li>
+              <input class="check" type="checkbox"  id="check3"><label for="check3"><i class="fa-solid fa-check"></i></label>
+              <img src="https://static.swatch.com/images/product/SUOK144-047/sa200/SUOK144-047_sa200_er005.png" alt="">
+              <p>SXY - KRILLIN</p>
+              <div class="price">132000</div>
+              <div class="qty">
+                <button onclick="minusbutton(this)">-</button>
+                <div>1</div>
+                <button onclick="plusbutton(this)">+</button>
+              </div>
+              <div class="amt">
+                132,000
+              </div>
+              <span> 원</span>
+            </li>
+          </ul>
+          <div id="check-remove">
+            <input class="check" id="checkAll" type="checkbox" onclick="checkAll()" ><label for="checkAll"><i class="fa-solid fa-check"></i></label>
+            <label for="checkAll"><span> 전체선택</span></label>
+            <button id="remove" onclick="remove()">선택삭제</button>
+          </div >
+        </div>
+        <div class="order">
+          <div id="calbox">
+            <div id="calbox_inner">
+              <div><span>상품금액</span><p><span  id="cal_price">29100</span><span> 원</span></p></div>
+              <div><span>배송비</span><span id="ship_fee">3,000<span> 원</span></span></div>
+              <div id="cal_total"><span>결제예정금액</span><p><span id="cal_total_inner">30000</span><span>원</span></p></div>
+            </div>
+
+          </div>
+          <div>
+            <button id="order_btn">주문하기</button>
+          </div>
+          
+
+        </div>
+      </div >
+
+    </main>
+
+
+
+
+
+
+    <footer>
+      <div id="info">
+        <div id="info1">
+          <h2>고객행복센터</h2>
+            <div id="call"><span id="callnumber"><strong>1644-1107</strong></span><span>월~토요일 오전7시 - 오후 6시</span></div>
+            <div class="qbox">
+            <button>카카오톡 문의</button>
+            <div>
+              월~토요일| 오전7시 - 오후 6시<br>
+              일~공휴일| 오전7시 - 오후 1시
+            </div>
+          </div>
+          <div class="qbox">
+            <a href="service.html"><button>1:1  문의</button></a>
+            <div>
+              365일<br>
+              고객센터 운영시간에 순차적으로 답변드리겠습니다.
+            </div>
+          </div>
+          <div class="qbox">
+            <a href="service.html"><button>대량주문 문의</button></a>
+            <div>
+              월~금요일| 오전9시 - 오후 6시<br>
+              점심시간| 오후1시 - 오후 2시
+            </div>
+          </div>
+        </div>
+        <div id="info2">
+          <ul>
+            <li>에이콘소개</li>
+            <li>에이콘소개영상</li>
+            <li>인재채용</li>
+            <li>이용약관</li>
+            <li>개인정보처리방침</li>
+            <li>이용안내</li>
+          </ul>
+          <p>법인명(상호):주식회사 에이콘 | 사업자 등록번호:61-254-25225 사업자 정보확인</p>
+          <P>통신판매업:제2018-서울강남-55566호 | 개인정보보호책임자:이원준</P>
+          <P>주소:서울특별시 강남구 테헤란로 133,18층(역삼동) | 대표이사:양양양</P>
+          <P>입점문의:입점문의하기| 제휴문의:ksjfdlssfljk@dlkjdl.com</P>
+          <p>채용문의:sksdkf@kdfjsld.com</p>
+          <p>팩스: 070-555-5545</p>
+          <div id="icons">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-youtube"></i>
+
+          </div>
+        </div>
+      </div>
+      <div id="copyright">
+        에이콘에서 판매되는 상품중에는 에이콘에 입접한 개별 판매자가 판매하는 오픈 마켓 상품이 포함되어 있습니다.
+        ACORN CORP.ALL RIGHT RESERVED
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,2420 @@
+<!-- 
+<%@page import="ezen.portfolio.common.web.Pagination"%>
+<%@page import="ezen.portfolio.common.web.PageParams"%>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ page import="java.util.List"%>
+<%@ page import="ezen.porfolio.article.dto.Memo"%>
+<%@ page import="ezen.porfolio.common.dao.DaoFactory"%>
+<%@ page import="ezen.porfolio.article.dao.MemoDao"%>
+
+<%
+//===================== 페이징 처리 ============================
+//한 페이지에 보여지는 목록 갯수 설정
+int elementSize = 5;
+//한페이지에 보여지는 페이지 갯수 설정
+int pageSize = 3;
+//-------------------------------------------------------------
+//사용자 선택페이지
+String requestPage = request.getParameter("page");
+if(requestPage == null || requestPage.equals("")){
+	requestPage = "1";
+}
+int selectPage = Integer.parseInt(requestPage);
+
+//-------------------------------------------------------------
+//페이징 계산을 위한 게시글 전체 갯수 조회
+MemoDao memoDao =  DaoFactory.getInstance().getMemoDao();
+int rowCount = memoDao.getCountAll();
+
+//-------------------------------------------------------------
+//전체 페이지수 계산
+PageParams params = new PageParams(elementSize, pageSize, selectPage, rowCount);
+Pagination pagination = new Pagination(params);
+
+//------------------------------------------------------------
+List<Memo> list = memoDao.findByAll(selectPage, elementSize);
+
+//게시글 목록 설정
+request.setAttribute("list", list);
+//페이징 정보 설정
+request.setAttribute("pagination", pagination);
+//MemoDao memoDao = DaoFactory.getInstance().getMemoDao();
+//List<Memo> list = memoDao.findByAll();
+//request.setAttribute("list", list);
+%> -->
+
+<!doctype html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Simply Amazed HTML Template by Tooplate</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--<%-- CSS 파일 포함. --%>-->
+<!-- <jsp:include page="/modules/styles.jsp" /> -->
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+<!--폰트어썸6.4.0버전 라이브러리cdn-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!--개발자 툴 아이콘 전용 라이브러리cdn-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+	<!--메인css-->
+	<link rel="stylesheet" href="asset/css/tooplate-simply-amazed.css" type="text/css" />
+
+	
+</head>
+
+<body>
+	<!--head와 nav바 영역 시작-->
+	<div id="outer">
+		<header class="header order-last" id="tm-header">
+			<nav class="navbar">
+				<div class="collapse navbar-collapse single-page-nav">
+					<ul class="navbar-nav">
+						<h1 class="fs-1 mb-5 w-auto w-25" id="nav-logo">
+							영호's <br>portfolio
+						</h1>
+						<li class="nav-item"><a class="nav-link" href="#section-1">Home</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" href="#section-2">About
+								Me</a></li>
+						<li class="nav-item"><a class="nav-link" href="#gallery-section">Projects</a></li>
+						<li class="nav-item"><a class="nav-link" href="#comment-section">Community</a></li>
+						<!-- <div style="border: 1px solid #fff; width: 220px; height: 230px; margin: 20px 0 0 20px;">
+                            <a class="btn btn-outline-light" href="./login.html" style="width: 25%;
+                            display: flex;
+                            margin: 0 auto;
+                            margin-top: 40%;">Login</a>
+                        </div> -->
+						<li>
+							<c:choose>
+								<c:when test="${empty loginMember}">
+									<a class="btn btn-outline-light" href="<c:url value=" /member/login.jsp" />"
+									style="margin-left: 60px;">Login</a>
+								</c:when>
+								<c:otherwise>
+									<span
+										style="margin-left: 55px; color: #fff; font-size: initial;">${loginMember.id}(${loginMember.name})님</span>
+									<span style="margin-left: 55px; color: #fff; font-size: initial;">환영합니다....</span>
+									<a class="btn btn-outline-light" href="<c:url value=" /member/logout-action.jsp" />"
+									style="margin-left: 55px;">Logout</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	</div>
+	<!--head와 nav바 영역 끝-->
+
+	<!--main의 시작-->
+	<main id="content-box" class="order-first">
+		<!--홈page section 시작-->
+		<section class="banner-section section parallax-window scrollAction" data-parallax="scroll" id="section-1"
+			style="background-image: url('asset/img/create-g69462951b_1920.jpg'); background-size: 100% 100%;">
+		</section>
+		<!--홈page section 끝-->
+
+		<!--소개page section 시작-->
+		<section class="work-section section scrollAction" id="section-2">
+			<div class="container">
+				<!--타이틀-->
+				<div class="row">
+					<div class="title">
+						<h2>About Me</h2>
+					</div>
+				</div>
+				<!--인적사항-->
+				<div class="row row1">
+					<div class="col-md-4">
+						<div>
+							<img src="asset/img/죠하 copy.jpg" alt="">
+						</div>
+					</div>
+					<div class="col-md-8">
+						<h2>인적사항</h2>
+						<pre>
+이       름: 조 영 호 
+전 화 번 호: 010 - 4373 - 1334
+이   메  일: dudgh114 @ gmail.com
+                        </pre>
+						<h2>학력 / 교육력</h2>
+						<p>
+							경복대학교 복지행정과 졸업<br> [스마트웹&콘텐츠개발]풀스택 자바웹개발자_혼합E 수료 예정
+						</p>
+					</div>
+				</div>
+				<!--나의 스킬-->
+				<div class="row row2">
+					<h4 class="col-md-12">Skill</h4>
+				</div>
+				<div class="row row3">
+					<div class="col-md-2">
+						<img src="asset/img/project/개발툴로고/java-plain.png" id="icon"></img>
+						<p>java</p>
+					</div>
+					<div class="col-md-2">
+						<img src="asset/img/project/개발툴로고/javascript-plain.png" id="icon"></img>
+						<p>javaScript</p>
+					</div>
+					<div class="col-md-2">
+						<img src="asset/img/project/개발툴로고/oracle-original.png" id="icon"></img>
+						<p>SQL/PLSQL</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--소개page section 끝-->
+
+		<!--항목page section 시작-->
+		<section class="gallery-section section parallax-window scrollAction" data-parallax="scroll" id="gallery-section">
+			<div class="container">
+				<div class="title text-right">
+					<h2>Project</h2>
+				</div>
+				<div class="mx-auto gallery-slider">
+					<figure class="effect-julia item">
+						<img src="asset/img/project_logo/console.png" alt="Image">
+						<figcaption>
+							<div>
+								<p>
+									Project AMS<br> (Console)
+								</p>
+							</div>
+							<a href="#carouselExampleDark">View more</a>
+						</figcaption>
+					</figure>
+					<figure class="effect-julia item">
+						<img src="asset/img/project_logo/GUI.png" alt="Image">
+						<figcaption>
+							<div>
+								<p>
+									Project AMS<br> (GUI)
+								</p>
+							</div>
+							<a href="#amsGui">View more</a>
+						</figcaption>
+					</figure>
+					<figure class="effect-julia item">
+						<img src="asset/img/project_logo/File.png" alt="Image">
+						<figcaption>
+							<div>
+								<p>
+									Project AMS<br> (FIle System)
+								</p>
+							</div>
+							<a href="#amsFile">View more</a>
+						</figcaption>
+					</figure>
+					<figure class="effect-julia item">
+						<img src="asset/img/project_logo/database.png" alt="Image">
+						<figcaption>
+							<div>
+								<p>
+									Project AMS<br> (DB Connection)
+								</p>
+							</div>
+							<a href="#amsData">View more</a>
+						</figcaption>
+					</figure>
+					<figure class="effect-julia item">
+						<img src="asset/img/project_logo/chat.png" alt="Image">
+						<figcaption>
+							<div>
+								<p>Multi-Chat<br> (다중채팅)</p>
+							</div>
+							<a href="#multiChat">View more</a>
+						</figcaption>
+					</figure>
+					<figure class="effect-julia item">
+						<img src="asset/img/project_logo/erd.png" alt="Image">
+						<figcaption>
+							<div>
+								<p>관계형 DB구축<br> (ERD)</p>
+							</div>
+							<a href="#erd">View more</a>
+						</figcaption>
+					</figure>
+					<figure class="effect-julia item">
+						<img src="asset/img/project_logo/coach.png" alt="Image">
+						<figcaption>
+							<div>
+								<p>학생성적관리 웹<br> (성적관리 웹)</p>
+							</div>
+							<a href="#scoreWeb">View more</a>
+						</figcaption>
+					</figure>
+					<figure class="effect-julia item">
+						<img src="asset/img/project_logo/PortfolioIcon.png" alt="Image">
+						<figcaption>
+							<div>
+								<p>WebPortfolio<br> (웹 포트폴리오)</p>
+							</div>
+							<a href="#webPort">View more</a>
+						</figcaption>
+					</figure>
+				</div>
+			</div>
+		</section>
+		<!--항목page section 끝-->
+
+		<!--프로젝트 섹션 시작-->
+
+
+		<!--슬라이드 시작-->
+		<div id="carouselExampleDark" class="carousel carousel-dark slide scrollAction">
+			<!--슬라이드 버튼(새로운 섹션마다 추가)-->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="5" aria-label="Slide 6"></button>
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="6" aria-label="Slide 7"></button>
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="7" aria-label="Slide 8"></button>
+				<button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="8" aria-label="Slide 9"></button>
+			</div>
+			<!--슬라이드 안의 내용-->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<!--첫번째 섹션-->
+					<section class="title-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 project_title">
+									<h1>AMS</h1>
+									<p>Console출력</p>
+								</div>
+							</div>
+							<!-- <div class="row">
+                                <div class="col-md-12 project_title">
+                                    <h1>AMS</h1>
+                                    <p>ConSole출력</p>
+                                </div>
+                            </div> -->
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Console</h2>
+									<img src="asset/img/project/AMS1/콘솔/Main실행.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Main</h2>
+									<img src="asset/img/project/AMS1/코드/main코드.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Function</h2>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;계좌
+										생성 및 등록
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;계좌목록
+										조회
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;입금(상환)
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;출금(상환)
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--세번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Console</h2>
+									<img src="asset/img/project/AMS1/콘솔/계좌선택후생성.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">selectAccountType() 수정전</h2>
+									<img src="asset/img/project/AMS1/코드/계좌선택메서드.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>
+										계좌 생성시 <span>계좌 타입마다 메소드를 따로 만들어 관리</span> 하였음.
+									</p>
+									<p>
+										<span>selectAccountType()</span>에서 각 메소드를 실행했으나 중복 코드가 많아 메소드를
+										한개로 합쳐 <span>boolean값으로 타입을 선택하게 함.</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--네번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">createAccount()</h2>
+									<img src="asset/img/project/AMS1/코드/일반계좌.png" class="img-fluid img-thumbnail" style="height: 40%;">
+									<h2 class="fw-bold">createMinusAccount()</h2>
+									<img src="asset/img/project/AMS1/코드/마이너스계좌.png" class="img-fluid img-thumbnail" style="height: 40%;">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">createAccount(boolean)</h2>
+									<img src="asset/img/project/AMS1/코드/개선후계좌생성.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">selectAccountType() 수정후</h2>
+									<img src="asset/img/project/AMS1/코드/계좌선택메서드개선판.png" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--다섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Console</h2>
+									<img src="asset/img/project/AMS1/콘솔/목록보기.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">showAccounts() 수정전</h2>
+									<img src="asset/img/project/AMS1/코드/계좌보기.png" class="img-fluid img-thumbnail" style="height: 40%;">
+									<h2 class="fw-bold">showAccounts() 수정후</h2>
+									<img src="asset/img/project/AMS1/코드/계좌보기개선판.png" class="img-fluid img-thumbnail" style="height: 40%;">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p style="margin-bottom: 200px;">Account의 배열을 이용하여 계좌를 불러와
+										instanceof연산자를 이용하여 일반계좌, 마이너스계좌 구분하여 목록에 출력 하였음.</p>
+									<p>List콜렉션에 Account객체만을 넣고 향상된 for문으로 목록에 출력 하는 것으로 코드를 수정
+										하였음.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Console</h2>
+									<img src="asset/img/project/AMS1/콘솔/입금상환2.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-7 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">depomoney()</h2>
+									<img src="asset/img/project/AMS1/코드/입금코드.png" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--일곱번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-7 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">depomoney() 트러블</h2>
+									<img src="asset/img/project/AMS1/코드/트러블1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="case col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h4 class="fw-bold">CASE 1</h4>
+									<p class="p2">반환타입이 Account인 메서드 결과를 MinusAccount의 참조변수에
+										담으려 했으나 convert오류가 발생.</p>
+									<p class="p2">반환된 결과를 MinusAccount타입으로 강제 형변환 시킴.</p>
+									<h4 class="fw-bold">CASE 2</h4>
+									<p class="p2">(입금금액+getRestMoney)를 totalMoney변수에 담고 출력. 입금
+										시 잔액표시가 출력되지만, 목록조회 시 입금이 안됨.</p>
+									<p class="p2">deposit() 메서드를 활용하여 restMoney를 초기화 해주고
+										getRestMoney로 잔액 출력함.</p>
+									<br> <img src="asset/img/project/AMS1/코드/데포짓메소드.png" class="img-fluid img-thumbnail h-25">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여덜번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Console</h2>
+									<img src="asset/img/project/AMS1/콘솔/출금대출 (2).png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">withdrawMoney()</h2>
+									<img src="asset/img/project/AMS1/코드/출금(대출).png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>초기 구상 시 예외 없이 입력을 받았음.</p>
+									<p>예외처리(try, catch)를 배우고,</p>
+									<p>출금(대출) 금액이 0이거나 음수이거나 잔액보다 많이 출금 하면 에러메세지 출력하게끔 수정 함.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--아홉번째 섹션-->
+					<section class="feeling-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-7 offset-5 project_title">
+									<h1>AMS(console) 느낀점</h1>
+									<p class="fs-3">
+										<span>처</span>음 수업을 시작하고 과제로 내주신 프로젝트 입니다. 혼자서 어렵기도 했지만 날마다
+										5~6시간씩 고민하여 코드가 완성 되었을 때는 정말 기분이 좋았습니다. <br>
+										<br> 새로운 문법을 배울 때 마다 코드가 간결해지며 깔끔해질 수 있는것을 몸소 배울 수 있는 기회
+										였고 객체지향에 대해 복습할 수 있었습니다.
+									</p>
+									<a href="#gallery-section" class="btn btn-outline-light">To_Projects</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!--화면 양옆에 이전, 다음 버튼추가-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev"
+				data-bs-interval="false">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">이전</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next"
+				data-bs-interval="false">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">다음</span>
+			</button>
+		</div>
+		<!--AMS 콘솔 프로젝트 끝------------------------------------------------------------------------------->
+
+		<!--AMS GUI프로젝트 시작------------------------------------------------------------------------------->
+		<div id="amsGui" class="carousel carousel-dark slide scrollAction">
+			<!--슬라이드 버튼(새로운 섹션마다 추가)-->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="0" class="active"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="4" aria-label="Slide 5"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="5" aria-label="Slide 6"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="6" aria-label="Slide 7"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="7" aria-label="Slide 8"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="8" aria-label="Slide 9"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="9" aria-label="Slide 10"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="10" aria-label="Slide 11"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="11" aria-label="Slide 12"></button>
+				<button type="button" data-bs-target="#amsGui" data-bs-slide-to="12" aria-label="Slide 13"></button>
+			</div>
+			<!--슬라이드 안의 내용-->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<!--첫번째 섹션-->
+					<section class="title-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 project_title">
+									<h1>AMS</h1>
+									<p>GUI 출력</p>
+								</div>
+							</div>
+							<!-- <div class="row">
+                                <div class="col-md-12 project_title">
+                                    <h1>AMS</h1>
+                                    <p>ConSole출력</p>
+                                </div>
+                            </div> -->
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Console</h2>
+									<img src="asset/img/project/AMS2/gui/GUI.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Main</h2>
+									<img src="asset/img/project/AMS2/code/메인.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Function</h2>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;전체계좌
+										조회
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;계좌번호
+										조회
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;예금주
+										조회
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;계좌등록
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;계좌삭제
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--세번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making1</h2>
+									<img src="asset/img/project/AMS2/code/gui1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making2</h2>
+									<img src="asset/img/project/AMS2/code/gui2.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making3</h2>
+									<img src="asset/img/project/AMS2/code/gui3.png" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--네번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">EventListner()</h2>
+									<img src="asset/img/project/AMS2/code/이벤트처리1.PNG" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">component 배치</h2>
+									<img src="asset/img/project/AMS2/code/이벤트처리2.PNG" style="height: 50%;"
+										class="img-fluid img-thumbnail"> <img src="asset/img/project/AMS2/code/이벤트처리3.PNG"
+										style="height: 40%;" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--다섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">TF유효성검사</h2>
+									<img src="asset/img/project/AMS2/code/예금주.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS2/code/계좌번호.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS2/code/패스워드.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Varidate클래스</h2>
+									<img src="asset/img/project/AMS2/code/바리클래스.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/tftrans.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">TF변화메소드</h2>
+									<img src="asset/img/project/AMS2/code/텍스트필드메소드.PNG" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>선택된 항목에 따른 택스트 필드의 able, disable구현</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--일곱번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">계좌번호 조회</h2>
+									<img src="asset/img/project/AMS2/gui/계좌번호조회.PNG" style="height: 45%;" class="img-fluid img-thumbnail">
+									<h2 class="fw-bold">예금주 조회</h2>
+									<img src="asset/img/project/AMS2/gui/예금주검색.PNG" style="height: 45%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAcc()</h2>
+									<img src="asset/img/project/AMS2/code/계좌번호예금주조회.PNG" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>boolean 값으로 계좌번호검색인지 예금주명검색인지 나뉘도록 코드를 작성함. repository에
+										있는 search메소드들은 AMS콘솔때와 코드가 같음.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여덜번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-7 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAcc() 트러블</h2>
+									<img src="asset/img/project/AMS2/code/트러블1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="case col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h4 class="fw-bold">CASE 1</h4>
+									<p class="p2">
+										예금주명으로 찾는 메서드의 경우 리턴타입이 List
+										<Account> 이다. 그대로 .toSrting 시 Account의 .toString이
+											호출되지 않아 출력시 원하는 포멧으로 나오지 않음.
+									</p>
+									<p class="p2">List를 배열타입으로 바꾸는 .toArray로 바꾼뒤, .toString을 호출
+										하니 원하는 포멧으로 출력 됨.</p>
+									<h4 class="fw-bold">repository의 interface</h4>
+									<img src="asset/img/project/AMS2/code/여러방법을 위한인터페이스.PNG" class="img-fluid img-thumbnail h-50">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--아홉번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/계좌등록.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount()</h2>
+									<img src="asset/img/project/AMS2/code/계좌등록.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount() 트러블</h2>
+									<img src="asset/img/project/AMS2/code/트러블2.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">case1</h2>
+									<p class="p2">비밀번호를 int형으로 받아서 validator클래스로 유효성 검사 못함.</p>
+									<p class="p2">유효성 검사를 위해 String 타입으로 passTF의 값을 한번 더 받아서 검사
+										진행하고 TF가 모두 유효할 경우 int형으로 다시 받음.</p>
+									<img src="asset/img/project/AMS2/code/바리클래스.PNG" style="height: 65%;" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열한번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/삭제후f.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">deleteAccount()</h2>
+									<img src="asset/img/project/AMS2/code/삭제.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/종료버튼반응.PNG" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">exit()</h2>
+									<img src="asset/img/project/AMS2/code/종료메서드.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열세번째 섹션-->
+					<section class="feeling-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-7 offset-5 project_title">
+									<h1>AMS(GUI) 느낀점</h1>
+									<p class="fs-3">
+										<span>A</span>WT 수업을 배우고 과제로 내주신 개인 프로젝트 입니다. GridBagLayout을
+										이용한 배치가 처음엔 이해 안됬지만, Excel도 열어보고 직접 셀디자인을 하며 배치에 신경을 많이 썼습니다.
+										물론, 각 버튼에 알맞은 코드를 제작 하는것도 어려웠습니다. <br>
+										<br> 특히 이벤트처리에 대한 연습이 될 수 있어서 좋은 경험 이었습니다.
+									</p>
+									<a href="#gallery-section" class="btn btn-outline-light">To_Projects</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!--화면 양옆에 이전, 다음 버튼추가-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#amsGui" data-bs-slide="prev"
+				data-bs-interval="false">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">이전</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#amsGui" data-bs-slide="next"
+				data-bs-interval="false">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">다음</span>
+			</button>
+		</div>
+		<!--========================================AMS(GUI) 끝===========================================-->
+		<!--========================================AMS(FileSystem) 시작==================================-->
+		<div id="amsFile" class="carousel carousel-dark slide scrollAction">
+			<!--슬라이드 버튼(새로운 섹션마다 추가)-->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="0" class="active"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="4" aria-label="Slide 5"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="5" aria-label="Slide 6"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="6" aria-label="Slide 7"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="7" aria-label="Slide 8"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="8" aria-label="Slide 9"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="9" aria-label="Slide 10"></button>
+				<button type="button" data-bs-target="#amsFile" data-bs-slide-to="10" aria-label="Slide 11"></button>
+			</div>
+			<!--슬라이드 안의 내용-->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<!--첫번째 섹션-->
+					<section class="title-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 project_title">
+									<h1>AMS</h1>
+									<p>RandomFileAccess저장</p>
+								</div>
+							</div>
+							<!-- <div class="row">
+                                <div class="col-md-12 project_title">
+                                    <h1>AMS</h1>
+                                    <p>ConSole출력</p>
+                                </div>
+                            </div> -->
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Console</h2>
+									<img src="asset/img/project/AMS3/gui/첫실행UI.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">File</h2>
+									<img src="asset/img/project/AMS3/file/첫실행시파일.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Function</h2>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;전체계좌조회
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;계좌번호조회
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;예금주조회
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;계좌등록
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;계좌삭제
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--세번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-8 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">FileAccountRepository</h2>
+									<img src="asset/img/project/AMS3/code/기본틀과파일사이즈상수.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>파일에 저장될 Account객체 한개의 바이트길이를 정하기 위해 속성에 각각 상수를 지정하고 전부 더한 최대 바이트길이를 또 상수로 지정해줌.</p>
+									<p>또한 생성자에서 파일의 길이가 0이 아닐시 계좌가 있는거니 계좌 갯수를 표현하는 변수인accountCount의 수를 1씩 늘려 계좌가 최대 몇개만들어 져있는지 저장해둔다.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--네번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-8 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">getFileAccount()</h2>
+									<img src="asset/img/project/AMS3/code/정보읽어오는코드.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>파일에 저장된 Account객체의 전체바이트수를 읽어와 속성값으로 설정된 상수씩 읽어 해당 하는 속성에 집어넣고 Account객체를 생성해 반환해주는 메소드이다.</p>
+									<p>받는 인자가 int index인것은 루프를 돌면서 파일의 모든 Account계좌 바이트길이를 객체화하기 위함이다.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--다섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-8 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">트러블</h2>
+									<img src="asset/img/project/AMS3/truble/계좌등록순서.png" style="height: 50%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS3/truble/객체화할때읽은순서.png" style="height: 40%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-terㄴtiary rounded offset-1 collum">
+									<h2 class="fw-bold">CASE1</h2>
+									<p>처음엔 순서 상관없이 생각나는속성 먼저 바이트를 읽어왔으나 엉뚱한결과 값이나옴.(윗사진이 등록시 순서, 아랫사진이 마구자비로 읽어온 순서)</p>
+									<p>계좌를 파일에 저장시 입력한 순서와 읽어들일 때의 순서가 같아야지 의도한 값이 들어오게끔 되어있음. 같은 순서로 읽어와 해결함.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+					<div class="carousel-item">
+					<!--여섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS3/gui/전체조회.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">getAccounts()</h2>
+									<img src="asset/img/project/AMS3/code/전체목록코드큰버전.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>이 메소드가 하는 일은 앞서 소개한 getFileAccount(int index)메소드를 이용해 루프를 돌며 어카운트계좌를 생성하여 콜렉션 List에 담아 반환해 주는 기능을 갖고 있다.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--일곱번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS3/gui/계좌조회.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAccount()</h2>
+									<img src="asset/img/project/AMS3/code/계좌번호조회코드큰버전.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>입력받은 계좌번호로 계좌를 검색하는 기능을 갖고 있다.</p>
+									<p>마찬가지로 getFileAccount(int index)메소드를 이용해 어카운트계좌를 생성하여 해당 어카운트객체의 계좌번호와 일치하면 해당 어카운트객체를 반환함.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여덜번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS3/gui/예금주조회1.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAccountOwner()</h2>
+									<img src="asset/img/project/AMS3/code/예금주검색코드큰것.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>입력받은 예금주명으로 계좌를 검색하는 기능을 갖고 있다.</p>
+									<p>계좌번호로 계좌검색과 거의 유사하지만 동명이인이 있을 수 있어 반환타입이 콜렉션List이다. 이름이 같을경우 콜렉션에 담아 반환된다.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--아홉번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount()</h2>
+									<img src="asset/img/project/AMS3/code/계좌등록1큰버전.png" style="height: 50%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS3/code/계좌등록코드2큰버전.png" style="height: 40%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">File</h2>
+									<img src="asset/img/project/AMS3/file/신규계좌등록후파일자른버전.png" style="height: 40%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS3/code/현재최고계좌번호코드큰버전.png" style="height: 50%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>입력받은 기본 정보들을 바이트화하여 파일에 써내려가는 메소드이다.</p>
+									<p>계좌번호는 계좌가 없으면 1000부터 시작하고 있으면 +1하게끔 최대 계좌번호를 반환받는 메소드를 이용해 계좌번호를 설정함.</p>
+									<p>처음에 설정한 상수값을이용하여 파일포인터를 이동시켜 속성 하나하나를 파일에 써내려감.</p>
+									<p>작업이 끝나면 파일포인터를 accountCount가 적힌 0번째로 이동시켜 accountCount도 1증가시킨 값으로 업데이트함.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">deleteAccont()</h2>
+									<img src="asset/img/project/AMS3/code/계좌삭제코드큰버전.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">File</h2>
+									<img src="asset/img/project/AMS3/file/계좌삭제후파일내용.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>입력받은 계좌번호로 계좌를 삭제하는 기능을 갖고 있다. 현 화면에선 1007번을 삭제한 파일상태이다.</p>
+									<p>의외로 엄청난 시간을 쓰게 만든 장본인이다. 삭제를 어떻게 구현할것인가 고민을 해야한다.</p>
+									<p>수많이 시도한 뒤 선택한 방법은 해당하는 계좌를 찾으면 파일포인터를 해당계좌의 제일뒤에 두고, 그뒤의 모든 남은 바이트를 읽어들인다음 해당계좌의 맨 처음으로 파일포인터를 옮긴뒤 읽어들인 남은 계좌들을 거기에 덮어 씌우는 식으로 구현함.(빈공간을 없앰과 동시에 해당 정보 삭제) </p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열한번째 섹션-->
+					<section class="feeling-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-7 offset-5 project_title">
+									<h1>AMS(RandomFileAccess저장) 느낀점</h1>
+									<p class="fs-3" style="text-align: left;">
+										<span>메</span>모리상의 데이터가 아닌 영속적인 데이터의 저장을 위한 첫걸음으로 FileSystem에 대한 공부를 시작하게되었습니다. 수업 마지막에 ObjectStream과 RandomFileAccess를 배우고 한 프로젝트입니다.<br>
+										선생님께서 둘중 하나로 영속적인 저장을 구현해보라고 하셨을 때 랜덤파일의 경우 read와 write를 동시에 할 수 있는것에 혹해 도전하게 되었습니다.
+										생각보다 많이 어려웠지만 바이트형식의 저장은 흥미로웠고 GUI프로그램 종료후에도 데이터가 저장되는것이 신기한 경험이었습니다. 파일에 접근해 읽고 쓰는것에 조금 익숙해 질 수 있는 시간이었습니다.
+									</p>
+									<a href="#gallery-section" class="btn btn-outline-light">To_Projects</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!--화면 양옆에 이전, 다음 버튼추가-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#amsFile" data-bs-slide="prev"
+				data-bs-interval="false">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">이전</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#amsFile" data-bs-slide="next"
+				data-bs-interval="false">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">다음</span>
+			</button>
+		</div>
+		<!--========================================AMS(FileSystem) 끝====================================-->
+		<!--========================================AMS(DataBase Connection) 시작=========================-->
+		<div id="amsData" class="carousel carousel-dark slide scrollAction">
+			<!--슬라이드 버튼(새로운 섹션마다 추가)-->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="0" class="active"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="4" aria-label="Slide 5"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="5" aria-label="Slide 6"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="6" aria-label="Slide 7"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="7" aria-label="Slide 8"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="8" aria-label="Slide 9"></button>
+				<button type="button" data-bs-target="#amsData" data-bs-slide-to="9" aria-label="Slide 10"></button>
+			</div>
+			<!--슬라이드 안의 내용-->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<!--첫번째 섹션-->
+					<section class="title-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 project_title">
+									<h1>AMS</h1>
+									<p>DataBase 연동</p>
+								</div>
+							</div>
+							<!-- <div class="row">
+                                <div class="col-md-12 project_title">
+                                    <h1>AMS</h1>
+                                    <p>ConSole출력</p>
+                                </div>
+                            </div> -->
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">테이블 구조</h2>
+									<img src="asset/img/project/AMS4/oracle/계좌테이블생성.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">제약조건 추가</h2>
+									<img src="asset/img/project/AMS4/oracle/테이블제약큰버전.png" style="height: 41.5%;" class="img-fluid img-thumbnail">
+									<h2 class="fw-bold">계좌번호 시퀸스</h2>
+									<img src="asset/img/project/AMS4/oracle/account_num시퀸스.png" style="height: 41.5%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-2 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+										<p>기본적인 기능은 앞의 AMS프로젝트와 동일하며, 저장시스템을RandomFileAccess에서 oracle의 DataBase로 바꾼 미니 프로젝트 임.</p>
+										<p>해당 프로젝트설명에선 GUI생략하고 변경되거나 추가된것을 기술함.</p>
+										<p>코드를 변경하기 전 오라클에 어카운트객체를 저장하기 위한 테이블을 생성하고 계좌번호 시퀸스 추가</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--세번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount()1</h2>
+									<img src="asset/img/project/AMS4/code/신규계좌등록1.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount()2</h2>
+									<img src="asset/img/project/AMS4/code/신규계좌등록2.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>신규 계좌 받아 테이블에 넣는 쿼리생성해 DB로 보내는 메서드이다.</p>
+									<p>등록하는 어카운트 타입이 어떤건지 instanceof로 구분하고 account_id의 값으로 1(일반)과 2(마이너스)를 넣어줌.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--네번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">getAccounts()1</h2>
+									<img src="asset/img/project/AMS4/code/전체계좌목록1.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">getAccounts()2</h2>
+									<img src="asset/img/project/AMS4/code/전체계좌목록2.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>데이터에 저장된 어카운트객체들을 리스트에 담아 반환해주는 메소드임.</p>
+									<p>저장된 account_id에 따라 마이너스계좌나 일반계좌 생성후 리스트에 더해줌.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--다섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-7 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">트러블1</h2>
+									<img src="asset/img/project/AMS4/truble/트러블1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 offset-1 shadow p-3 mb-5 bg-body-terㄴtiary rounded offset-1 collum">
+									<h2 class="fw-bold">CASE1</h2>
+									<p>마이너스계좌를 어떻게 생성해야하나 고민함.</p>
+									<p>서로의 차이인 버로우머니를 기준으로 0이면 어카운트따로 0 !=이면 마이너스 따로 생성자 호출해서 각자 생성시켰으나 버로우머니가 제대로 안들어감.</p>
+									<p>테이블에 account_id를 추가하고 1이면 일반계좌 생성자를 호출 2면 마이너스 계좌의 생성자를 호출하며 강제형변환으로 버로우머니setter호출 하여 등록하게 바꿈.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAccount()1</h2>
+									<img src="asset/img/project/AMS4/code/계좌조회1.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAccount()2</h2>
+									<img src="asset/img/project/AMS4/code/계좌조회2.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>쿼리의 WHERE절에 계좌번호값을 입력후 원하는 계좌를 DB에서 가져오는 메소드.</p>
+									<p>불러온 값으로 account_id에 해당하는 계좌타입 생성후 리턴해줌.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--일곱번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAccountByOwner()1</h2>
+									<img src="asset/img/project/AMS4/code/예금주조회1큰버전.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAccountByOwner()2</h2>
+									<img src="asset/img/project/AMS4/code/예금주조회2큰버전.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>예금주의 경우 동명이인이 있을 가능성을 고려해 반환타입이 List이며 와일문으로 계좌를 생성해 List에 담은 후 반환해줌.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여덜번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">deleteAccount()</h2>
+									<img src="asset/img/project/AMS4/code/계좌삭제큰버전.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">close()</h2>
+									<img src="asset/img/project/AMS4/code/커넥션종료큰버전.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>입력받은 계좌를 쿼리의 WHERE절에 넣어주고 해당하는 계좌정보를 삭제하는 메소드이다.</p>
+									<h2 class="fw-bold">트러블2</h2>
+									<p>여지껏 나온 모든 메소드가 finally에서 커넥션.close()를 해주었는데 그로 인해 아무 메소드나 실행 되자마자 서버와의 연결이 끊겨 다음 작업을 하지 못했음.</p>
+									<p>close()메소드를 추가해 GUI에서 종료버튼을 눌렀을시 호출되도록 수정하여 해결함.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--아홉번째 섹션-->
+					<section class="feeling-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-7 offset-5 project_title">
+									<h1>AMS(DataBase 연동) 느낀점</h1>
+									<p class="fs-3">
+										<span>S</span>QL 수업을 배우면서 과제로 내주신 개인 프로젝트 입니다. 쿼리문을 통해 여러가지의 데이터를 조회하는 방법이 있으며 여러 종류의 쿼리문 종류가 있는것 을 배웠습니다.
+									</p>
+									<p class="fs-3">선생님께서 저번에 파일로 저장한 계좌정보를 이번엔 DB에 넣어서 영속적인 저장을 해보자고 하셔서 시도하게 되었습니다. 처음엔 DB와의 연동이 이해가 잘 되지 않았지만 코드를 작성하다보니 영감이 떠올라 생각보다 금방 하게 되었던 미니 프로젝트였습니다. 덕분에 DB와의 연동에 자신감이 생길 수 있던 프로젝트였습니다.</p>
+									<a href="#gallery-section" class="btn btn-outline-light">To_Projects</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!--화면 양옆에 이전, 다음 버튼추가-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#amsData" data-bs-slide="prev"
+				data-bs-interval="false">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">이전</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#amsData" data-bs-slide="next"
+				data-bs-interval="false">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">다음</span>
+			</button>
+		</div>
+		<!--=======================================AMS(DateBase Connection)끝=============================-->
+		<!--=======================================Multi Chat(다중채팅) 시작==============================-->
+		<div id="multiChat" class="carousel carousel-dark slide scrollAction">
+			<!--슬라이드 버튼(새로운 섹션마다 추가)-->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="0" class="active"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="4" aria-label="Slide 5"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="5" aria-label="Slide 6"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="6" aria-label="Slide 7"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="7" aria-label="Slide 8"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="8" aria-label="Slide 9"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="9" aria-label="Slide 10"></button>
+				<button type="button" data-bs-target="#multiChat" data-bs-slide-to="10" aria-label="Slide 11"></button>
+			</div>
+			<!--슬라이드 안의 내용-->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<!--첫번째 섹션-->
+					<section class="title-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 project_title">
+									<h1>Multi-Chat</h1>
+									<p>다중채팅</p>
+								</div>
+							</div>
+							<!-- <div class="row">
+                                <div class="col-md-12 project_title">
+                                    <h1>AMS</h1>
+                                    <p>ConSole출력</p>
+                                </div>
+                            </div> -->
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/project_chat/실행화면/first_run.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Main</h2>
+									<img src="asset/img/project/project_chat/코드/main.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Function</h2>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;접속
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;전체채팅
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;DM채팅
+									</p>
+									<p>
+										<i class="fa-solid fa-diamond" style="color: #006699;"></i>&nbsp;&nbsp;연결해제
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--세번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Client1</h2>
+									<img src="asset/img/project/project_chat/코드/client1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4  shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Client2</h2>
+									<img src="asset/img/project/project_chat/코드/clientmessage.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h2 class="fw-bold">comment</h2>
+									<p>우선 클라이언트측을 살펴보겠다. 서버로 메세지를 보낼때 메세지별 타입을 알기 위해 프로토콜상수를 사용하는 모습을 볼 수 있다.</p>
+									<h2 class="fw-bold">메세지타입상수</h2>
+									<img src="asset/img/project/project_chat/코드/protocolshort.png" class="img-thumbnail" style="max-height: 10%;">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--네번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Server1</h2>
+									<img src="asset/img/project/project_chat/코드/server1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4  shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Server2</h2>
+									<img src="asset/img/project/project_chat/코드/server2.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h2 class="fw-bold">comment</h2>
+									<p>서버측. 접속한 클라이언트를 관리할 맵콜렉션과 메세지 전송에 관련된 메소드로 이루어짐.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--다섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Handler1</h2>
+									<img src="asset/img/project/project_chat/코드/handler1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-6  shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Handler2</h2>
+									<img src="asset/img/project/project_chat/코드/sendmessage.png" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Handler3</h2>
+									<img src="asset/img/project/project_chat/코드/processprotocol.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-3 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>서버의 핸들러클래스이다. 클라이언트로부터 받은 메세지를 파싱하여 프로토콜마다 해당하는 작업을 수행하게 이루어져 있다. 다음페이지부터는 실행화면이다.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--일곱번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/project_chat/실행화면/connect_client.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/project_chat/실행화면/multi_chat.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여덣번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/project_chat/실행화면/dm_message.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/project_chat/실행화면/exist_member2.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--아홉번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-7 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h2 class="fw-bold">트러블</h2>
+									<img src="asset/img/project/project_chat/트러블/case1-1truble_short.png" class="img-fluid img-thumbnail" style="max-height: 40%;">
+									<h2 class="fw-bold">해결</h2>
+									<img src="asset/img/project/project_chat/트러블/case1-1solved_short.png" class="img-fluid img-thumbnail" style="max-height: 30%;">
+								</div>
+								<div class="case col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h4 class="fw-bold">CASE 1</h4>
+									<p class="p2">
+										사람이 들어올수록 목록이 반복되서 출력됨.
+									</p>
+									<p class="p2">루프문전에 택스트에이리어를 빈문자열로 초기화해줌.</p>
+									<h4 class="fw-bold">Server에서 보낸 이용자 목록처리</h4>
+									<img src="asset/img/project/project_chat/트러블/case1solved.png" class="img-fluid img-thumbnail h-50">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="case col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h4 class="fw-bold">CASE 2</h4>
+									<p class="p2">
+										특정인원에게만 DM을 보내야하는데 결국 에코메세지(메아리)만 들어옴.
+									</p>
+									<p class="p2">메서드의 매개변수로 보내는이, 받는이, 메세지 3개를 받아서
+										콜렉션에 클라이언트객체를 리스트에 담은후 향상된 for문을 돌면서 이름을 받아낸후 받는이, 보내는이의 이름이 같을경우 메세지를 전송하게 바꿈.
+									</p>
+								</div>
+								<div class="col-md-1"></div>
+								<div class="case col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h4 class="fw-bold">CASE 3</h4>
+									<p class="p2">
+										회원목록 필드에 현재 접속중 인원을 동적으로 보여줘야해서 회원리스트를 스트링빌더클래스로 ,를 추가후 클라이언트 측에서 ,기준으로 해서 유저리스트를 보여주도록 했지만 토큰화가 제대로 작동 안함.
+									</p>
+									<p class="p2">토큰[0]에서부터 ,를 기준으로했지만 토큰[2]부터가 유저리스트였어서 토큰을[2]로 바꿈.
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열한번째 섹션-->
+					<section class="feeling-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-7 offset-5 project_title">
+									<h1>Multi-Chat 느낀점</h1>
+									<p class="fs-3">
+										<span>T</span>hread 수업을 배우고 과제로 내주신 개인 프로젝트 입니다. borderLayout을
+										이용하여 배치하였습니다.<br>
+										<br> 클라이언트 개개인이 접속할 때 새로운 스레드를 지급해 각자의 커넥션을 가지고 있게 하는게 신기하였고, 여러개의 트러블이 발생하였는데 클라이언트측과 서버측을 왔다갔다하여 정신없어서 문제를 찾기 더 어려웠습니다.<br><br>
+										Thread에 대해 이해를 높일 수 있었고, 여러개의 클래스를 다뤄 객체지향에 조금더 이해를 높일 수 있던 기회였습니다.
+									</p>
+									<a href="#gallery-section" class="btn btn-outline-light">To_Projects</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!--화면 양옆에 이전, 다음 버튼추가-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#multiChat" data-bs-slide="prev"
+				data-bs-interval="false">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">이전</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#multiChat" data-bs-slide="next"
+				data-bs-interval="false">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">다음</span>
+			</button>
+		</div>
+		<!--=======================================Multi Chat(다중채팅)끝=================================-->
+		<!--=======================================관계형 DB구축(ERD) 시작================================-->
+		<div id="erd" class="carousel carousel-dark slide scrollAction">
+			<!--슬라이드 버튼(새로운 섹션마다 추가)-->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#erd" data-bs-slide-to="0" class="active"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#erd" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#erd" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#erd" data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#erd" data-bs-slide-to="4" aria-label="Slide 5"></button>
+				<button type="button" data-bs-target="#erd" data-bs-slide-to="5" aria-label="Slide 6"></button>
+				<button type="button" data-bs-target="#erd" data-bs-slide-to="6" aria-label="Slide 7"></button>
+			</div>
+			<!--슬라이드 안의 내용-->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<!--첫번째 섹션-->
+					<section class="title-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 project_title">
+									<h1>DB ERD모델</h1>
+									<p>관계형</p>
+								</div>
+							</div>
+							<!-- <div class="row">
+                                <div class="col-md-12 project_title">
+                                    <h1>AMS</h1>
+                                    <p>ConSole출력</p>
+                                </div>
+                            </div> -->
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-12 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">최종완성Erd</h2>
+									<img src="asset/img/project/erd/complete.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--세번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">CASE1</h2>
+									<p>창고와 재고가 일(창고)대 다(재고)의 관계라 생각하고 작성 했으나 팀원가 상의한 결과 다대다 관계인것이라 둘 사이에 새로운 entity를 생성할 필요가 있어졌음.<br><br>
+										결과 재고와 직접적 관련이 있는 재고항목이라는 엔티티를 생성하여 일대 다 관계를 유지함.</p>
+									<img src="asset/img/project/erd/트러블1.png" class="img-fluid img-thumbnail" style="max-height: 50%;">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">CASE2</h2>
+									<p>주문과 제품이 일대 다관계라 생각했으나 팀원과 상의 결과 이것도 다대 다 관계로 판명 되어 중간에 새로운 entity가 필요해짐.<br><br>
+										주문과 제품 사이에 주문항목과 운송, 운송항목entity를 새로 생성하여 제품과 주문사이 의 일대 다 관계를 유지하게 함.</p>
+									<img src="asset/img/project/erd/트러블2.png" style="max-height: 50%;" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--네번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-5 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Making1</h2>
+									<img src="asset/img/project/erd/명사추출.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Making2</h2>
+									<img src="asset/img/project/erd/엔티티추출.png" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--다섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-5 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Making3</h2>
+									<img src="asset/img/project/erd/작업중1.jpg" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Making4</h2>
+									<img src="asset/img/project/erd/작업중2.jpg" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-5 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Making5</h2>
+									<img src="asset/img/project/erd/작업중3.jpg" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-6 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Making6</h2>
+									<img src="asset/img/project/erd/테이블명세서.png" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--일곱번째 섹션-->
+					<section class="feeling-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-7 offset-5 project_title">
+									<h1>AMS(GUI) 느낀점</h1>
+									<p class="fs-3">
+										<span>업</span>무 보고서를 5~6번 읽고 회사의 주요업무를 파악한 후 명사를 추출한 뒤 중복 명사제거와 엔티티가 될 수 있는 명사를 구분하는 작업을 진행하였습니다.<br><br>
+										엔티티에 들어갈 속성이 될 명사들을 추출하여 넣었고 이 과정에서 추가 엔티티의 필요성과 속성을 어디에 넣을지에 관해 많은 상의를 하였고 처음 한 팀프로젝트라서 서로 호흡을 맞출 수 있는 시간이었습니다.<br><br>
+										최종적으로 해당 엔티티를 오라클에 구축해보았고 팀원과의 협동성이 올라 갈 수 있던 좋은 프로젝트 였습니다.
+									</p>
+									<a href="#gallery-section" class="btn btn-outline-light">To_Projects</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+			<!--화면 양옆에 이전, 다음 버튼추가-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#erd" data-bs-slide="prev"
+				data-bs-interval="false">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">이전</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#erd" data-bs-slide="next"
+				data-bs-interval="false">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">다음</span>
+			</button>
+		</div>
+		<!--=======================================관계형 DB구축(ERD) 끝==================================-->
+		<!--=======================================JS학생점수관리 웹페이지 시작===========================-->
+		<div id="scoreWeb" class="carousel carousel-dark slide scrollAction">
+			<!--슬라이드 버튼(새로운 섹션마다 추가)-->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="0" class="active"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="4" aria-label="Slide 5"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="5" aria-label="Slide 6"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="6" aria-label="Slide 7"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="7" aria-label="Slide 8"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="8" aria-label="Slide 9"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="9" aria-label="Slide 10"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="10" aria-label="Slide 11"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="11" aria-label="Slide 12"></button>
+				<button type="button" data-bs-target="#scoreWeb" data-bs-slide-to="12" aria-label="Slide 13"></button>
+			</div>
+			<!--슬라이드 안의 내용-->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<!--첫번째 섹션-->
+					<section class="title-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 project_title">
+									<h1>학생성적관리 웹</h1>
+									<p>성적관리 웹</p>
+								</div>
+							</div>
+							<!-- <div class="row">
+                                <div class="col-md-12 project_title">
+                                    <h1>AMS</h1>
+                                    <p>ConSole출력</p>
+                                </div>
+                            </div> -->
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-12 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h2 class="fw-bold">공사중</h2>
+									<img src="asset/img/다운로드.jpg" alt="" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--세번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making1</h2>
+									<img src="asset/img/project/AMS2/code/gui1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making2</h2>
+									<img src="asset/img/project/AMS2/code/gui2.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making3</h2>
+									<img src="asset/img/project/AMS2/code/gui3.png" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--네번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">EventListner()</h2>
+									<img src="asset/img/project/AMS2/code/이벤트처리1.PNG" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">component 배치</h2>
+									<img src="asset/img/project/AMS2/code/이벤트처리2.PNG" style="height: 50%;"
+										class="img-fluid img-thumbnail"> <img src="asset/img/project/AMS2/code/이벤트처리3.PNG"
+										style="height: 40%;" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--다섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">TF유효성검사</h2>
+									<img src="asset/img/project/AMS2/code/예금주.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS2/code/계좌번호.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS2/code/패스워드.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Varidate클래스</h2>
+									<img src="asset/img/project/AMS2/code/바리클래스.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/tftrans.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">TF변화메소드</h2>
+									<img src="asset/img/project/AMS2/code/텍스트필드메소드.PNG" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>선택된 항목에 따른 택스트 필드의 able, disable구현</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--일곱번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">계좌번호 조회</h2>
+									<img src="asset/img/project/AMS2/gui/계좌번호조회.PNG" style="height: 45%;" class="img-fluid img-thumbnail">
+									<h2 class="fw-bold">예금주 조회</h2>
+									<img src="asset/img/project/AMS2/gui/예금주검색.PNG" style="height: 45%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAcc()</h2>
+									<img src="asset/img/project/AMS2/code/계좌번호예금주조회.PNG" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>boolean 값으로 계좌번호검색인지 예금주명검색인지 나뉘도록 코드를 작성함. repository에
+										있는 search메소드들은 AMS콘솔때와 코드가 같음.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여덜번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-7 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAcc() 트러블</h2>
+									<img src="asset/img/project/AMS2/code/트러블1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="case col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h4 class="fw-bold">CASE 1</h4>
+									<p class="p2">
+										예금주명으로 찾는 메서드의 경우 리턴타입이 List
+										<Account> 이다. 그대로 .toSrting 시 Account의 .toString이
+											호출되지 않아 출력시 원하는 포멧으로 나오지 않음.
+									</p>
+									<p class="p2">List를 배열타입으로 바꾸는 .toArray로 바꾼뒤, .toString을 호출
+										하니 원하는 포멧으로 출력 됨.</p>
+									<h4 class="fw-bold">repository의 interface</h4>
+									<img src="asset/img/project/AMS2/code/여러방법을 위한인터페이스.PNG" class="img-fluid img-thumbnail h-50">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--아홉번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/계좌등록.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount()</h2>
+									<img src="asset/img/project/AMS2/code/계좌등록.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount() 트러블</h2>
+									<img src="asset/img/project/AMS2/code/트러블2.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">case1</h2>
+									<p class="p2">비밀번호를 int형으로 받아서 validator클래스로 유효성 검사 못함.</p>
+									<p class="p2">유효성 검사를 위해 String 타입으로 passTF의 값을 한번 더 받아서 검사
+										진행하고 TF가 모두 유효할 경우 int형으로 다시 받음.</p>
+									<img src="asset/img/project/AMS2/code/바리클래스.PNG" style="height: 65%;" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열한번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/삭제후f.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">deleteAccount()</h2>
+									<img src="asset/img/project/AMS2/code/삭제.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/종료버튼반응.PNG" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">exit()</h2>
+									<img src="asset/img/project/AMS2/code/종료메서드.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열세번째 섹션-->
+					<section class="feeling-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-7 offset-5 project_title">
+									<h1>AMS(GUI) 느낀점</h1>
+									<p class="fs-3">
+										<span>A</span>WT 수업을 배우고 과제로 내주신 개인 프로젝트 입니다. GridBagLayout을
+										이용한 배치가 처음엔 이해 안됬지만, Excel도 열어보고 직접 셀디자인을 하며 배치에 신경을 많이 썼습니다.
+										물론, 각 버튼에 알맞은 코드를 제작 하는것도 어려웠습니다. <br>
+										<br> 특히 이벤트처리에 대한 연습이 될 수 있어서 좋은 경험 이었습니다.
+									</p>
+									<a href="#gallery-section" class="btn btn-outline-light">To_Projects</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!--화면 양옆에 이전, 다음 버튼추가-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#scoreWeb" data-bs-slide="prev"
+				data-bs-interval="false">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">이전</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#scoreWeb" data-bs-slide="next"
+				data-bs-interval="false">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">다음</span>
+			</button>
+		</div>
+		<!--=======================================JS학생점수관리 웹페이지 끝=============================-->
+		<!--=======================================Porfolio웹페이지화 시작================================-->
+		<div id="webPort" class="carousel carousel-dark slide scrollAction">
+			<!--슬라이드 버튼(새로운 섹션마다 추가)-->
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="0" class="active"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="3" aria-label="Slide 4"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="4" aria-label="Slide 5"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="5" aria-label="Slide 6"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="6" aria-label="Slide 7"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="7" aria-label="Slide 8"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="8" aria-label="Slide 9"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="9" aria-label="Slide 10"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="10" aria-label="Slide 11"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="11" aria-label="Slide 12"></button>
+				<button type="button" data-bs-target="#webPort" data-bs-slide-to="12" aria-label="Slide 13"></button>
+			</div>
+			<!--슬라이드 안의 내용-->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<!--첫번째 섹션-->
+					<section class="title-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 project_title">
+									<h1>Web Portfolio</h1>
+									<p>웹페이지형 포트폴리오</p>
+								</div>
+							</div>
+							<!-- <div class="row">
+                                <div class="col-md-12 project_title">
+                                    <h1>AMS</h1>
+                                    <p>ConSole출력</p>
+                                </div>
+                            </div> -->
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-12 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h2 class="fw-bold">공사중</h2>
+									<img src="asset/img/다운로드.jpg" alt="" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--세번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making1</h2>
+									<img src="asset/img/project/AMS2/code/gui1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making2</h2>
+									<img src="asset/img/project/AMS2/code/gui2.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI Making3</h2>
+									<img src="asset/img/project/AMS2/code/gui3.png" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--네번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">EventListner()</h2>
+									<img src="asset/img/project/AMS2/code/이벤트처리1.PNG" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">component 배치</h2>
+									<img src="asset/img/project/AMS2/code/이벤트처리2.PNG" style="height: 50%;"
+										class="img-fluid img-thumbnail"> <img src="asset/img/project/AMS2/code/이벤트처리3.PNG"
+										style="height: 40%;" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--다섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">TF유효성검사</h2>
+									<img src="asset/img/project/AMS2/code/예금주.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS2/code/계좌번호.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+									<img src="asset/img/project/AMS2/code/패스워드.PNG" style="height: 30%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">Varidate클래스</h2>
+									<img src="asset/img/project/AMS2/code/바리클래스.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여섯번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/tftrans.png" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">TF변화메소드</h2>
+									<img src="asset/img/project/AMS2/code/텍스트필드메소드.PNG" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>선택된 항목에 따른 택스트 필드의 able, disable구현</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--일곱번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">계좌번호 조회</h2>
+									<img src="asset/img/project/AMS2/gui/계좌번호조회.PNG" style="height: 45%;" class="img-fluid img-thumbnail">
+									<h2 class="fw-bold">예금주 조회</h2>
+									<img src="asset/img/project/AMS2/gui/예금주검색.PNG" style="height: 45%;" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAcc()</h2>
+									<img src="asset/img/project/AMS2/code/계좌번호예금주조회.PNG" alt="" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-3 shadow p-3 mb-5 bg-body-tertiary rounded offset-1 collum">
+									<h2 class="fw-bold">Comment</h2>
+									<p>boolean 값으로 계좌번호검색인지 예금주명검색인지 나뉘도록 코드를 작성함. repository에
+										있는 search메소드들은 AMS콘솔때와 코드가 같음.</p>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--여덜번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-7 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">searchAcc() 트러블</h2>
+									<img src="asset/img/project/AMS2/code/트러블1.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="case col-md-4 shadow p-3 mb-5 bg-body-tertiary rounded collum">
+									<h4 class="fw-bold">CASE 1</h4>
+									<p class="p2">
+										예금주명으로 찾는 메서드의 경우 리턴타입이 List
+										<Account> 이다. 그대로 .toSrting 시 Account의 .toString이
+											호출되지 않아 출력시 원하는 포멧으로 나오지 않음.
+									</p>
+									<p class="p2">List를 배열타입으로 바꾸는 .toArray로 바꾼뒤, .toString을 호출
+										하니 원하는 포멧으로 출력 됨.</p>
+									<h4 class="fw-bold">repository의 interface</h4>
+									<img src="asset/img/project/AMS2/code/여러방법을 위한인터페이스.PNG" class="img-fluid img-thumbnail h-50">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--아홉번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/계좌등록.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount()</h2>
+									<img src="asset/img/project/AMS2/code/계좌등록.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">addAccount() 트러블</h2>
+									<img src="asset/img/project/AMS2/code/트러블2.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">case1</h2>
+									<p class="p2">비밀번호를 int형으로 받아서 validator클래스로 유효성 검사 못함.</p>
+									<p class="p2">유효성 검사를 위해 String 타입으로 passTF의 값을 한번 더 받아서 검사
+										진행하고 TF가 모두 유효할 경우 int형으로 다시 받음.</p>
+									<img src="asset/img/project/AMS2/code/바리클래스.PNG" style="height: 65%;" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열한번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/삭제후f.png" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">deleteAccount()</h2>
+									<img src="asset/img/project/AMS2/code/삭제.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열두번째 섹션-->
+					<section class="ams-section section" id="project_section">
+						<div class="container project_container">
+							<div class="row row1">
+								<div class="col-md-6 offset-1 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">GUI</h2>
+									<img src="asset/img/project/AMS2/gui/종료버튼반응.PNG" class="img-fluid img-thumbnail">
+								</div>
+								<div class="col-md-5 shadow p-3 mb-5 bg-body-tertiary rounded image-container collum">
+									<h2 class="fw-bold">exit()</h2>
+									<img src="asset/img/project/AMS2/code/종료메서드.PNG" class="img-fluid img-thumbnail">
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<div class="carousel-item">
+					<!--열세번째 섹션-->
+					<section class="feeling-section section" id="project_ams">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-7 offset-5 project_title">
+									<h1>AMS(GUI) 느낀점</h1>
+									<p class="fs-3">
+										<span>A</span>WT 수업을 배우고 과제로 내주신 개인 프로젝트 입니다. GridBagLayout을
+										이용한 배치가 처음엔 이해 안됬지만, Excel도 열어보고 직접 셀디자인을 하며 배치에 신경을 많이 썼습니다.
+										물론, 각 버튼에 알맞은 코드를 제작 하는것도 어려웠습니다. <br>
+										<br> 특히 이벤트처리에 대한 연습이 될 수 있어서 좋은 경험 이었습니다.
+									</p>
+									<a href="#gallery-section" class="btn btn-outline-light">To_Projects</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!--화면 양옆에 이전, 다음 버튼추가-->
+			<button class="carousel-control-prev" type="button" data-bs-target="#webPort" data-bs-slide="prev"
+				data-bs-interval="false">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">이전</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#webPort" data-bs-slide="next"
+				data-bs-interval="false">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">다음</span>
+			</button>
+		</div>
+		<!--=======================================Porfolio웹페이지화 끝==================================-->
+		<!--=======================================댓글섹션 시작==========================================-->
+		<section class="comment-section section scrollAction" id="comment-section">
+			<div class="container">
+				<div class="row mt-4">
+					<div class="col-md-6" style="border-right: 1px solid #dadde1;">
+						<h2 class="mt-5">게시글</h2>
+						<p class="mb-3 w-lg-75">자유롭게 글을 남겨 주세요.</p>
+						<div class="width-50x pt-1" style="background-color: #006699;"></div>
+						<div class="text-center mb-5">
+							<img src="asset/img/conversation.jpg" style="width: 50%; height: 40%;">
+						</div>
+						<form action="./article-action.jsp" method="post" role="form" class="needs-validation mb-5 mb-lg-7"
+							novalidate>
+							<div class="mb-3 text-end" style="background-color: #6699cc; border-radius: 10px 30px;">
+								<textarea class="form-control textArea" name="content" <c:if test="${empty loginMember}">placeholder="로그인 하여야 게시글을 입력할 수 있습니다...."</c:if>
+											required <c:if test="${empty loginMember}">disabled</c:if>></textarea>
+							</div>
+
+							<div class="d-md-flex justify-content-end align-items-center mb-0">
+								<input type="submit" value="글 남기기" id="sendBtn" class="btn btn-success btn-sm">
+							</div>
+						</form>
+					</div>
+					<div class="col-md-6">
+						<ul class="list-group w-100" style="margin-top: 3em;">
+
+							<c:forEach items="${list}" var="memo">
+								<li class="list-group-item border-0">
+									<div class="mb-3 text-end">
+										<label class="fs-6">${memo.writer} | ${memo.write_date}</label>
+										<p class="form-control text-start bg-gray-200 pb-5" disabled> ${memo.content}</p>
+									</div>
+								</li>
+							</c:forEach>
+
+						</ul>
+						<nav class="mt-3">
+                    <ul class="pagination justify-content-center">
+	                   	<%-- 처음으로 보여주기 여부 --%>
+	                   	<c:if test="${pagination.showFirst}">
+                    		<li class="page-item" >
+                        		<a class="page-link" href="?page=1" aria-label="First">
+                          			<span aria-hidden="true">처음으로</span>
+                        		</a>
+                      		</li>
+                    	</c:if>
+                    	
+	                   	<%-- 이전 목록 보여주기 여부 --%>
+	                   	<c:if test="${pagination.showPrevious}">
+                    		<li class="page-item" >
+                        		<a class="page-link" href="?page=${pagination.previousStartPage}" aria-label="Previous">
+                          			<span aria-hidden="true">&laquo;</span>
+                        		</a>
+                      		</li>
+                    	</c:if>
+                      
+	                      <c:forEach var="i" begin="${pagination.startPage }" end="${pagination.endPage }">
+	                      	<c:choose>
+	                      		<c:when test="${i == pagination.params.requestPage}">
+	                      			<li class="page-item active"><a class="page-link">${i}</a></li>
+	                      		</c:when>
+	                      		<c:otherwise>
+	                      			<li class="page-item"><a class="page-link" href="?page=${i}">${i}</a></li>
+	                      		</c:otherwise>
+	                      	</c:choose>
+	                      </c:forEach>
+	                      
+	                      <%-- 다음 목록 보여주기 여부 --%>
+	                      <c:if test="${pagination.showNext}">
+                    		<li class="page-item" >
+                        		<a class="page-link" href="?page=${pagination.nextStartPage}" aria-label="Next">
+                          			<span aria-hidden="true">&raquo;</span>
+                        		</a>
+                      		</li>
+                    	</c:if>
+                    	
+                    	<%-- 마지막으로 보여주기 여부 --%>
+	                   	<c:if test="${pagination.showLast}">
+                    		<li class="page-item" >
+                        		<a class="page-link" href="?page=${pagination.totalPages}" aria-label="First">
+                          			<span aria-hidden="true">마지막으로</span>
+                        		</a>
+                      		</li>
+                    	</c:if>
+                    </ul>
+                  </nav>
+					</div>
+					<div class="row">
+						<!-- pagination-->
+					</div>
+				</div>
+		</section>
+
+	</main>
+
+	<!-- <script src="js/bootstrap.bundle.min.js"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="asset/js/wheel.js"></script>
+</body>
+
+</html>

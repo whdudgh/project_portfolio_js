@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://kit.fontawesome.com/4ec79785b5.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @font-face {
+        font-family: "Pretendard-Regular";
+        src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+          format("woff");
+        font-weight: 400;
+        font-style: normal;
+      }
+      /* 🚩 */
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Pretendard-Regular";
+      }
+      header {
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 1050px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+      .logo img {
+        width: 150px;
+      }
+      .search {
+        padding-left: 5px;
+        width: 400px;
+        height: 45px;
+        border: 1px solid black;
+        border-radius: 5px;
+      }
+      .search i {
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .search input {
+        border: 0;
+        outline: none;
+        font-size: 16px;
+        padding: 0;
+        height: 44px;
+        width: 340px;
+        margin-right: 20px;
+      }
+      .user i {
+        text-decoration: none;
+        color: black;
+        font-size: 25px;
+        padding: 10px;
+      }
+      .user i:hover {
+        color: rgb(113, 113, 113);
+      }
+      /* 🚩 */
+      nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        min-width: 1050px;
+        height: 50px;
+        margin: 0 auto;
+        line-height: 50px;
+        background-color: rgb(255, 255, 255);
+        z-index: 10;  /*무조건 맨 위로 오도록*/
+        box-shadow: 0 4px 4px -3px rgb(210, 210, 210);  /*그림자 아래에만 적용*/
+      }
+      .navbar {
+        width: 1200px;
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 0 auto;
+
+      }
+      .navbar a{
+        text-decoration: none;
+        color: black;
+      }
+      .navbar li:hover{
+        color: rgb(98, 98, 98);
+      }
+      /* 🚩 */
+      #loginbox{
+        text-align: center;
+        margin: 0 auto;
+        width: 350px;
+      }
+      form input, button{
+        height: 50px;
+        margin-bottom: 10px;
+        font-size: 15px;
+      }
+      #loginbox h3{
+        line-height: 100px;
+        margin-top: 30px;
+      }
+      form{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      form button{
+        cursor: pointer;
+      }
+      #loginbtn{
+        background-color: black;
+        color: aliceblue;
+      }
+
+
+
+
+      /* 🚩 */
+      ffooter{
+        width: 100%;
+      }
+      #info{
+        width: 1200px;
+        padding-top: 30px;
+        margin: 30px auto;
+      }
+
+      .qbox{
+        display: flex;
+      }
+      #call{
+        margin-bottom: 30px;
+      }
+      #callnumber{
+        font-size: 28px;
+      }
+      #call span{
+        margin-right: 10px;
+      }
+      .qbox{
+        padding: 5px 0px;
+      }
+      .qbox div{
+        color: gray;
+        font-size: 14px;
+        line-height: 20px;
+      }
+      .qbox button{
+        width: 180px;
+        height: 40px;
+        margin-right: 20px;
+        border:1px solid rgb(206, 206, 206);
+        padding: 8px 40px;
+        background-color: white;
+        cursor: pointer;
+      }
+      footer h2{
+        padding: 20px 0;
+      }
+      #info{
+        display: flex;
+        justify-content: space-between;
+
+      }
+      #info2 ul{
+        padding: 20px 0 20px 0;
+        list-style: none;
+        display: flex;
+        margin-bottom: 50px;
+        
+      }
+      #info2 ul li{
+        margin-right: 15px;
+      }
+      #info2 p{
+        font-size: 13px;
+        color: gray;
+        padding: 4px;
+      }
+
+      #icons{
+        font-size: 30px;
+        color: gray;
+        margin-top: 20px;
+      }
+      #copyright{
+        height: 100px;
+        line-height: 100px;
+        background-color: rgb(238, 238, 238);
+        text-align: center;
+        padding: 0 30px 0 30px;
+        font-size: 12px;
+        color: rgb(122, 122, 122);
+        margin-top: 30px;
+      }
+    
+    </style>
+
+    <script>
+        function login_check(){
+            let userId = document.querySelector("#userId");
+            let userPw = document.querySelector("#userPw");
+
+            if(userId.value==""){
+                alert("아이디를 입력해주세요");
+                userId.focus();
+            }else if(userPw.value==""){
+                alert("비밀번호를 입력해주세요");
+                userPw.focus();
+            }else{
+                alert("로그인 되었습니다.");
+                location.href = "mypage.html"
+            }
+        }
+
+        function signup(){
+          location.href = "signup.html"
+        }
+
+        
+      //검색 시작
+      function search(obj){
+      let search = obj.previousElementSibling.value;
+      console.log(search);
+
+      switch(search){
+        case '신상품':
+        location.href = 'newList.html';
+        break;
+        case '베스트':
+        location.href = 'bestList.html';
+        break;
+        case '여성시계':
+        location.href = 'womensList.html';
+        break;
+        case '남성시계':
+        location.href = 'mensList.html';
+        break;
+        case '아동시계':
+        location.href = 'childList.html';
+        break;
+        default:
+        alert('상품이 존재하지 않습니다');
+        break;
+        }
+      }
+      //검색 끝
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="home.html"> <img src="image/logo.png" alt="" /> </a>
+        <span>Acorn watch </span>
+      </div>
+      <div class="search">
+        <input type="text"/>
+        <i onclick="search(this)" class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="user">
+        <a href="login.html"><i class="fa-solid fa-user"></i></a>
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+    </header>
+    <nav>
+      <ul class="navbar">
+        <a href="newList.html"><li>신상품</li></a>
+        <a href="bestList.html"><li>베스트</li></a>
+        <a href="womensList.html"><li>여성시계</li></a>
+        <a href="mensList.html"><li>남성시계</li></a>
+        <a href="childList.html"><li>아동시계</li></a>
+      </ul>
+    </nav>
+
+
+    <main>
+        <div id="loginbox">
+            <h3>로그인</h3>
+            <form>
+                <input id="userId" type="id" placeholder="아이디를 입력해주세요">
+                <input id="userPw" type="password" placeholder="비밀번호를 입력해주세요">
+                <button type="button" onclick="login_check()" id="loginbtn">로그인</button>
+                <button type="button" id="signupbtn" onclick="signup()">회원가입</button>
+            </form>
+        </div>
+    </main>
+
+
+
+    <footer>
+      <div id="info">
+        <div id="info1">
+          <h2>고객행복센터</h2>
+            <div id="call"><span id="callnumber"><strong>1644-1107</strong></span><span>월~토요일 오전7시 - 오후 6시</span></div>
+            <div class="qbox">
+            <button>카카오톡 문의</button>
+            <div>
+              월~토요일| 오전7시 - 오후 6시<br>
+              일~공휴일| 오전7시 - 오후 1시
+            </div>
+          </div>
+          <div class="qbox">
+            <a href="service.html"><button>1:1  문의</button></a>
+            <div>
+              365일<br>
+              고객센터 운영시간에 순차적으로 답변드리겠습니다.
+            </div>
+          </div>
+          <div class="qbox">
+            <a href="service.html"><button>대량주문 문의</button></a>
+            <div>
+              월~금요일| 오전9시 - 오후 6시<br>
+              점심시간| 오후1시 - 오후 2시
+            </div>
+          </div>
+        </div>
+        <div id="info2">
+          <ul>
+            <li>에이콘소개</li>
+            <li>에이콘소개영상</li>
+            <li>인재채용</li>
+            <li>이용약관</li>
+            <li>개인정보처리방침</li>
+            <li>이용안내</li>
+          </ul>
+          <p>법인명(상호):주식회사 에이콘 | 사업자 등록번호:61-254-25225 사업자 정보확인</p>
+          <P>통신판매업:제2018-서울강남-55566호 | 개인정보보호책임자:이원준</P>
+          <P>주소:서울특별시 강남구 테헤란로 133,18층(역삼동) | 대표이사:양양양</P>
+          <P>입점문의:입점문의하기| 제휴문의:ksjfdlssfljk@dlkjdl.com</P>
+          <p>채용문의:sksdkf@kdfjsld.com</p>
+          <p>팩스: 070-555-5545</p>
+          <div id="icons">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-youtube"></i>
+
+          </div>
+        </div>
+      </div>
+      <div id="copyright">
+        에이콘에서 판매되는 상품중에는 에이콘에 입접한 개별 판매자가 판매하는 오픈 마켓 상품이 포함되어 있습니다.
+        ACORN CORP.ALL RIGHT RESERVED
+      </div>
+    </footer>
+  </body>
+</html>
